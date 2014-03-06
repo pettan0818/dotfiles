@@ -1,0 +1,10 @@
+#CygwinSetting
+export CYGWIN=nodosfilewarning  #Cygwinにおいて、DOSファイル名警告を無効化する
+
+#Cygwin用のショートカット、そのうち関数に書き換える必要あり
+alias root='/cygdrive/c/'
+alias desktop='/cygdrive/c/Users/Noname/Desktop/'
+alias dropbox='/cygdrive/c/Dropbox/'
+alias python='/cygdrive/c/python27/python.exe'
+alias -s py='/cygdrive/c/python27/python.exe'
+alias SEO='/cygdrive/c/Dropbox/Document/+Jobs/+DataAnalytics/SEO/' 
