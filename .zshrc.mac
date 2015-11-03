@@ -1,0 +1,32 @@
+# Personal Settings
+export PATH="$HOME/Documents/Naver_Curation_system:$PATH"
+alias desktop="~/Desktop/"
+alias dropbox="~/Dropbox/"
+alias SEO="~/Dropbox/Document/SEO業務/"
+alias Naver="~/Documents/Naver_Curation_system/"
+# cd .. as Windows CMD
+alias cd..="cd .."
+#===========================
+# For HomeBrew
+#===========================
+export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+
+#===========================
+# VirtualEnv
+#===========================
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
+
+#===========================
+# Zsh Completions
+#===========================
+if [ -e /usr/local/share/zsh-completions ]; then
+    fpath=(/usr/local/share/zsh-completions $fpath)
+fi
+
+#=============================
+# source zsh-syntax-highlighting
+#=============================
+if [ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
