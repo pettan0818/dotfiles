@@ -1,9 +1,6 @@
+
+
 " Thank/ to Vimを最強のPython開発環境にする2
-" [TODO] Omni補完の処理をなんとかする
-" Omni補完、デフォルトでは、選択肢の1番目が選択状態になってしまう
-" [XXX]  NeoCompleteにJedi-vimを埋め込むのはあきらめる
-" [
-"
 " 以下のグループ設定が必須
 " -----
 " release autogroup in MyAutoCmd
@@ -547,27 +544,15 @@ if has('lua') && v:version >= 703 && has('patch885')
     let s:hooks = neobundle#get_hooks("neocomplete.vim")
     let g:neocomplete#enable_at_startup = 1
     function! s:hooks.on_source(bundle)
-        let g:acp_enableAtStartup = 0
-        let g:neocomplete#enable_smart_case = 1
-        let g:neocomplete#enable_fuzzy_completion = 1
-        let g:neocomplete#enable_auto_select = 0
-        " キーマッピング
-        " 補完のキャンセル
-        inoremap <expr><BS> neocomplete#smart_close_popup()."\<BS>"
-        " Enterで補完の確定(endwiseとの競合対策
-        function! s:my_crinsert()
-            return pumvisible() ? neocomplete#close_popup() : "\<Cr>"
-        endfunction
-        inoremap <silent> <CR> <C-R>=<SID>my_crinsert()<CR>
-        " TABで補完を選択
-        inoremap <expr><TAB> pumvisible() ? "<C-N>" : "<TAB>"
+        let g:acp_enableAtStartup = 1
+        let g:neocomplet#enable_smart_case = 1
     endfunction
-
 else
     NeoBundleLazy "Shougo/neocomplcache.vim", {
         \ "autoload": {
         \   "insert": 1,
         \ }}
+    " 2013-07-03 14:30 原因不明だがNeoComplCacheEnableコマンドが見つからないので変更
     let g:neocomplcache_enable_at_startup = 1
     let s:hooks = neobundle#get_hooks("neocomplcache.vim")
     function! s:hooks.on_source(bundle)
@@ -576,93 +561,83 @@ else
     endfunction
 endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" SuperTab
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundle "ervandew/supertab"
-" Omni補完をShift + Tabで実現
-" <C-E>で補完解除、<C-X><C-O>でオムニ補完、<C-P>で補完選択解除
-let g:SuperTabDefaultCompletionType = "<C-X><C-O><C-P>"
+    " Python comp feat with jedi.vim
+    "autocmd FileType python setlocal omnifunc=jedi#completions
+    "    let g:jedi#completions_enabled = 0
+    "    let g:jedi#auto_vim_configuration = 0
+
+    "if !exists('g:neocomplete#force_omni_input_patterns')
+    "    let g:neocomplete#force_omni_input_patterns = {}
+    "endif
+    "let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Jedi-vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-NeoBundleLazy "davidhalter/jedi-vim", {
-      \ "autoload": {
-      \   "filetypes": ["python", "python3", "djangohtml"],
-      \ },
-      \ "build": {
-      \   "mac": "pip install jedi",
-      \   "unix": "pip install jedi",
-      \ }}
+"NeoBundleLazy "davidhalter/jedi-vim", {
+"      \ "autoload": {
+"      \   "filetypes": ["python", "python3", "djangohtml"],
+"      \ },
+"      \ "build": {
+"      \   "mac": "pip install jedi",
+"      \   "unix": "pip install jedi",
+"      \ }}
+"    let s:hooks = neobundle#get_hooks("jedi-vim")
+"    function! s:hooks.on_source(bundle)
+"        " jediにvimの設定を任せると'completeopt+=preview'するので
+"        " 自動設定機能をOFFにし手動で設定を行う
+"        let g:jedi#auto_vim_configuration = 0
+"
+"        " 補完の最初の項目が選択された状態だと使いにくいためオフにする
+"        let g:jedi#popup_select_first = 0
+"
+"       " quickrunと被るため大文字に変更
+"      let g:jedi#rename_command = '<Leader>R'
 
-    let s:hooks = neobundle#get_hooks("jedi-vim")
-
-    function! s:hooks.on_source(bundle)
-        " jediにvimの設定を任せると'completeopt+=preview'するので
-        " 自動設定機能をOFFにし手動で設定を行う
-        let g:jedi#auto_vim_configuration = 0
-        " 補完の最初の項目が選択された状態だと使いにくいためオフにする
-        let g:jedi#popup_select_first = 0
-        " Popup on dot.
-        let g:jedi#popup_on_dot = 1
-        let g:jedi#completions_enabled = 1
-       " quickrunと被るため大文字に変更
-        let g:jedi#rename_command = '<Leader>R'
-        " gundoと被るため大文字に変更 (2013-06-24 10:00 追記)
-        let g:jedi#goto_assignments_command = '<Leader>G'
-
-        " docstringは表示しない
-        autocmd FileType python setlocal completeopt-=preview
-        " Python comp feat with jedi.vim
-        " NeocompleteとJedi-vimをフルに連携すると、Neocompleteの動作が制限され
-        " るので、OmniFunctionは停止。
-        "autocmd FileType python setlocal omnifunc=jedi#completions
-"            if !exists('g:neocomplete#force_omni_input_patterns')
-"                let g:neocomplete#force_omni_input_patterns = {}
-"            endif
-"            "let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
-"            let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-    endfunction
+"        " gundoと被るため大文字に変更 (2013-06-24 10:00 追記)
+"        let g:jedi#goto_assignments_command = '<Leader>G'
+"        " Popup on dot.
+"        let g:jedi#popup_on_dot = 0
+"    endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Neo-Snippet
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"    NeoBundleLazy "Shougo/neosnippet.vim", {
-"        \ "depends": ["honza/vim-snippets"],
-"        \ "autoload": {
-"        \   "insert": 1,
-"        \ }}
-"
-"    let s:hooks = neobundle#get_hooks("neosnippet.vim")
-"    function! s:hooks.on_source(bundle)
-"
-"    " Plugin key-mappings.
-""    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"    xmap <C-k>     <Plug>(neosnippet_expand_target)
-"
-"    " SuperTab like snippets behavior.
-"    imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-"        \ "\<Plug>(neosnippet_expand_or_jump)"
-"        \: pumvisible() ? "\<C-n>" : "\<TAB>"
-"    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-"        \ "\<Plug>(neosnippet_expand_or_jump)"
-"        \: "\<TAB>"
-"    " For snippet_complete marker.
-"    if has('conceal')
-"        set conceallevel=2 concealcursor=i
-"    endif
-"
-"    " Enable snipMate compatibility feature.
-"    let g:neosnippet#enable_snipmate_compatibility = 1
-"
-"    " Tell Neosnippet about the other snippets
-"    let g:neosnippet#snippets_directory=s:bundle_root . '/vim-snippets/snippets'
-"    endfunction
-"
-"    NeoBundle "Shougo/neosnippet-snippets"
-"
+    NeoBundleLazy "Shougo/neosnippet.vim", {
+        \ "depends": ["honza/vim-snippets"],
+        \ "autoload": {
+        \   "insert": 1,
+        \ }}
+
+    let s:hooks = neobundle#get_hooks("neosnippet.vim")
+    function! s:hooks.on_source(bundle)
+
+    " Plugin key-mappings.
+    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+    " SuperTab like snippets behavior.
+    imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+        \ "\<Plug>(neosnippet_expand_or_jump)"
+        \: pumvisible() ? "\<C-n>" : "\<TAB>"
+    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+        \ "\<Plug>(neosnippet_expand_or_jump)"
+        \: "\<TAB>"
+    " For snippet_complete marker.
+    if has('conceal')
+        set conceallevel=2 concealcursor=i
+    endif
+
+    " Enable snipMate compatibility feature.
+    let g:neosnippet#enable_snipmate_compatibility = 1
+
+    " Tell Neosnippet about the other snippets
+    let g:neosnippet#snippets_directory=s:bundle_root . '/vim-snippets/snippets'
+    endfunction
+
+    NeoBundle "Shougo/neosnippet-snippets"
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-indent-guides
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -720,13 +695,7 @@ NeoBundleLazy "davidhalter/jedi-vim", {
         \ "autoload": {
         \   "mappings": [['nxo', '<Plug>(quickrun)']]
         \ }}
-
-    if has("clientserver")
-        nmap <Leader>r :QuickRun -runner vimproc<CR>
-    else
-        nmap <Leader>r <Plug>(quickrun)
-    endif
-
+    nmap <Leader>r <Plug>(quickrun)
     let s:hooks = neobundle#get_hooks("vim-quickrun")
     function! s:hooks.on_source(bundle)
         let g:quickrun_config = {
@@ -756,10 +725,10 @@ NeoBundleLazy "davidhalter/jedi-vim", {
 " [BugFix] Vimで正しくvirtualenvを処理できるようにする
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Djangoを正しくVimで読み込めるようにする
-    "NeoBundleLazy "lambdalisue/vim-django-support", {
-    "    \ "autoload": {
-    "    \   "filetypes": ["python", "python3", "djangohtml"]
-    "    \ }}
+    NeoBundleLazy "lambdalisue/vim-django-support", {
+        \ "autoload": {
+        \   "filetypes": ["python", "python3", "djangohtml"]
+        \ }}
 
     " Vimで正しくvirtualenvを処理できるようにする
     NeoBundleLazy "jmcantrell/vim-virtualenv", {
@@ -772,16 +741,15 @@ NeoBundleLazy "davidhalter/jedi-vim", {
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "[TODO] エラー表示の矢印がどう考えても劣化している。
 "[TODO] コードに直接色づけするのをやめさせる。
-    NeoBundle "scrooloose/syntastic"
-    ", {
-    "    \ "build": {
-    "    \   "mac": ["pip install flake8", "npm -g install coffeelint"],
-    "    \   "unix": ["pip install flake8", "npm -g install coffeelint"],
-    "    \ }}
-    let g:syntastic_enable_signs=1
-    let g:syntastic_auto_loc_list=2
+    NeoBundle "scrooloose/syntastic", {
+        \ "build": {
+        \   "mac": ["pip install flake8", "npm -g install coffeelint"],
+        \   "unix": ["pip install flake8", "npm -g install coffeelint"],
+        \ }}
+    "let g:syntastic_enable_signs=1
+    "let g:syntastic_auto_loc_list=2
     " Python用のチェッカー指定
-    let g:syntastic_python_checkers = ["pyflakes","pylint","pep8","python"]
+    let g:syntastic_python_checkers = ["pylint","pep8","python"]
 
     " エラー無視の設定
     " 複数指定する場合はカンマ区切り
@@ -870,16 +838,6 @@ NeoBundleLazy "davidhalter/jedi-vim", {
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
     NeoBundle 'bronson/vim-trailing-whitespace'
 
-""""""""""""""""""""""""""""""""""""""""""""""""
-" Indent Obey PEP8.
-""""""""""""""""""""""""""""""""""""""""""""""""
-    NeoBundle 'hynek/vim-python-pep8-indent'
-
-""""""""""""""""""""""""""""""""""""""""""""""""
-" Python Syntax Highlighting
-""""""""""""""""""""""""""""""""""""""""""""""""
-    "NeoBundle 'hdima/python-syntax'
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "カラースキーマの設定
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -905,19 +863,26 @@ NeoBundleLazy "davidhalter/jedi-vim", {
     NeoBundle 'therubymug/vim-pyte'
     " molokai カラースキーム
     NeoBundle 'tomasr/molokai'
+
     call neobundle#end()
+    let g:hybrid_use_Xresources = 1
+
+    colorscheme molokai
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " インストールされていないプラグインのチェックおよびダウンロード
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     NeoBundleCheck
-    let g:hybrid_use_Xresources = 1
-    colorscheme molokai
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 最終処理
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ファイルタイププラグインおよびインデントを有効化
+" これはNeoBundleによる処理が終了したあとに呼ばなければならない
+filetype plugin on
+filetype indent on
+
 " クリップボードをデフォルトのレジスタとして指定。後にYankRingを使うので
 " 'unnamedplus'が存在しているかどうかで設定を分ける必要がある
 if has('unnamedplus')
@@ -935,9 +900,3 @@ set shortmess+=I
 
 " lightlineの有効化措置
 set laststatus=2
-
-" ファイルタイププラグインおよびインデントを有効化
-" これはNeoBundleによる処理が終了したあとに呼ばなければならない
-filetype detect
-filetype plugin on
-filetype indent on
