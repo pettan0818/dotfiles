@@ -166,6 +166,9 @@ nnoremap g# g#zz
 " j, k による移動を折り返されたテキストでも自然に振る舞うように変更
 nnoremap j gj
 nnoremap k gk
+" Shift + h, lで文末・文頭へ。
+nnoremap <S-h> ^
+nnoremap <S-l> $
 
 " vを二回で行末まで選択
 vnoremap v $h
