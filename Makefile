@@ -11,9 +11,11 @@ clean: $(foreach f, $(DOT_FILES), unlink-dot-file-$(f))
 link-dot-file-%: %
 	@echo "Create Symlink $< => $(HOME)/$<"
 	@ln -snf $(CURDIR)/$< $(HOME)/$<
-	@ln -snf $(CURDIR)/vim_template $(HOME)/.vim/template
+	@mkdir ~/.vim
+	@mkdir ~/.vim/template
+	@ln -snf $(CURDIR)/vim_template/* $(HOME)/.vim/template
 
 unlink-dot-file-%: %
 	@echo "Remove Symlink $(HOME)/$<"
 	@$(RM) $(HOME)/$<
-	@$(RM) $(HOME)/.vim/template
+	@$(RM) $(HOME)/.vim/template/*
