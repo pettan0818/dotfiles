@@ -208,3 +208,4 @@ function chpwd() {ls --color=tty -hF}
 #ローカル設定の読み込み
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 [ -f ~/.zshrc.mac ] && source ~/.zshrc.mac
+[ -f ~/.zshrc.secret ] && source ~/.zshrc.secret
