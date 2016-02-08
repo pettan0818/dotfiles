@@ -24,6 +24,8 @@ if [ -e /usr/local/share/zsh-completions ]; then
     fpath=(/usr/local/share/zsh-completions $fpath)
 fi
 
+rm -f ~/.zcompdump; compinit
+
 #=============================
 # source zsh-syntax-highlighting
 #=============================
