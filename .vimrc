@@ -298,6 +298,22 @@ else
     \ }
 
 " 導入プラグインリスト
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" [BugFix] Djangoを正しくVimで読み込めるようにする
+" [BugFix] Vimで正しくvirtualenvを処理できるようにする
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " Djangoを正しくVimで読み込めるようにする
+    NeoBundleLazy "lambdalisue/vim-django-support", {
+        \ "autoload": {
+        \   "filetypes": ["python", "python3", "djangohtml"]
+        \ }}
+
+     " Vimで正しくvirtualenvを処理できるようにする
+    NeoBundleLazy "jmcantrell/vim-virtualenv", {
+        \ "autoload": {
+        \   "filetypes": ["python", "python3", "djangohtml"]
+        \ }}
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " LightLine
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -602,6 +618,9 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O><C-P>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Jedi-vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" docstringは表示しない
+autocmd FileType python setlocal completeopt-=preview
+
 NeoBundleLazy "davidhalter/jedi-vim", {
       \ "autoload": {
       \   "filetypes": ["python", "python3", "djangohtml"],
@@ -619,25 +638,23 @@ NeoBundleLazy "davidhalter/jedi-vim", {
         let g:jedi#auto_vim_configuration = 0
         " 補完の最初の項目が選択された状態だと使いにくいためオフにする
         let g:jedi#popup_select_first = 0
-        " Popup on dot.
-        let g:jedi#popup_on_dot = 1
-        let g:jedi#completions_enabled = 1
-       " quickrunと被るため大文字に変更
-        let g:jedi#rename_command = '<Leader>R'
+        " Don't Popup on dot.
+        let g:jedi#completions_enabled = 0
+        let g:jedi#popup_on_dot = 0
+        " quickrunと被るため大文字に変更
         " gundoと被るため大文字に変更 (2013-06-24 10:00 追記)
+        let g:jedi#rename_command = '<Leader>R'
         let g:jedi#goto_assignments_command = '<Leader>G'
 
-        " docstringは表示しない
-        autocmd FileType python setlocal completeopt-=preview
         " Python comp feat with jedi.vim
         " NeocompleteとJedi-vimをフルに連携すると、Neocompleteの動作が制限され
         " るので、OmniFunctionは停止。
-        "autocmd FileType python setlocal omnifunc=jedi#completions
-"            if !exists('g:neocomplete#force_omni_input_patterns')
-"                let g:neocomplete#force_omni_input_patterns = {}
-"            endif
-"            "let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
-"            let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+        autocmd FileType python setlocal omnifunc=jedi#completions
+            if !exists('g:neocomplete#force_omni_input_patterns')
+                let g:neocomplete#force_omni_input_patterns = {}
+            endif
+        "    "let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+            let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
     endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -766,22 +783,6 @@ NeoBundleLazy "davidhalter/jedi-vim", {
         \   "filetypes": ["text", "pandoc", "markdown", "rst", "textile"],
         \ }}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" [BugFix] Djangoを正しくVimで読み込めるようにする
-" [BugFix] Vimで正しくvirtualenvを処理できるようにする
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " Djangoを正しくVimで読み込めるようにする
-    NeoBundleLazy "lambdalisue/vim-django-support", {
-        \ "autoload": {
-        \   "filetypes": ["python", "python3", "djangohtml"]
-        \ }}
-
-    " Vimで正しくvirtualenvを処理できるようにする
-    NeoBundleLazy "jmcantrell/vim-virtualenv", {
-        \ "autoload": {
-        \   "filetypes": ["python", "python3", "djangohtml"]
-        \ }}
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntastic
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -796,12 +797,13 @@ NeoBundleLazy "davidhalter/jedi-vim", {
     let g:syntastic_enable_signs=1
     let g:syntastic_auto_loc_list=2
     " Python用のチェッカー指定
-    let g:syntastic_python_checkers = ["pyflakes","pylint","pep8","python"]
+    let g:syntastic_python_checkers = ["flake8","pyflakes","pylint","pep257","pep8","python"]
 
     " エラー無視の設定
     " 複数指定する場合はカンマ区切り
     let g:syntastic_python_pep8_args = '--ignore="E501,E128"'
     let g:syntastic_python_pylint_args = '--disable="C0301,W1402"'
+    let g:syntastic_python_flake8_args = '--ignore="E501,E128"'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enhanced Commentify
