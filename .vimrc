@@ -257,6 +257,11 @@ if filereadable(s:local_vimrc)
     execute 'source ' . s:local_vimrc
 endif
 
+let s:mac_vimrc = expand('~/.vimrc.mac')
+if filereadable(s:mac_vimrc)
+    execute 'source ' . s:mac_vimrc
+endif
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NeoBundle関連
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
