@@ -177,6 +177,13 @@ vnoremap v $h
 nnoremap <Tab> %
 vnoremap <Tab> %
 
+" E-macs的な移動を実現
+inoremap <C-a> <C-o>^
+inoremap <C-e> <C-o>$
+inoremap <C-f> <C-o>w
+inoremap <C-b> <C-o>b
+inoremap <C-d> <C-o>x
+
 " Ctrl + hjkl でウィンドウ間を移動
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
