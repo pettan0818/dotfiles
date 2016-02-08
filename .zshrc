@@ -7,7 +7,7 @@ export KCODE=u           # KCODEにUTF-8を設定
 export AUTOFEATURE=true  # autotestでfeatureを動かす
 export PAGER=less        # ページャーをlessに設定
 
-#bindkey -e              # キーバインドをemacsモードに設定
+bindkey -e              # キーバインドをemacsモードに設定
 #bindkey -v              # キーバインドをviモードに設定
 
 setopt noautoremoveslash # パス補完時にスラッシュをつける
