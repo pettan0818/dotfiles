@@ -1,0 +1,26 @@
+zplug "zsh-users/zsh-history-substring-search"
+
+zplug "mollifier/anyframe"
+zplug "mollifier/cd-gitroot"
+
+# compinit 以降に読み込むようにロードの優先度を変更する(10~19にすれば良い)
+zplug "zsh-users/zsh-syntax-highlighting", nice:10
+zplug "zsh-users/zsh-completions"
+
+# fzf-bin にホスティングされているので注意
+# またファイル名が fzf-bin となっているので file:fzf としてリネームする
+zplug "junegunn/fzf-bin", as:command, from:gh-r, file:fzf
+
+# ついでに tmux 用の拡張も入れるといい
+zplug "junegunn/fzf", as:command, of:bin/fzf-tmux
+
+# インストール処理
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# プラグインを読み込み、コマンドにパスを通す
+zplug load --verbose
