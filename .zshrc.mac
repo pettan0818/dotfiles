@@ -16,19 +16,3 @@ export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 #===========================
 export WORKON_HOME=$HOME/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
-
-#===========================
-# Zsh Completions
-#===========================
-if [ -e /usr/local/share/zsh-completions ]; then
-    fpath=(/usr/local/share/zsh-completions $fpath)
-fi
-
-rm -f ~/.zcompdump; compinit
-
-#=============================
-# source zsh-syntax-highlighting
-#=============================
-if [ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
