@@ -179,6 +179,8 @@ alias gitlog='git log-all | less -R'
 alias gitg='git graph'
 alias gitst='git st'
 alias dir='ls --color -al'
+alias cd..='cd ..'
+alias cd...='cd ../..'
 
 # Vim for clientserver
 # alias vim='vim --servername VIM'
