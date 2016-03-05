@@ -262,7 +262,7 @@ if filereadable(s:mac_vimrc)
     execute 'source ' . s:mac_vimrc
 endif
 
-let s:neobundele_initializer = expand('./.vimrc.initializer')
+let s:neobundele_initializer = expand('~/.vimrc.initializer')
 if filereadable(s:neobundele_initializer)
     execute 'source ' . s:neobundele_initializer
 endif
