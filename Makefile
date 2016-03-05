@@ -8,7 +8,6 @@ all:
 	mkdir ~/.vim/template
 	ln -snf ./vim_template/template.py ~/.vim/template/template.py
 	ln -snf ./vim_template/template.sh ~/.vim/template/template.sh
-	curl -fLo ~/.zplug/zplug --create-dirs git.io/zplug
 
 .PHONY: clean
 clean: $(foreach f, $(DOT_FILES), unlink-dot-file-$(f))
