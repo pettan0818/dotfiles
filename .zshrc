@@ -90,7 +90,9 @@ export LS_COLORS
 export ZLS_COLORS=$LS_COLORS
 # lsコマンド時、自動で色がつく(ls -Gのようなもの？)
 export CLICOLOR=true
-alias ls='ls -ahF --color=auto'
+alias ls='ls -ahF'
+# cdコマンド実行後、lsを実行する
+function chpwd() {ls -ahF}
 
 # 補完候補に色を付ける
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
@@ -187,7 +189,6 @@ alias cd...='cd ../..'
 #拡張子用の設定(共通)
 #alias -s py=python
 alias -s txt=cat
-
 function extract() {
     case $1 in
         *.tar.gz|*.tgz) tar xzvf $1;;
@@ -204,10 +205,6 @@ function extract() {
     esac
 }
 alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
-
-# cdコマンド実行後、lsを実行する
-function chpwd() {ls --color=tty -hF}
-
 
 #ローカル設定の読み込み
 [ -f ~/.zshrc.zplug ] && source ~/.zshrc.zplug
