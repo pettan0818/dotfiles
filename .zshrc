@@ -209,9 +209,8 @@ alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 #ローカル設定の読み込み
 [ -f ~/.zshrc.zplug ] && source ~/.zshrc.zplug
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
-case ${OS_NAME} in
+case ${OSTYPE} in
     darwin*)
-        [ -f ~/.zshrc.mac ] && source ~/.zshrc.mac
-        ;;
+        [ -f ~/.zshrc.mac ] && source ~/.zshrc.mac;;
 esac
 [ -f ~/.zshrc.secret ] && source ~/.zshrc.secret
