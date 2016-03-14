@@ -1,6 +1,7 @@
 # ls(coreutils)
 alias ls="gls -ahF --color=auto"
 alias dir="gls -ahFl --color=auto"
+function chpwd() {gls -ahF --color=auto}
 
 # Personal Settings
 export PATH="$HOME/Documents/Naver_Curation_system:$PATH"
