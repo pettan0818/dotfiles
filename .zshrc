@@ -97,7 +97,6 @@ if [ -f ~/.dircolors ]; then
 fi
 
 # lsコマンド時、自動で色がつく(ls -Gのようなもの？)
-
 export CLICOLOR=true
 alias ls='ls -ahF --color=auto'
 alias dir='ls --color -ahFl'
