@@ -13,9 +13,10 @@ fi
 # from: では gh-r の他に oh-my-zsh と gist が使える
 # oh-my-zsh を指定すると oh-my-zsh のリポジトリにある plugin/ 以下を
 # コマンド/プラグインとして管理することができる
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/python", from:oh-my-zsh
-zplug "plugins/pip", from:oh-my-zsh
+# [Warning] this oh-my-zsh plugins destroy my .zshrc settings like ssh.
+# zplug "plugins/git", from:oh-my-zsh
+# zplug "plugins/python", from:oh-my-zsh
+# zplug "plugins/pip", from:oh-my-zsh
 
 # 自身を管理
 zplug "b4b4r07/zplug"
