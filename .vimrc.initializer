@@ -45,4 +45,4 @@ autocmd! VimEnter * redraw
             \ | echohl WarningMsg
             \ | echo "You should do ':NeoBundleInit' at first!"
             \ | echohl None
-endif 
+endif
