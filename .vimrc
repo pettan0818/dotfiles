@@ -858,10 +858,14 @@ NeoBundleLazy "davidhalter/jedi-vim", {
     let g:auto_save_in_insert_mode = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Markdown
 " Previm
 " Markdownの自己完結型プレビューワー
 " [TODO] 何とか駆動するようにがんばろう。。。
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    NeoBundleLazy 'plasticboy/vim-markdown', {
+            \     'autoload': {'filetypes': ['pandoc','md', 'mkd']}
+            \  }
     NeoBundleLazy 'tyru/open-browser.vim', {
             \     'autoload': {'filetypes': ['pandoc','md', 'mkd']}
             \  }
