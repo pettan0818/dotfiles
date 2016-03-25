@@ -1,12 +1,4 @@
-" Thank/ to Vimを最強のPython開発環境にする2
-" [TODO] Omni補完の処理をなんとかする
-" Omni補完、デフォルトでは、選択肢の1番目が選択状態になってしまう
-" [XXX]  NeoCompleteにJedi-vimを埋め込むのはあきらめる
-" [
-"
-" 以下のグループ設定が必須
-" -----
-" release autogroup in MyAutoCmd
+" グループ設定
 augroup MyAutoCmd
     autocmd!
 augroup END
