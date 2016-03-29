@@ -1,12 +1,4 @@
-" Thank/ to Vimを最強のPython開発環境にする2
-" [TODO] Omni補完の処理をなんとかする
-" Omni補完、デフォルトでは、選択肢の1番目が選択状態になってしまう
-" [XXX]  NeoCompleteにJedi-vimを埋め込むのはあきらめる
-" [
-"
-" 以下のグループ設定が必須
-" -----
-" release autogroup in MyAutoCmd
+" グループ設定
 augroup MyAutoCmd
     autocmd!
 augroup END
@@ -262,9 +254,9 @@ if filereadable(s:mac_vimrc)
     execute 'source ' . s:mac_vimrc
 endif
 
-let s:neobundele_initializer = expand('~/.vimrc.initializer')
-if filereadable(s:neobundele_initializer)
-    execute 'source ' . s:neobundele_initializer
+let s:neobundle_initializer = expand('~/.vimrc.initializer')
+if filereadable(s:neobundle_initializer)
+    execute 'source ' . s:neobundle_initializer
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -858,10 +850,14 @@ NeoBundleLazy "davidhalter/jedi-vim", {
     let g:auto_save_in_insert_mode = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Markdown
 " Previm
 " Markdownの自己完結型プレビューワー
 " [TODO] 何とか駆動するようにがんばろう。。。
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    NeoBundleLazy 'plasticboy/vim-markdown', {
+            \     'autoload': {'filetypes': ['pandoc','md', 'mkd']}
+            \  }
     NeoBundleLazy 'tyru/open-browser.vim', {
             \     'autoload': {'filetypes': ['pandoc','md', 'mkd']}
             \  }
