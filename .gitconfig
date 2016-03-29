@@ -50,5 +50,7 @@
 	required = true
 [credential]
 	helper = osxkeychain
+[url "https://"]
+	insteadOf = git://
 [merge]
 	ff = false
