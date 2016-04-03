@@ -561,6 +561,8 @@ else
     NeoBundle 'tpope/vim-surround'
     NeoBundle 'vim-scripts/Align'
     NeoBundle 'vim-scripts/YankRing.vim'
+    let g:yankring_history_dir = '~/.vim/'
+    let g:yankring_max_history = 10000
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NeoComplete
