@@ -1,0 +1,9 @@
+all: install
+
+install: deploy init
+
+deploy:
+	bash ./etc/deploy.zsh
+
+init:
+	bash ./etc/initialize.zsh
