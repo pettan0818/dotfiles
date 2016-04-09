@@ -561,6 +561,8 @@ else
     NeoBundle 'tpope/vim-surround'
     NeoBundle 'vim-scripts/Align'
     NeoBundle 'vim-scripts/YankRing.vim'
+    let g:yankring_history_dir = '~/.vim/'
+    let g:yankring_max_history = 10000
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NeoComplete
@@ -603,6 +605,11 @@ else
         let g:neocomplcache_enable_smart_case = 1
     endfunction
 endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Fast-Fold
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+NeoBundle "Konfekt/FastFold"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SuperTab
@@ -791,8 +798,14 @@ NeoBundleLazy "davidhalter/jedi-vim", {
     "    \   "mac": ["pip install flake8", "npm -g install coffeelint"],
     "    \   "unix": ["pip install flake8", "npm -g install coffeelint"],
     "    \ }}
-    let g:syntastic_enable_signs=1
-    let g:syntastic_auto_loc_list=2
+
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
+    let g:syntastic_enable_signs = 1
+    let g:syntastic_auto_loc_list = 2
+    let g:syntastic_check_on_open = 0
+    let g:syntastic_check_on_wq = 0
     " Python用のチェッカー指定
     let g:syntastic_python_checkers = ["flake8","pyflakes","pylint","pep257","pep8","python"]
 

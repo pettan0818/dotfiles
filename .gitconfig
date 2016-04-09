@@ -18,6 +18,7 @@
     sgraph = !"git log --oneline --graph"
     graph = !"git log1"
 
+    ap      = add -p
     br      = branch
     cl      = clone
     cm      = commit

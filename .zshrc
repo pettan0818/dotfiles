@@ -187,6 +187,12 @@ alias gitg='git graph'
 alias gitst='git st'
 alias cd..='cd ..'
 alias cd...='cd ../..'
+alias mv='mv -i'
+alias cp='cp -i'
+alias rmdir='rm -rf'
+alias grep='grep --color=auto'
+alias egrep='grep -E'
+alias fgrep='grep -F'
 
 # Vim for clientserver
 # alias vim='vim --servername VIM'
