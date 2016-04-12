@@ -1,4 +1,5 @@
 # linking dotfiles from dotfiles repos.
+cd ..
 echo "Linking dotfiles."
 for file in .??*
 do
