@@ -926,6 +926,7 @@ NeoBundleLazy "davidhalter/jedi-vim", {
 " 行末の半角スペースを可視化
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
     NeoBundle 'bronson/vim-trailing-whitespace'
+    let g:extra_whitespace_ignored_filetypes = ['unite', 'mkd']
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Indent Obey PEP8.
