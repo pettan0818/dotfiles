@@ -931,12 +931,20 @@ NeoBundleLazy "davidhalter/jedi-vim", {
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Indent Obey PEP8.
 """"""""""""""""""""""""""""""""""""""""""""""""
-    NeoBundle 'hynek/vim-python-pep8-indent'
+    NeoBundleLazy 'hynek/vim-python-pep8-indent', {
+        \ "autoload": {
+        \   "filetypes": ["python", "python3", "djangohtml"],
+        \ },
+        \ }
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Python Syntax Highlighting
 """"""""""""""""""""""""""""""""""""""""""""""""
-    "NeoBundle 'hdima/python-syntax'
+    NeoBundleLazy 'hdima/python-syntax', {
+        \ "autoload": {
+        \   "filetypes": ["python", "python3", "djangohtml"],
+        \ },
+        \ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "カラースキーマの設定
