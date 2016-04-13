@@ -137,6 +137,11 @@ set nobackup
 set noswapfile
 
 " マクロ設定とキー設定
+" ESCを素早く効くようにする。
+set notimeout
+set ttimeout
+set timeoutlen=100
+
 " 入力モード中に素早くjjと入力したときはESCと見なす。
 inoremap jj <ESC>
 inoremap kk <ESC>
