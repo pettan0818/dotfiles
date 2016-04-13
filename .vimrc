@@ -163,6 +163,7 @@ nnoremap g# g#zz
 " j, k による移動を折り返されたテキストでも自然に振る舞うように変更
 nnoremap j gj
 nnoremap k gk
+
 " Shift + h, lで文末・文頭へ。
 nnoremap <S-h> ^
 nnoremap <S-l> $
@@ -180,6 +181,12 @@ inoremap <C-e> <C-o>$
 inoremap <C-f> <C-o>w
 inoremap <C-b> <C-o>b
 inoremap <C-d> <C-o>x
+
+" 挿入モードでC-で動けるようにする。
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
 
 " Ctrl + hjkl でウィンドウ間を移動
 nnoremap <C-h> <C-w>h
