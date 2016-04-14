@@ -316,12 +316,13 @@ else
 " [BugFix] Djangoを正しくVimで読み込めるようにする
 " [BugFix] Vimで正しくvirtualenvを処理できるようにする
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " Djangoを正しくVimで読み込めるようにする
-    NeoBundleLazy "lambdalisue/vim-django-support", {
-        \ "autoload": {
-        \   "filetypes": ["python", "python3", "djangohtml"]
-        \ }}
-
+    " " Djangoを正しくVimで読み込めるようにする
+    " [ERROR] vim-django-support will suppress vim performnce
+    " NeoBundleLazy "lambdalisue/vim-django-support", {
+    "     \ "autoload": {
+    "     \   "filetypes": ["python", "python3", "djangohtml"]
+    "     \ }}
+    "
      " Vimで正しくvirtualenvを処理できるようにする
     NeoBundleLazy "jmcantrell/vim-virtualenv", {
         \ "autoload": {
