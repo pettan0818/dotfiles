@@ -605,8 +605,6 @@ if has('lua') && v:version >= 703 && has('patch885')
         \ "autoload": {
         \   "insert": 1,
         \ }}
-    " [141022] Jedi-vim Compability...added
-    " http://dackdive.hateblo.jp/entry/2014/08/13/130000
     let s:hooks = neobundle#get_hooks("neocomplete.vim")
     let g:neocomplete#enable_at_startup = 1
     function! s:hooks.on_source(bundle)
@@ -656,43 +654,43 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O><C-P>"
 " Jedi-vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " docstringは表示しない
-autocmd FileType python setlocal completeopt-=preview
+" autocmd FileType python setlocal completeopt-=preview
 
-NeoBundleLazy "davidhalter/jedi-vim", {
-      \ "autoload": {
-      \   "filetypes": ["python", "python3", "djangohtml"],
-      \ },
-      \ "build": {
-      \   "mac": "pip install jedi",
-      \   "unix": "pip install jedi",
-      \ }}
-
-    let s:hooks = neobundle#get_hooks("jedi-vim")
-
-    function! s:hooks.on_source(bundle)
-        " jediにvimの設定を任せると'completeopt+=preview'するので
-        " 自動設定機能をOFFにし手動で設定を行う
-        let g:jedi#auto_vim_configuration = 0
-        " 補完の最初の項目が選択された状態だと使いにくいためオフにする
-        let g:jedi#popup_select_first = 0
-        " Don't Popup on dot.
-        let g:jedi#completions_enabled = 0
-        let g:jedi#popup_on_dot = 0
-        " quickrunと被るため大文字に変更
-        " gundoと被るため大文字に変更 (2013-06-24 10:00 追記)
-        let g:jedi#rename_command = '<Leader>R'
-        let g:jedi#goto_assignments_command = '<Leader>G'
-
-        " Python comp feat with jedi.vim
-        " NeocompleteとJedi-vimをフルに連携すると、Neocompleteの動作が制限され
-        " るので、OmniFunctionは停止。
-        autocmd FileType python setlocal omnifunc=jedi#completions
-            if !exists('g:neocomplete#force_omni_input_patterns')
-                let g:neocomplete#force_omni_input_patterns = {}
-            endif
-        "    "let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
-            let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-    endfunction
+" NeoBundleLazy "davidhalter/jedi-vim", {
+"       \ "autoload": {
+"       \   "filetypes": ["python", "python3", "djangohtml"],
+"       \ },
+"       \ "build": {
+"       \   "mac": "pip install jedi",
+"       \   "unix": "pip install jedi",
+"       \ }}
+"
+"     let s:hooks = neobundle#get_hooks("jedi-vim")
+"
+"     function! s:hooks.on_source(bundle)
+"         " jediにvimの設定を任せると'completeopt+=preview'するので
+"         " 自動設定機能をOFFにし手動で設定を行う
+"         let g:jedi#auto_vim_configuration = 0
+"         " 補完の最初の項目が選択された状態だと使いにくいためオフにする
+"         let g:jedi#popup_select_first = 0
+"         " Don't Popup on dot.
+"         let g:jedi#completions_enabled = 0
+"         let g:jedi#popup_on_dot = 0
+"         " quickrunと被るため大文字に変更
+"         " gundoと被るため大文字に変更 (2013-06-24 10:00 追記)
+"         let g:jedi#rename_command = '<Leader>R'
+"         let g:jedi#goto_assignments_command = '<Leader>G'
+"
+"         " Python comp feat with jedi.vim
+"         " NeocompleteとJedi-vimをフルに連携すると、Neocompleteの動作が制限され
+"         " るので、OmniFunctionは停止。
+"         autocmd FileType python setlocal omnifunc=jedi#completions
+"             if !exists('g:neocomplete#force_omni_input_patterns')
+"                 let g:neocomplete#force_omni_input_patterns = {}
+"             endif
+"             "let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+"             let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+"     endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Neo-Snippet
