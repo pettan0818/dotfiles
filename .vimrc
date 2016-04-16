@@ -889,10 +889,11 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O><C-P>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
     NeoBundle 'vim-scripts/vim-auto-save'
 
-    " デフォルトで有効にする
+    " デフォルトで無効にする
     let g:auto_save = 0
     " do not save while in insert mode
     let g:auto_save_in_insert_mode = 0
+    nmap [toggle]S :AutoSaveToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Markdown
