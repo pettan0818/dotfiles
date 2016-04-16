@@ -210,7 +210,8 @@ nnoremap <silent> [toggle]w :setl wrap!<CR>:setl wrap?<CR>
 
 "タブ関連ショートカットキー
 nnoremap [TABCMD]  <nop>
-nmap     <leader>^ [TABCMD]
+"nmap     <leader>^ [TABCMD]
+nmap <Space>t [TABCMD]
 
 nnoremap <silent> [TABCMD]f :<c-u>tabfirst<cr>
 nnoremap <silent> [TABCMD]l :<c-u>tablast<cr>
@@ -757,7 +758,7 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O><C-P>"
         \ "autoload": {
         \   "commands": ['GundoToggle'],
         \}}
-    nnoremap <Leader>g :GundoToggle<CR>
+    nnoremap <Space>g :GundoToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TaskList
@@ -766,7 +767,7 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O><C-P>"
         \ "autoload": {
         \   "mappings": ['<Plug>TaskList'],
         \}}
-    nmap <Leader>T <plug>TaskList
+    nmap <Space>T <plug>TaskList
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tagbar
@@ -778,7 +779,7 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O><C-P>"
         \ "build": {
         \   "mac": "brew install ctags",
         \ }}
-    nmap <Leader>t :TagbarToggle<CR>
+    nmap <Space>t :TagbarToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " QuickRun
@@ -789,9 +790,9 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O><C-P>"
         \ }}
 
     if has("clientserver")
-        nmap <Leader>r :QuickRun -runner vimproc<CR>
+        nmap <Space>r :QuickRun -runner vimproc<CR>
     else
-        nmap <Leader>r <Plug>(quickrun)
+        nmap <Space>r <Plug>(quickrun)
     endif
 
     let s:hooks = neobundle#get_hooks("vim-quickrun")
@@ -860,7 +861,7 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O><C-P>"
             \ "autoload": {
             \   "filetypes": ["R"],
             \ }}
-     let vimrplugin_r_path='C:\Program Files\R\R-3.0.3\bin'
+    let vimrplugin_r_path='C:\Program Files\R\R-3.0.3\bin'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " HTML5 ominicomplete & syntax
