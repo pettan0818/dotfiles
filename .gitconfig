@@ -48,8 +48,7 @@
     l       = log
     lg      = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)<%an>%Creset' --abbrev-commit --date=relative
     lga     = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)<%an>%Creset' --abbrev-commit --date=relative
-    sgraph = !"git log --oneline --graph"
-    graph = !"git log1"
+
     cb = rev-parse --abbrev-ref HEAD
     pull-dry-run  = "!git fetch origin;\
         b=$(git rev-parse --abbrev-ref HEAD);\
@@ -61,10 +60,13 @@
         git reset --hard HEAD~;\
         };f"
 
-    commit = commit -v
-    rebase = rebase -v
 
-    ls      = ls-files
+    sgraph = !"git log --oneline --graph"
+    graph = !"git log1"
+    commit = !"commit -v"
+    rebase = !"rebase -v"
+
+    ad      = add -A
     ap      = add -p
     br      = branch
     cl      = clone
@@ -77,6 +79,7 @@
     df      = diff
     dfc     = diff --cached
     dfs     = diff -C --stat
+    ls      = ls-files
     pl      = pull
     ps      = push
     pst     = push --tags
@@ -86,3 +89,6 @@
     smst    = submodule status
     smsync  = submodule sync
     st      = status
+    su = stash -u # stash also untracked
+    ci = commit -a
+    ad = add -A
