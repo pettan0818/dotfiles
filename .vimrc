@@ -1,4 +1,9 @@
-" グループ設定
+" No Vi互換モード
+if !&compatible
+  set nocompatible
+endif
+
+" reset augroup
 augroup MyAutoCmd
     autocmd!
 augroup END
@@ -10,8 +15,6 @@ set fileencodings=utf-8,iso-2022-jp,eucjp,cp932,ucs-bom,latin1
 set fileformats=unix,dos,mac
 " vim内部のエンコーディング
 set encoding=utf-8
-" Vi互換モードを使わず、Vimとして使う
-set nocompatible
 
 " 表示関係
 " -----
