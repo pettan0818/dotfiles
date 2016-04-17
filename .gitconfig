@@ -64,6 +64,7 @@
     commit = commit -v
     rebase = rebase -v
 
+    ls      = ls-files
     ap      = add -p
     br      = branch
     cl      = clone
