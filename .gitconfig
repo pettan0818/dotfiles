@@ -50,6 +50,16 @@
     lga     = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)<%an>%Creset' --abbrev-commit --date=relative
     sgraph = !"git log --oneline --graph"
     graph = !"git log1"
+    cb = rev-parse --abbrev-ref HEAD
+    pull-dry-run  = "!git fetch origin;\
+        b=$(git rev-parse --abbrev-ref HEAD);\
+        git diff --stat --summary ${b}..origin/${b}"
+    pull-dry-run-s = "!git fetch origin $(git config branch.$(git rev-parse --abbrev-ref HEAD).merge);\
+        git diff --stat --summary HEAD...FETCH_HEAD"
+    cancel = "!f () {\
+        git commit -a -m 'Temporary commit for cancel';\
+        git reset --hard HEAD~;\
+        };f"
 
     commit = "commit -v"
     rebase = "rebase -v"
