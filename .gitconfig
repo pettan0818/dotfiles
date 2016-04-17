@@ -75,10 +75,8 @@
         fi;\
         };f"
 
-    sgraph = !"git log --oneline --graph"
-    graph = !"git log1"
-    commit = !"commit -v"
-    rebase = !"rebase -v"
+    sgraph = "!git log --oneline --graph"
+    graph = "!git log1"
 
     ad      = add -A
     ap      = add -p
