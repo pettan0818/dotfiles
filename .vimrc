@@ -999,12 +999,8 @@ endif
 " クリップボードをデフォルトのレジスタとして指定。後にYankRingを使うので
 " 'unnamedplus'が存在しているかどうかで設定を分ける必要がある
 if has('unnamedplus')
-    " set clipboard& clipboard+=unnamedplus " 2013-07-03 14:30 unnamed 追加
-    "set clipboard& clipboard+=unnamedplus,unnamed
     set clipboard+=unnamed,unnamedplus
 else
-    " set clipboard& clipboard+=unnamed,autoselect 2013-06-24 10:00 autoselect 削除
-    "set clipboard& clipboard+=unnamed
     set clipboard+=unnamed
 endif
 
