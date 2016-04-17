@@ -61,8 +61,8 @@
         git reset --hard HEAD~;\
         };f"
 
-    commit = "commit -v"
-    rebase = "rebase -v"
+    commit = commit -v
+    rebase = rebase -v
 
     ap      = add -p
     br      = branch
