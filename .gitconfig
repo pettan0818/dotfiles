@@ -17,11 +17,14 @@
     log4 = log --graph --pretty='format:%C(yellow)%h%Cblue%d%Creset %s %C(black bold)%an, %ar%Creset'
     sgraph = !"git log --oneline --graph"
     graph = !"git log1"
+    commit = "commit -v"
+    rebase = "rebase -v"
 
     ap      = add -p
     br      = branch
     cl      = clone
-    cm      = commit
+    cm      = commit -v
+    cmm     = commit -vm
     co      = checkout
     cob     = checkout -b
     cod     = checkout develop
