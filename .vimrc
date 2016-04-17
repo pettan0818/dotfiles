@@ -654,7 +654,7 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O><C-P>"
 " Jedi-vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " docstringは表示しない
-" autocmd FileType python setlocal completeopt-=preview
+autocmd FileType python setlocal completeopt-=preview
 
 " NeoBundleLazy "davidhalter/jedi-vim", {
 "       \ "autoload": {
@@ -803,7 +803,7 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O><C-P>"
         \ },
         \ "python":{
         \   "type" : "python",
-        \   "command" : "python",
+        \   "command" : "ipython",
         \ },}
     endfunction
     " <C/c>で、強制終了
