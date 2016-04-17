@@ -978,7 +978,7 @@ autocmd FileType python setlocal completeopt-=preview
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     NeoBundleCheck
     let g:hybrid_use_Xresources = 1
-    colorscheme molokai
+    colorscheme jellybeans
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
