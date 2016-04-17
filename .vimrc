@@ -807,10 +807,12 @@ autocmd FileType python setlocal completeopt-=preview
         \ "_": {
         \   "outputter/buffer/close_on_empty" : 1,
         \   "outputter/buffer/split" : ":vertical rightb",
+        \   "runner" : "vimproc",
+        \   "runner/vimproc/updatetime" : 60,
         \ },
         \ "python":{
         \   "type" : "python",
-        \   "command" : "ipython",
+        \   "command" : "python",
         \ },}
     endfunction
     " <C/c>で、強制終了
