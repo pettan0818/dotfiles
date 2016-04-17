@@ -15,6 +15,8 @@ set nocompatible
 
 " 表示関係
 " -----
+" 256色許可
+set t_Co=256
 " ステータスラインを常に表示
 set laststatus=2
 " コマンドラインの行数
@@ -25,8 +27,6 @@ set notitle
 "set title
 " 行番号の色
 highlight LineNr ctermfg=darkyellow
-" 256色許可
-set t_Co=256
 
 " シンタックス・ハイライトを有効にする
 syntax on
@@ -926,7 +926,7 @@ autocmd FileType python setlocal completeopt-=preview
 " 行末の半角スペースを可視化
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
     NeoBundle 'bronson/vim-trailing-whitespace'
-    let g:extra_whitespace_ignored_filetypes = ['unite', 'mkd']
+    let g:extra_whitespace_ignored_filetypes = ['unite', 'mkd', 'md']
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Indent Obey PEP8.
