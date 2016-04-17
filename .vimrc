@@ -482,16 +482,18 @@ else
         \ | endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vim Outliner
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+NeoBundle 'vim-scripts/VOoM'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Unite-vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
     NeoBundleLazy "Shougo/unite.vim", {
         \ "autoload": {
         \   "commands": ["Unite", "UniteWithBufferDir"]
         \ }}
-    NeoBundleLazy 'h1mesuke/unite-outline', {
-        \ "autoload": {
-        \   "unite_sources": ["outline"],
-        \ }}
+    NeoBundle "Shougo/unite-outline"
     NeoBundleLazy 'Shougo/neomru.vim', {
         \ "autoload": {
         \   "commands": ["Unite"]
@@ -510,7 +512,7 @@ else
     nnoremap <silent> [unite]m :<C-u>Unite file_mru<CR>
     nnoremap <silent> [unite]c :<C-u>Unite bookmark<CR>
     nnoremap <silent> [unite]p :<C-u>Unite process<CR>
-    nnoremap <silent> [unite]o :<C-u>Unite outline<CR>
+    nnoremap <silent> [unite]o :<C-u>Unite outline -vertical -winwidth=40<CR>
     nnoremap <silent> [unite]t :<C-u>Unite tab<CR>
     nnoremap <silent> [unite]w :<C-u>Unite window<CR>
 
