@@ -549,6 +549,7 @@ NeoBundle 'vim-scripts/VOoM'
     nnoremap <silent> [unite]f :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
     nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
     nnoremap <silent> [unite]g :<C-u>Unite grep<CR>
+    nnoremap <silent> [unite]G :<C-u>Unite grammarous<CR>
     nnoremap <silent> [unite]r :<C-u>Unite register<CR>
     nnoremap <silent> [unite]y :<C-u>Unite history/yank<CR>
     nnoremap <silent> [unite]m :<C-u>Unite file_mru<CR>
@@ -811,6 +812,30 @@ autocmd FileType python setlocal completeopt-=preview
     let g:indent_guides_color_change_percent = 30
     " ガイドの幅
     let g:indent_guides_guide_size = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-grammarous
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    NeoBundle "rhysd/vim-grammarous"
+    let g:grammarous#default_comments_only_filetypes = {
+                \ '*' : 1, 'help' : 0, 'markdown' : 0,
+                \ }
+    let g:grammarous#disabled_rules = {
+                \ '*' : ['WHITESPACE_RULE', 'EN_QUOTES'],
+                \ 'help' : ['WHITESPACE_RULE', 'EN_QUOTES', 'SENTENCE_WHITESPACE', 'UPPERCASE_SENTENCE_START'],
+                \ }
+    let g:grammarous#hooks = {}
+    function! g:grammarous#hooks.on_check(errs)
+        nmap <buffer><C-n> <Plug>(grammarous-move-to-next-error)
+        nmap <buffer><C-p> <Plug>(grammarous-move-to-previous-error)
+        nmap <buffer><Esc><Esc> <Plug>(grammarous-reset)
+    endfunction
+
+    function! g:grammarous#hooks.on_reset(errs)
+        nunmap <buffer><C-n>
+        nunmap <buffer><C-p>
+        nunmap <buffer><Esc><Esc>
+    endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " gundo.vim
