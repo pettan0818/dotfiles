@@ -720,6 +720,23 @@ else
     endfunction
 endif
 
+" Include Path Completion
+NeoBundle "Shougo/neoinclude.vim"
+
+" Syntax completion
+NeoBundle "Shougo/neco-syntax"
+let g:necosyntax#min_keyword_length = 2
+
+" Vim syntax Completion
+NeoBundle "Shougo/neco-vim"
+
+" English words completion
+NeoBundle "ujihisa/neco-look"
+
+" Github completion
+NeoBundle "rhysd/github-complete.vim"
+let g:github_complete_enable_neocomplete = 1
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fast-Fold
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
