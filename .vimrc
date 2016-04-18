@@ -8,6 +8,13 @@ augroup MyAutoCmd
     autocmd!
 augroup END
 
+filetype on
+" 注意: この内容は:filetype onよりも後に記述すること。
+autocmd FileType *
+\   if &l:omnifunc == ''
+\ |   setlocal omnifunc=syntaxcomplete#Complete
+\ | endif
+
 " 普通は入れなくても動くと思うが、挙動不審なとき用の設定
 " -----
 " 文字コード関係で困ったとき用
