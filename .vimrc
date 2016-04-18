@@ -658,6 +658,10 @@ if has('lua') && v:version >= 703 && has('patch885')
         let g:neocomplete#enable_fuzzy_completion = 1
         let g:neocomplete#enable_auto_select = 0
 
+        " _(アンダースコア)区切りの補完を有効化
+        let g:neocomplete#enable_underbar_completion = 1
+        let g:neocomplete#enable_camel_case_completion  =  1
+
         " Set minimum syntax keyword length.
         let g:neocomplete#sources#syntax#min_keyword_length = 3
         let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
