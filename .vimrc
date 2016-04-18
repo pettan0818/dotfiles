@@ -682,7 +682,8 @@ if has('lua') && v:version >= 703 && has('patch885')
         " キーマッピング
         " 補完のキャンセル
         inoremap <expr><BS> neocomplete#smart_close_popup()."\<BS>"
-        " Enterで補完の確定(endwiseとの競合対策
+        inoremap <expr><S-Tab> neocomplete#smart_close_popup()."<C-X><C-O><C-P>"
+        " Enterで補完の確定(endwiseとの競合対策)
         function! s:my_crinsert()
             return pumvisible() ? neocomplete#close_popup() : "\<Cr>"
         endfunction
