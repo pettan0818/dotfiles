@@ -622,6 +622,24 @@ if has('lua') && v:version >= 703 && has('patch885')
         let g:neocomplete#enable_smart_case = 1
         let g:neocomplete#enable_fuzzy_completion = 1
         let g:neocomplete#enable_auto_select = 0
+
+        " Set minimum syntax keyword length.
+        let g:neocomplete#sources#syntax#min_keyword_length = 3
+        let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+        " Define dictionary.
+        let g:neocomplete#sources#dictionary#dictionaries = {
+            \ 'default' : '',
+            \ 'vimshell' : $HOME.'/.vimshell_hist',
+            \ 'scheme' : $HOME.'/.gosh_completions'
+                \ }
+
+        " Define keyword.
+        if !exists('g:neocomplete#keyword_patterns')
+            let g:neocomplete#keyword_patterns = {}
+        endif
+        let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
         " キーマッピング
         " 補完のキャンセル
         inoremap <expr><BS> neocomplete#smart_close_popup()."\<BS>"
