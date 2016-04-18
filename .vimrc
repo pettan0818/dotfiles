@@ -738,6 +738,16 @@ NeoBundle "rhysd/github-complete.vim"
 let g:github_complete_enable_neocomplete = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-go
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+NeoBundle 'fatih/vim-go'
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_interfaces = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fast-Fold
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle "Konfekt/FastFold"
@@ -962,6 +972,10 @@ NeoBundleLazy "davidhalter/jedi-vim", {
     let g:syntastic_python_pep8_args = '--ignore="E501,E128"'
     let g:syntastic_python_pylint_args = '--disable="C0301,W1402"'
     let g:syntastic_python_flake8_args = '--ignore="E501,E128"'
+
+    " Go用のチェッカー
+    let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+    let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enhanced Commentify
