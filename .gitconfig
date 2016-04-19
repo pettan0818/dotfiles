@@ -1,27 +1,89 @@
-[push]
-    default = matching
 [user]
     name = pettan0818
     email = pettan0818+git@gmail.com
+
+[github]
+    user = pettan0818
+
 [core]
     autocrlf = false
     editor = vim
     pager = less -R
     whitespace = cr-at-eol
-[gui]
-    recentrepo = "C:/Dropbox/Document/#Jobs/#DataAnalytics/SEO/Codes"
+    execludesfile = ~/.gitignore_global
+
+[push]
+    default = matching
+
+[fetch]
+    prune = true
+
+[merge]
+    tool = vimdiff
+    ff = false
+
+[diff]
+    algorithm = histogram
+
+[color]
+    ui = true
+    diff = true
+
+[filter "lfs"]
+    clean = git-lfs clean %f
+    smudge = git-lfs smudge %f
+    required = true
+
+[credential]
+    helper = osxkeychain
+
+[url "https://"]
+    insteadOf = git://
+
 [alias]
     log1 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)― %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
     log2 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(bold white)― %an%C(reset)' --abbrev-commit
     log3 = log --graph --date-order -C -M --pretty=format:"<%h> %ad [%an] %Cgreen%d%Creset %s" --all --date=short
     log4 = log --graph --pretty='format:%C(yellow)%h%Cblue%d%Creset %s %C(black bold)%an, %ar%Creset'
-    sgraph = !"git log --oneline --graph"
-    graph = !"git log1"
+    l       = log
+    lg      = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)<%an>%Creset' --abbrev-commit --date=relative
+    lga     = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)<%an>%Creset' --abbrev-commit --date=relative
 
+    cb = rev-parse --abbrev-ref HEAD
+    pull-dry-run  = "!git fetch origin;\
+        b=$(git rev-parse --abbrev-ref HEAD);\
+        git diff --stat --summary ${b}..origin/${b}"
+    pull-dry-run-s = "!git fetch origin $(git config branch.$(git rev-parse --abbrev-ref HEAD).merge);\
+        git diff --stat --summary HEAD...FETCH_HEAD"
+    cancel = "!f () {\
+        git commit -a -m 'Temporary commit for cancel';\
+        git reset --hard HEAD~;\
+        };f"
+
+    d = difftool --tool=vimdiff --no-prompt
+    d1 = diff HEAD~
+    d2 = diff HEAD~~
+    d3 = diff HEAD~~~
+    d4 = diff HEAD~~~~
+    d5 = diff HEAD~~~~~
+    d10 = diff HEAD~~~~~~~~~~
+    d = "!f () {\
+        if expr \"$1\" : \"[0-9]*\" >/dev/null;then \
+        git diff HEAD~\"${@}\";\
+        else \
+        git difftool --tool=vimdiff --no-prompt $*;\
+        fi;\
+        };f"
+
+    sgraph = "!git log --oneline --graph"
+    graph = "!git log1"
+
+    ad      = add -A
     ap      = add -p
     br      = branch
     cl      = clone
-    cm      = commit
+    cm      = commit -v
+    cmm     = commit -vm
     co      = checkout
     cob     = checkout -b
     cod     = checkout develop
@@ -29,6 +91,7 @@
     df      = diff
     dfc     = diff --cached
     dfs     = diff -C --stat
+    ls      = ls-files
     pl      = pull
     ps      = push
     pst     = push --tags
@@ -38,20 +101,6 @@
     smst    = submodule status
     smsync  = submodule sync
     st      = status
-    l       = log
-    lg      = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)<%an>%Creset' --abbrev-commit --date=relative
-    lga     = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)<%an>%Creset' --abbrev-commit --date=relative
-
-[color]
-    ui = true
-    diff = true
-[filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
-[credential]
-	helper = osxkeychain
-[url "https://"]
-	insteadOf = git://
-[merge]
-	ff = false
+    su = stash -u # stash also untracked
+    ci = commit -a
+    ad = add -A

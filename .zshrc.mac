@@ -19,3 +19,8 @@ export PATH="/usr/local/sbin:$PATH"
 #===========================
 export WORKON_HOME=$HOME/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
+
+#===========================
+# Go_BIN_PATH
+#===========================
+export GOPATH="$HOME/.go"
