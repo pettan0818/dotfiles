@@ -639,6 +639,10 @@ NeoBundle 'vim-scripts/VOoM'
     NeoBundle 'tpope/vim-surround'
     NeoBundle 'vim-scripts/Align'
     NeoBundle 'vim-scripts/YankRing.vim'
+    NeoBundle 'kana/vim-textobj-user'
+    NeoBundle 'kana/vim-operator-user'
+    NeoBundle 'kana/vim-textobj-line'
+    NeoBundle 'osyo-manga/vim-textobj-multiblock'
     let g:yankring_history_dir = '~/.vim/'
     let g:yankring_max_history = 10000
 
