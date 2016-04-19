@@ -17,7 +17,7 @@ export PATH="/usr/local/sbin:$PATH"
 #===========================
 # VirtualEnv
 #===========================
-export WORKON_HOME=$HOME/.virtualenv
+export WORKON_HOME=$HOME/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
 
 #===========================
