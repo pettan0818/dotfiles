@@ -795,8 +795,26 @@ NeoBundleLazy "davidhalter/jedi-vim", {
         " gundoと被るため大文字に変更 (2013-06-24 10:00 追記)
         let g:jedi#rename_command = '<Leader>R'
         let g:jedi#goto_assignments_command = '<Leader>G'
+        if jedi#init_python()
+        function! s:jedi_auto_force_py_version() abort
+            let major_version = pyenv#python#get_internal_major_version()
+            call jedi#force_py_version(major_version)
+        endfunction
+        augroup vim-pyenv-custom-augroup
+            autocmd! *
+            autocmd User vim-pyenv-activate-post   call s:jedi_auto_force_py_version()
+            autocmd User vim-pyenv-deactivate-post call s:jedi_auto_force_py_version()
+        augroup END
+        endif
     endfunction
 
+    " Do not load vim-pyenv until *.py is opened and
+    " make sure that it is loaded after jedi-vim is loaded.
+    NeoBundleLazy 'lambdalisue/vim-pyenv', {
+            \ 'depends': ['davidhalter/jedi-vim'],
+            \ 'autoload': {
+            \   'filetypes': ['python', 'python3'],
+            \ }}
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Neo-Snippet
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
