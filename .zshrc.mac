@@ -9,11 +9,13 @@ alias desktop="~/Desktop/"
 alias dropbox="~/Dropbox/"
 alias SEO="~/Dropbox/Document/SEO業務/"
 alias Naver="~/Documents/Naver_Curation_system/"
+
 #===========================
 # For HomeBrew
 #===========================
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
+
 #===========================
 # VirtualEnv
 #===========================
