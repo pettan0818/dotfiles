@@ -388,6 +388,7 @@ if has('lua') && v:version >= 703 && has('patch885')
         autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
         autocmd FileType python setlocal omnifunc=jedi#completions
         " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+        " autocmd FileType python3 setlocal omnifunc=python3complete#Complete
         autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
         let g:neocomplete#force_omni_input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
         let g:neocomplete#force_omni_input_patterns.typescript = '[^. \t]\.\%(\h\w*\)\?' " Same as JavaScript
@@ -692,6 +693,7 @@ NeoBundleLazy "davidhalter/jedi-vim", {
     let g:syntastic_check_on_open = 0
     let g:syntastic_check_on_wq = 0
     " Python用のチェッカー指定
+    let g:syntastic_python_python_exec = 'python3'
     let g:syntastic_python_checkers = ["flake8","pyflakes","pylint","pep257","pep8","python"]
 
     " エラー無視の設定
