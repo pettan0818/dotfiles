@@ -64,6 +64,7 @@ else
             \ 'active': {
             \   'left': [
             \     ['mode', 'paste'],
+            \     ['pyenv'],
             \     ['fugitive', 'gitgutter', 'filename'],
             \   ],
             \   'right': [
@@ -84,6 +85,7 @@ else
             \   'syntastic': 'SyntasticStatuslineFlag',
             \   'charcode': 'MyCharCode',
             \   'gitgutter': 'MyGitGutter',
+            \   'pyenv':  "pyenv#statusline#component"
             \ },
             \ 'separator': {'left': '>', 'right': '<'},
             \ 'subseparator': {'left': '>', 'right': '<'}
@@ -450,6 +452,10 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O><C-P>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Jedi-vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ~/.pyenv/shimsを$PATHに追加
+" jedi-vim や vim-pyenc のロードよりも先に行う必要がある、はず。
+let $PATH = "~/.pyenv/shims:".$PATH
+
 " docstringは表示しない
 autocmd FileType python setlocal completeopt-=preview
 
@@ -465,6 +471,8 @@ NeoBundleLazy "davidhalter/jedi-vim", {
     let s:hooks = neobundle#get_hooks("jedi-vim")
 
     function! s:hooks.on_source(bundle)
+        " let g:jedi#force_py_version = 2
+        " let g:jedi#force_py_version = 3
         " jediにvimの設定を任せると'completeopt+=preview'するので
         " 自動設定機能をOFFにし手動で設定を行う
         let g:jedi#auto_vim_configuration = 0
