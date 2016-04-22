@@ -767,13 +767,18 @@ NeoBundleLazy "davidhalter/jedi-vim", {
     NeoBundleLazy 'plasticboy/vim-markdown', {
             \     'autoload': {'filetypes': ['pandoc','md', 'mkd']}
             \  }
+    let s:hooks = neobundle#get_hooks("vim-markdown")
+    function! s:hooks.on_source(bundle)
+        " Markdown Preview
+        let g:vim_markdown_folding_disabled = 1
+    endfunction
+
     NeoBundleLazy 'tyru/open-browser.vim', {
             \     'autoload': {'filetypes': ['pandoc','md', 'mkd']}
             \  }
     NeoBundleLazy 'kannokanno/previm', {
             \     'autoload': {'filetypes': ['pandoc','md', 'mkd']}
             \  }
-    " Markdown Preview
     " <F7>でプレビュー
     nnoremap <silent> <F7> :PrevimOpen<CR>
     " 現在のタブを閉じる
