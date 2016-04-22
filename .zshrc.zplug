@@ -21,7 +21,7 @@ fi
 zplug "b4b4r07/zplug"
 
 # ZSHの履歴検索を部分一致にアップグレード
-zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-history-substring-search", nice:11
 
 # fzf-bin にホスティングされているので注意
 # またファイル名が fzf-bin となっているので file:fzf としてリネームする
