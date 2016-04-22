@@ -424,8 +424,8 @@ NeoBundle "Shougo/neco-vim"
 NeoBundle "ujihisa/neco-look"
 
 " Github completion
-NeoBundle "rhysd/github-complete.vim"
-let g:github_complete_enable_neocomplete = 1
+" NeoBundle "rhysd/github-complete.vim"
+" let g:github_complete_enable_neocomplete = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-go
