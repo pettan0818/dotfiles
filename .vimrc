@@ -431,12 +431,14 @@ NeoBundle "ujihisa/neco-look"
 " vim-go
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'fatih/vim-go'
+set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fast-Fold
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -703,8 +705,10 @@ NeoBundleLazy "davidhalter/jedi-vim", {
     let g:syntastic_python_flake8_args = '--ignore="E501,E128"'
 
     " Go用のチェッカー
-    let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-    let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+    let g:syntastic_mode_map = { 'mode': 'passive',
+    \ 'active_filetypes': ['go'] }
+    let g:syntastic_go_checkers = ['go', 'golint', 'govet', 'errcheck', 'gofmt']
+    " let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enhanced Commentify
