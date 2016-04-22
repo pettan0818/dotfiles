@@ -588,9 +588,9 @@ NeoBundleLazy "davidhalter/jedi-vim", {
 " vim-grammarous
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
     NeoBundle "rhysd/vim-grammarous"
-    let g:grammarous#default_comments_only_filetypes = {
-                \ '*' : 1, 'help' : 0, 'markdown' : 0,
-                \ }
+    " let g:grammarous#default_comments_only_filetypes = {
+    "             \ '*' : 1, 'help' : 0, 'markdown' : 0,
+    "             \ }
     let g:grammarous#disabled_rules = {
                 \ '*' : ['WHITESPACE_RULE', 'EN_QUOTES'],
                 \ 'help' : ['WHITESPACE_RULE', 'EN_QUOTES', 'SENTENCE_WHITESPACE', 'UPPERCASE_SENTENCE_START'],
