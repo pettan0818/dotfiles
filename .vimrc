@@ -474,8 +474,22 @@ NeoBundleLazy "davidhalter/jedi-vim", {
     let s:hooks = neobundle#get_hooks("jedi-vim")
 
     function! s:hooks.on_source(bundle)
+        let python_version = system("python -V")
+        let g:jedi#force_py_version = str2nr(matchstr(python_version, "[0-9]", 0))
+        if jedi#init_python()
+        function! s:jedi_auto_force_py_version() abort
+            let major_version = pyenv#python#get_internal_major_version()
+            call jedi#force_py_version(major_version)
+        endfunction
+        augroup vim-pyenv-custom-augroup
+            autocmd! *
+            autocmd User vim-pyenv-activate-post   call s:jedi_auto_force_py_version()
+            autocmd User vim-pyenv-deactivate-post call s:jedi_auto_force_py_version()
+        augroup END
+        endif
         " let g:jedi#force_py_version = 2
-        let g:jedi#force_py_version = 3
+        " let g:jedi#force_py_version = 3
+
         " jediにvimの設定を任せると'completeopt+=preview'するので
         " 自動設定機能をOFFにし手動で設定を行う
         let g:jedi#auto_vim_configuration = 0
@@ -489,19 +503,6 @@ NeoBundleLazy "davidhalter/jedi-vim", {
         " gundoと被るため大文字に変更 (2013-06-24 10:00 追記)
         let g:jedi#rename_command = '<Leader>R'
         let g:jedi#goto_assignments_command = '<Leader>G'
-
-        if jedi#init_python()
-        function! s:jedi_auto_force_py_version() abort
-            let major_version = pyenv#python#get_internal_major_version()
-            call jedi#force_py_version(major_version)
-        endfunction
-        augroup vim-pyenv-custom-augroup
-            autocmd! *
-            autocmd User vim-pyenv-activate-post   call s:jedi_auto_force_py_version()
-            autocmd User vim-pyenv-deactivate-post call s:jedi_auto_force_py_version()
-        augroup END
-        endif
-
     endfunction
 
     " Do not load vim-pyenv until *.py is opened and
