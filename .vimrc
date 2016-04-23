@@ -698,8 +698,9 @@ NeoBundleLazy "davidhalter/jedi-vim", {
     let g:syntastic_check_on_open = 0
     let g:syntastic_check_on_wq = 0
     " Python用のチェッカー指定
+    " pylint is not available for pyenv
     let g:syntastic_python_python_exec = 'python3'
-    let g:syntastic_python_checkers = ["flake8","pyflakes","pylint","pep257","pep8","python"]
+    let g:syntastic_python_checkers = ["flake8","pyflakes","pep257","pep8","python"]
 
     " エラー無視の設定
     " 複数指定する場合はカンマ区切り
@@ -708,8 +709,8 @@ NeoBundleLazy "davidhalter/jedi-vim", {
     let g:syntastic_python_flake8_args = '--ignore="E501,E128"'
 
     " Go用のチェッカー
-    let g:syntastic_mode_map = { 'mode': 'passive',
-    \ 'active_filetypes': ['go'] }
+    " let g:syntastic_mode_map = { 'mode': 'passive',
+    " \ 'active_filetypes': ['go'] }
     let g:syntastic_go_checkers = ['go', 'golint', 'govet', 'errcheck', 'gofmt']
     " let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
