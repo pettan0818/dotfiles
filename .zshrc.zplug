@@ -64,7 +64,7 @@ if ! zplug check --verbose; then
     fi
 fi
 zplug "pettan0818/zsh-python-prompt"
-source "./.zplug/repos/pettan0818/zsh-python-prompt/zshrc.zsh"
+[ -f ~/.zplug/repos/pettan0818/zsh-python-prompt/zshrc.zsh ] && source ~/.zplug/repos/pettan0818/zsh-python-prompt/zshrc.zsh
 RPROMPT='[$ZSH_PYTHON_PROMPT `rprompt-git-current-branch` %~]'
 
 # プラグインを読み込み、コマンドにパスを通す
