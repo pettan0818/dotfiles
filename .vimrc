@@ -1141,6 +1141,7 @@ endif
 function! SetDiffMode()
   if &diff
     setlocal nospell
+    setl scrollbind
     " setlocal wrap<
   endif
 endfunction
