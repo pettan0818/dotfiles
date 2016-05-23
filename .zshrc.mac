@@ -15,7 +15,7 @@ alias Naver="~/Documents/Naver_Curation_system/"
 #===========================
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
-
+export HOMEBREW_NO_ANALYTICS=1
 #===========================
 # Go_BIN_PATH
 #===========================
