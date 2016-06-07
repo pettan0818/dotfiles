@@ -15,6 +15,11 @@ alias Naver="~/Documents/Naver_Curation_system/"
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 #===========================
+# For iterm2
+#===========================
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+#===========================
 # VirtualEnv
 #===========================
 export WORKON_HOME=$HOME/.virtualenvs
