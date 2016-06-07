@@ -8,306 +8,6 @@ augroup MyAutoCmd
     autocmd!
 augroup END
 
-filetype on
-" 注意: この内容は:filetype onよりも後に記述すること。
-autocmd FileType *
-\   if &l:omnifunc == ''
-\ |   setlocal omnifunc=syntaxcomplete#Complete
-\ | endif
-
-" 普通は入れなくても動くと思うが、挙動不審なとき用の設定
-" -----
-" 文字コード関係で困ったとき用
-set fileencodings=utf-8,iso-2022-jp,eucjp,cp932,ucs-bom,latin1
-set fileformats=unix,dos,mac
-" vim内部のエンコーディング
-set encoding=utf-8
-
-" 表示関係
-" -----
-" 256色許可
-set t_Co=256
-" ステータスラインを常に表示
-set laststatus=2
-" コマンドラインの行数
-set cmdheight=1
-" Title掃除
-set notitle
-" 編集中のファイル名の表示
-"set title
-" 行番号の色
-highlight LineNr ctermfg=darkyellow
-
-" シンタックス・ハイライトを有効にする
-syntax on
-
-" コマンドをステータスラインに表示
-set showcmd
-" 左端に行番号を表示する
-set number
-" カーソル行の背景色を変える
-set cursorline
-" 長い文字の折り返し
-set wrap
-" 自動改行無効化
-set textwidth=0
-" その代わり80文字目にラインを入れる
-set colorcolumn=80
-
-" 前時代的スクリーンベルの無効化
-set t_vb=
-set novisualbell
-
-" 不可視文字も表示する
-set list
-" デフォルトの不可視文字は美しくないのでUniCodeできれいに
-set listchars=eol:¬,tab:▸\
-"set listchars=eol:~
-"set listchars=tab:»\ ,trail:-,extends:»,precedes:«,nbsp:%
-
-" モードの表示
-" lightlineとの併用のため無効化しました。(2014/03/24)
-set noshowmode
-" ファイルマネージャで上キーで上のディレクトリに
-set wildmenu
-
-" 背景を真っ黒にする。
-set background=dark
-"日本語の行の連結時には空白を入力しない。
-set formatoptions+=mM
-"□や○の文字があってもカーソル位置がずれないようにする。
-set ambiwidth=double
-"画面最後の行をできる限り表示する。
-set display+=lastline
-
-" インデント関係
-" -----
-" オートインデント
-set autoindent
-set smartindent
-set cindent
-
-" ハードタブ教 & タブは4文字教 の人に最適化
-" -----
-" 自動インデント等を有効にする
-" filetype plugin indent on
-" ファイルを開いた時のTab文字(<Tab>, \t)を空白何文字分で表示するか
-set tabstop=4
-" 自動インデントや << or >> で入力されるインデントの幅
-set shiftwidth=4
-" 入力中にTabキーを押した時、何文字分の空白で表示するか
-set softtabstop=4
-" Tabを空白に変換する
-set expandtab
-
-" 検索関係
-" -----
-" 検索文字列をハイライトする
-set hlsearch
-" 検索する時、大文字と小文字を無視する
-set ignorecase
-" 検索文字に大文字が入ったらやっぱり考慮する
-set smartcase
-" インクリメンタルサーチ
-set incsearch
-
-" バックスラッシュやクエスチョンを状況に合わせてエスケープする
-cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
-cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
-
-" 編集関係
-" -----
-" 全モードでのマウス有効化
-set mouse=a
-" '<'や'>'でインデントする際に'shiftwidth'の倍数に丸める
-set shiftround
-" 補完時に大文字小文字を区別しない
-set infercase
-" cursorを文字がない部分でも動くようにする。
-set virtualedit=all
-" 左右のカーソル移動で行間移動可能にする。
-set whichwrap=b,s,h,l,<,>,[,]
-" バッファ切り替え時にHidden(プロセスを殺さない)
-set hidden
-" 新しく開く代わりにすでに開いているバッファを開く
-set switchbuf=useopen
-" 対応する括弧などのハイライト表示
-set showmatch
-" 対応括弧のハイライト表示を三秒間にする
-set matchtime=3
-" 対応括弧に<>を入れる
-set matchpairs& matchpairs+=<:>
-" BackSpaceでなんでも消す
-set backspace=indent,eol,start
-
-" Swapファイル?Backupファイル?前時代的すぎ
-" なので全て無効化する
-set nowritebackup
-set nobackup
-set noswapfile
-
-" マクロ設定とキー設定
-" ESCを素早く効くようにする。
-set notimeout
-set ttimeout
-set timeoutlen=100
-
-" 入力モード中に素早くjjと入力したときはESCと見なす。
-inoremap jj <ESC>
-inoremap kk <ESC>
-
-" ESCを二回押すとハイライト消去
-nmap <silent> <Esc><Esc> :nohlsearch<CR>
-
-" カーソル下の単語を * で検索
-vnoremap <silent> * "vy/\V<C-r>=substitute(escape(@v, '\/'), "\n", '\\n', 'g')<CR><CR>
-
-" <C-f>でスクロールしていくと最後一行になってしまうのを直す設定
-" http://itchyny.hatenablog.com/entry/2016/02/02/210000
-noremap <expr> <C-b> max([winheight(0) - 2, 1]) . "\<C-u>" . (line('.') < 1         + winheight(0) ? 'H' : 'L')
-noremap <expr> <C-f> max([winheight(0) - 2, 1]) . "\<C-d>" . (line('.') > line('$') - winheight(0) ? 'L' : 'H')
-noremap <expr> <C-y> (line('w0') <= 1         ? 'k' : "\<C-y>")
-noremap <expr> <C-e> (line('w$') >= line('$') ? 'j' : "\<C-e>")
-
-" 検索後にジャンプした際に検索単語を画面中央に持ってくる
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap * *zz
-nnoremap # #zz
-nnoremap g* g*zz
-nnoremap g# g#zz
-
-" j, k による移動を折り返されたテキストでも自然に振る舞うように変更
-nnoremap j gj
-nnoremap k gk
-
-" Shift + h, lで文末・文頭へ。
-nnoremap <S-h> ^
-nnoremap <S-l> $
-
-" vを二回で行末まで選択
-vnoremap v $h
-
-" TABにて対応ペアにジャンプ
-nnoremap <Tab> %
-vnoremap <Tab> %
-
-" E-macs的な移動を実現
-inoremap <C-a> <C-o>^
-inoremap <C-e> <C-o>$
-inoremap <C-f> <C-o>w
-inoremap <C-b> <C-o>b
-inoremap <C-d> <C-o>x
-
-" 挿入モードでC-で動けるようにする。
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-h> <Left>
-inoremap <C-l> <Right>
-
-" Ctrl + hjkl でウィンドウ間を移動
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-" Shift + 矢印でウィンドウサイズを変更
-nnoremap <S-Left>  <C-w><<CR>
-nnoremap <S-Right> <C-w>><CR>
-nnoremap <S-Up>    <C-w>-<CR>
-nnoremap <S-Down>  <C-w>+<CR>
-
-" T + ? で各種設定をトグル
-nnoremap [toggle] <Nop>
-nmap T [toggle]
-nnoremap <silent> [toggle]s :setl spell!<CR>:setl spell?<CR>
-nnoremap <silent> [toggle]l :setl list!<CR>:setl list?<CR>
-nnoremap <silent> [toggle]t :setl expandtab!<CR>:setl expandtab?<CR>
-nnoremap <silent> [toggle]w :setl wrap!<CR>:setl wrap?<CR>
-
-"タブ関連ショートカットキー
-nnoremap [TABCMD]  <nop>
-nmap     <leader>^ [TABCMD]
-
-nnoremap <silent> [TABCMD]f :<c-u>tabfirst<cr>
-nnoremap <silent> [TABCMD]l :<c-u>tablast<cr>
-nnoremap <silent> [TABCMD]n :<c-u>tabnext<cr>
-nnoremap <silent> [TABCMD]N :<c-u>tabNext<cr>
-nnoremap <silent> [TABCMD]p :<c-u>tabprevious<cr>
-nnoremap <silent> [TABCMD]e :<c-u>tabedit<cr>
-nnoremap <silent> [TABCMD]c :<c-u>tabclose<cr>
-nnoremap <silent> [TABCMD]o :<c-u>tabonly<cr>
-nnoremap <silent> [TABCMD]s :<c-u>tabs<cr>
-nnoremap <silent> [TABCMD]t :<c-u>tabnew<cr>
-
-" make, grep などのコマンド後に自動的にQuickFixを開く
-autocmd MyAutoCmd QuickfixCmdPost make,grep,grepadd,vimgrep copen
-
-" QuickFixおよびHelpでは q でバッファを閉じる
-autocmd MyAutoCmd FileType help,qf nnoremap <buffer> q <C-w>c
-
-" w!! でスーパーユーザーとして保存(sudoが使える環境限定)
-cmap w!! w !sudo tee > /dev/null %
-
-" :e などでファイルを開く際にフォルダが存在しない場合は自動作成
-function! s:mkdir(dir, force)
-  if !isdirectory(a:dir) && (a:force ||
-        \ input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
-    call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
-  endif
-endfunction
-autocmd MyAutoCmd BufWritePre * call s:mkdir(expand('<afile>:p:h'), v:cmdbang)
-
-" vim 起動時のみカレントディレクトリを開いたファイルの親ディレクトリに指定
-autocmd MyAutoCmd VimEnter * call s:ChangeCurrentDir('', '')
-function! s:ChangeCurrentDir(directory, bang)
-    if a:directory == ''
-        lcd %:p:h
-    else
-        execute 'lcd' . a:directory
-    endif
-
-    if a:bang == ''
-        pwd
-    endif
-endfunction
-
-" ~/.vimrc.localが存在する場合のみ設定を読み込む
-let s:local_vimrc = expand('~/.vimrc.local')
-if filereadable(s:local_vimrc)
-    execute 'source ' . s:local_vimrc
-endif
-
-let s:mac_vimrc = expand('~/.vimrc.mac')
-if filereadable(s:mac_vimrc)
-    execute 'source ' . s:mac_vimrc
-endif
-
-let s:neobundle_initializer = expand('~/.vimrc.initializer')
-if filereadable(s:neobundle_initializer)
-    execute 'source ' . s:neobundle_initializer
-endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vimdiff設定
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! SetDiffMode()
-  if &diff
-    setlocal nospell
-    " setlocal wrap<
-  endif
-endfunction
-autocmd VimEnter,FilterWritePre * call SetDiffMode()
-" diffモードで開いて片方を残してそのまま編集したい時、 diffモードが続いてしまって見難いのでdiffoffをする必要がありますが、 これを自動で行う様に以下の様な設定をしておくと便利です。
-autocmd WinEnter * if(winnr('$') == 1) && (getbufvar(winbufnr(0), '&diff')) == 1 | diffoff | endif
-" 左側に編集中のファイル、右側に元のファイルを表示します。 (デフォルトではこのオプションはオフで、そのままだと右側に編集中のファイルがおかれる。)
-set splitright
-" 開いたファイルの初期状態からの違いをdiffモードで見ることが出来る
-if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-        \ | wincmd p | diffthis
-endif
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NeoBundle関連
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -354,23 +54,6 @@ else
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     NeoBundle 'Shougo/context_filetype.vim'
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" [BugFix] Djangoを正しくVimで読み込めるようにする
-" [BugFix] Vimで正しくvirtualenvを処理できるようにする
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " " Djangoを正しくVimで読み込めるようにする
-    " [ERROR] vim-django-support will suppress vim performnce
-    " NeoBundleLazy "lambdalisue/vim-django-support", {
-    "     \ "autoload": {
-    "     \   "filetypes": ["python", "python3", "djangohtml"]
-    "     \ }}
-    "
-     " Vimで正しくvirtualenvを処理できるようにする
-    NeoBundleLazy "jmcantrell/vim-virtualenv", {
-        \ "autoload": {
-        \   "filetypes": ["python", "python3", "djangohtml"]
-        \ }}
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " LightLine
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -381,6 +64,7 @@ else
             \ 'active': {
             \   'left': [
             \     ['mode', 'paste'],
+            \     ['pyenv'],
             \     ['fugitive', 'gitgutter', 'filename'],
             \   ],
             \   'right': [
@@ -401,6 +85,7 @@ else
             \   'syntastic': 'SyntasticStatuslineFlag',
             \   'charcode': 'MyCharCode',
             \   'gitgutter': 'MyGitGutter',
+            \   'pyenv':  "pyenv#statusline#component"
             \ },
             \ 'separator': {'left': '>', 'right': '<'},
             \ 'subseparator': {'left': '>', 'right': '<'}
@@ -703,6 +388,7 @@ if has('lua') && v:version >= 703 && has('patch885')
         autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
         autocmd FileType python setlocal omnifunc=jedi#completions
         " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+        " autocmd FileType python3 setlocal omnifunc=python3complete#Complete
         autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
         let g:neocomplete#force_omni_input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
         let g:neocomplete#force_omni_input_patterns.typescript = '[^. \t]\.\%(\h\w*\)\?' " Same as JavaScript
@@ -738,19 +424,21 @@ NeoBundle "Shougo/neco-vim"
 NeoBundle "ujihisa/neco-look"
 
 " Github completion
-NeoBundle "rhysd/github-complete.vim"
-let g:github_complete_enable_neocomplete = 1
+" NeoBundle "rhysd/github-complete.vim"
+" let g:github_complete_enable_neocomplete = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-go
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 NeoBundle 'fatih/vim-go'
+set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fast-Fold
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -767,6 +455,10 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O><C-P>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Jedi-vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ~/.pyenv/shimsを$PATHに追加
+" jedi-vim や vim-pyenc のロードよりも先に行う必要がある、はず。
+let $PATH = "~/.pyenv/shims:".$PATH
+
 " docstringは表示しない
 autocmd FileType python setlocal completeopt-=preview
 
@@ -782,6 +474,22 @@ NeoBundleLazy "davidhalter/jedi-vim", {
     let s:hooks = neobundle#get_hooks("jedi-vim")
 
     function! s:hooks.on_source(bundle)
+        let python_version = system("python -V")
+        let g:jedi#force_py_version = str2nr(matchstr(python_version, "[0-9]", 0))
+        if jedi#init_python()
+        function! s:jedi_auto_force_py_version() abort
+            let major_version = pyenv#python#get_internal_major_version()
+            call jedi#force_py_version(major_version)
+        endfunction
+        augroup vim-pyenv-custom-augroup
+            autocmd! *
+            autocmd User vim-pyenv-activate-post   call s:jedi_auto_force_py_version()
+            autocmd User vim-pyenv-deactivate-post call s:jedi_auto_force_py_version()
+        augroup END
+        endif
+        " let g:jedi#force_py_version = 2
+        " let g:jedi#force_py_version = 3
+
         " jediにvimの設定を任せると'completeopt+=preview'するので
         " 自動設定機能をOFFにし手動で設定を行う
         let g:jedi#auto_vim_configuration = 0
@@ -796,6 +504,30 @@ NeoBundleLazy "davidhalter/jedi-vim", {
         let g:jedi#rename_command = '<Leader>R'
         let g:jedi#goto_assignments_command = '<Leader>G'
     endfunction
+
+    " Do not load vim-pyenv until *.py is opened and
+    " make sure that it is loaded after jedi-vim is loaded.
+    NeoBundleLazy 'lambdalisue/vim-pyenv', {
+            \ 'depends': ['davidhalter/jedi-vim'],
+            \ 'autoload': {
+            \   'filetypes': ['python', 'python3'],
+            \ }}
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" [BugFix] Djangoを正しくVimで読み込めるようにする
+" [BugFix] Vimで正しくvirtualenvを処理できるようにする
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " " Djangoを正しくVimで読み込めるようにする
+    " [ERROR] vim-django-support will suppress vim performnce
+    " NeoBundleLazy "lambdalisue/vim-django-support", {
+    "     \ "autoload": {
+    "     \   "filetypes": ["python", "python3", "djangohtml"]
+    "     \ }}
+    "
+     " Vimで正しくvirtualenvを処理できるようにする
+    NeoBundleLazy "jmcantrell/vim-virtualenv", {
+        \ "autoload": {
+        \   "filetypes": ["python", "python3", "djangohtml"]
+        \ }}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Neo-Snippet
@@ -859,9 +591,9 @@ NeoBundleLazy "davidhalter/jedi-vim", {
 " vim-grammarous
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
     NeoBundle "rhysd/vim-grammarous"
-    let g:grammarous#default_comments_only_filetypes = {
-                \ '*' : 1, 'help' : 0, 'markdown' : 0,
-                \ }
+    " let g:grammarous#default_comments_only_filetypes = {
+    "             \ '*' : 1, 'help' : 0, 'markdown' : 0,
+    "             \ }
     let g:grammarous#disabled_rules = {
                 \ '*' : ['WHITESPACE_RULE', 'EN_QUOTES'],
                 \ 'help' : ['WHITESPACE_RULE', 'EN_QUOTES', 'SENTENCE_WHITESPACE', 'UPPERCASE_SENTENCE_START'],
@@ -961,15 +693,14 @@ NeoBundleLazy "davidhalter/jedi-vim", {
     "    \   "unix": ["pip install flake8", "npm -g install coffeelint"],
     "    \ }}
 
-    set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
-    set statusline+=%*
     let g:syntastic_enable_signs = 1
     let g:syntastic_auto_loc_list = 2
     let g:syntastic_check_on_open = 0
     let g:syntastic_check_on_wq = 0
     " Python用のチェッカー指定
-    let g:syntastic_python_checkers = ["flake8","pyflakes","pylint","pep257","pep8","python"]
+    " pylint is not available for pyenv
+    let g:syntastic_python_python_exec = 'python3'
+    let g:syntastic_python_checkers = ["flake8","pyflakes","pep257","pep8","python"]
 
     " エラー無視の設定
     " 複数指定する場合はカンマ区切り
@@ -978,8 +709,10 @@ NeoBundleLazy "davidhalter/jedi-vim", {
     let g:syntastic_python_flake8_args = '--ignore="E501,E128"'
 
     " Go用のチェッカー
-    let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-    let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+    " let g:syntastic_mode_map = { 'mode': 'passive',
+    " \ 'active_filetypes': ['go'] }
+    let g:syntastic_go_checkers = ['go', 'golint', 'govet', 'errcheck', 'gofmt']
+    " let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enhanced Commentify
@@ -1038,13 +771,18 @@ NeoBundleLazy "davidhalter/jedi-vim", {
     NeoBundleLazy 'plasticboy/vim-markdown', {
             \     'autoload': {'filetypes': ['pandoc','md', 'mkd']}
             \  }
+    let s:hooks = neobundle#get_hooks("vim-markdown")
+    function! s:hooks.on_source(bundle)
+        " Markdown Preview
+        let g:vim_markdown_folding_disabled = 1
+    endfunction
+
     NeoBundleLazy 'tyru/open-browser.vim', {
             \     'autoload': {'filetypes': ['pandoc','md', 'mkd']}
             \  }
     NeoBundleLazy 'kannokanno/previm', {
             \     'autoload': {'filetypes': ['pandoc','md', 'mkd']}
             \  }
-    " Markdown Preview
     " <F7>でプレビュー
     nnoremap <silent> <F7> :PrevimOpen<CR>
     " 現在のタブを閉じる
@@ -1115,6 +853,309 @@ NeoBundleLazy "davidhalter/jedi-vim", {
     let g:hybrid_use_Xresources = 1
     colorscheme jellybeans
 endif
+
+filetype on
+" 注意: この内容は:filetype onよりも後に記述すること。
+autocmd FileType *
+\   if &l:omnifunc == ''
+\ |   setlocal omnifunc=syntaxcomplete#Complete
+\ | endif
+
+" 普通は入れなくても動くと思うが、挙動不審なとき用の設定
+" -----
+" 文字コード関係で困ったとき用
+set fileencodings=utf-8,iso-2022-jp,eucjp,cp932,ucs-bom,latin1
+set fileformats=unix,dos,mac
+" vim内部のエンコーディング
+set encoding=utf-8
+
+" 表示関係
+" -----
+" 256色許可
+set t_Co=256
+" ステータスラインを常に表示
+set laststatus=2
+" コマンドラインの行数
+set cmdheight=1
+" Title掃除
+set notitle
+" 編集中のファイル名の表示
+"set title
+" 行番号の色
+highlight LineNr ctermfg=darkyellow
+
+" シンタックス・ハイライトを有効にする
+syntax on
+
+" コマンドをステータスラインに表示
+set showcmd
+" 左端に行番号を表示する
+set number
+" カーソル行の背景色を変える
+set cursorline
+" 長い文字の折り返し
+set wrap
+" 自動改行無効化
+set textwidth=0
+" その代わり80文字目にラインを入れる
+set colorcolumn=80
+
+" 前時代的スクリーンベルの無効化
+set t_vb=
+set novisualbell
+
+" 不可視文字も表示する
+set list
+" デフォルトの不可視文字は美しくないのでUniCodeできれいに
+set listchars=eol:¬,tab:▸\
+"set listchars=eol:~
+"set listchars=tab:»\ ,trail:-,extends:»,precedes:«,nbsp:%
+
+" モードの表示
+" lightlineとの併用のため無効化しました。(2014/03/24)
+set noshowmode
+" ファイルマネージャで上キーで上のディレクトリに
+set wildmenu
+
+" 背景を真っ黒にする。
+set background=dark
+"日本語の行の連結時には空白を入力しない。
+set formatoptions+=mM
+"□や○の文字があってもカーソル位置がずれないようにする。
+set ambiwidth=double
+"画面最後の行をできる限り表示する。
+set display+=lastline
+
+" インデント関係
+" -----
+" オートインデント
+set autoindent
+set smartindent
+set cindent
+
+" ハードタブ教 & タブは4文字教 の人に最適化
+" -----
+" 自動インデント等を有効にする
+" filetype plugin indent on
+" ファイルを開いた時のTab文字(<Tab>, \t)を空白何文字分で表示するか
+set tabstop=4
+" 自動インデントや << or >> で入力されるインデントの幅
+set shiftwidth=4
+" 入力中にTabキーを押した時、何文字分の空白で表示するか
+set softtabstop=4
+" Tabを空白に変換する
+set expandtab
+
+" 検索関係
+" -----
+" 検索文字列をハイライトする
+set hlsearch
+" 検索する時、大文字と小文字を無視する
+set ignorecase
+" 検索文字に大文字が入ったらやっぱり考慮する
+set smartcase
+" インクリメンタルサーチ
+set incsearch
+
+" バックスラッシュやクエスチョンを状況に合わせてエスケープする
+cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
+cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
+
+" 編集関係
+" -----
+" 全モードでのマウス有効化
+set mouse=a
+" '<'や'>'でインデントする際に'shiftwidth'の倍数に丸める
+set shiftround
+" 補完時に大文字小文字を区別しない
+set infercase
+" cursorを文字がない部分でも動くようにする。
+set virtualedit=all
+" 左右のカーソル移動で行間移動可能にする。
+set whichwrap=b,s,h,l,<,>,[,]
+" バッファ切り替え時にHidden(プロセスを殺さない)
+set hidden
+" 新しく開く代わりにすでに開いているバッファを開く
+set switchbuf=useopen
+" 対応する括弧などのハイライト表示
+set showmatch
+" 対応括弧のハイライト表示を三秒間にする
+set matchtime=3
+" 対応括弧に<>を入れる
+set matchpairs& matchpairs+=<:>
+" BackSpaceでなんでも消す
+set backspace=indent,eol,start
+
+" Swapファイル?Backupファイル?前時代的すぎ
+" なので全て無効化する
+set nowritebackup
+set nobackup
+set noswapfile
+set noundofile
+
+" マクロ設定とキー設定
+" ESCを素早く効くようにする。
+set notimeout
+set ttimeout
+set timeoutlen=100
+
+" 入力モード中に素早くjjと入力したときはESCと見なす。
+inoremap jj <ESC>
+inoremap kk <ESC>
+
+" ESCを二回押すとハイライト消去
+nmap <silent> <Esc><Esc> :nohlsearch<CR>
+
+" カーソル下の単語を * で検索
+vnoremap <silent> * "vy/\V<C-r>=substitute(escape(@v, '\/'), "\n", '\\n', 'g')<CR><CR>
+
+" <C-f>でスクロールしていくと最後一行になってしまうのを直す設定
+" http://itchyny.hatenablog.com/entry/2016/02/02/210000
+noremap <expr> <C-b> max([winheight(0) - 2, 1]) . "\<C-u>" . (line('.') < 1         + winheight(0) ? 'H' : 'L')
+noremap <expr> <C-f> max([winheight(0) - 2, 1]) . "\<C-d>" . (line('.') > line('$') - winheight(0) ? 'L' : 'H')
+noremap <expr> <C-y> (line('w0') <= 1         ? 'k' : "\<C-y>")
+noremap <expr> <C-e> (line('w$') >= line('$') ? 'j' : "\<C-e>")
+
+" 検索後にジャンプした際に検索単語を画面中央に持ってくる
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
+
+" j, k による移動を折り返されたテキストでも自然に振る舞うように変更
+nnoremap j gj
+nnoremap k gk
+
+" Shift + h, lで文末・文頭へ。
+nnoremap <S-h> ^
+nnoremap <S-l> $
+
+" vを二回で行末まで選択
+vnoremap v $h
+
+" TABにて対応ペアにジャンプ
+nnoremap <Tab> %
+vnoremap <Tab> %
+
+" E-macs的な移動を実現
+inoremap <C-a> <C-o>^
+inoremap <C-e> <C-o>$
+inoremap <C-f> <C-o>w
+inoremap <C-b> <C-o>b
+inoremap <C-d> <C-o>x
+
+" 挿入モードでC-で動けるようにする。
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+
+" Ctrl + hjkl でウィンドウ間を移動
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Shift + 矢印でウィンドウサイズを変更
+nnoremap <S-Left>  <C-w><<CR>
+nnoremap <S-Right> <C-w>><CR>
+nnoremap <S-Up>    <C-w>-<CR>
+nnoremap <S-Down>  <C-w>+<CR>
+
+" T + ? で各種設定をトグル
+nnoremap [toggle] <Nop>
+nmap T [toggle]
+nnoremap <silent> [toggle]s :setl spell!<CR>:setl spell?<CR>
+nnoremap <silent> [toggle]l :setl list!<CR>:setl list?<CR>
+nnoremap <silent> [toggle]t :setl expandtab!<CR>:setl expandtab?<CR>
+nnoremap <silent> [toggle]w :setl wrap!<CR>:setl wrap?<CR>
+
+"タブ関連ショートカットキー
+nnoremap [TABCMD]  <nop>
+nmap     <leader>^ [TABCMD]
+
+nnoremap <silent> [TABCMD]f :<c-u>tabfirst<cr>
+nnoremap <silent> [TABCMD]l :<c-u>tablast<cr>
+nnoremap <silent> [TABCMD]n :<c-u>tabnext<cr>
+nnoremap <silent> [TABCMD]N :<c-u>tabNext<cr>
+nnoremap <silent> [TABCMD]p :<c-u>tabprevious<cr>
+nnoremap <silent> [TABCMD]e :<c-u>tabedit<cr>
+nnoremap <silent> [TABCMD]c :<c-u>tabclose<cr>
+nnoremap <silent> [TABCMD]o :<c-u>tabonly<cr>
+nnoremap <silent> [TABCMD]s :<c-u>tabs<cr>
+nnoremap <silent> [TABCMD]t :<c-u>tabnew<cr>
+
+" make, grep などのコマンド後に自動的にQuickFixを開く
+autocmd MyAutoCmd QuickfixCmdPost make,grep,grepadd,vimgrep copen
+
+" QuickFixおよびHelpでは q でバッファを閉じる
+autocmd MyAutoCmd FileType help,qf nnoremap <buffer> q <C-w>c
+
+" w!! でスーパーユーザーとして保存(sudoが使える環境限定)
+cmap w!! w !sudo tee > /dev/null %
+
+" :e などでファイルを開く際にフォルダが存在しない場合は自動作成
+function! s:mkdir(dir, force)
+  if !isdirectory(a:dir) && (a:force ||
+        \ input(printf('"%s" does not exist. Create? [y/N]', a:dir)) =~? '^y\%[es]$')
+    call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
+  endif
+endfunction
+autocmd MyAutoCmd BufWritePre * call s:mkdir(expand('<afile>:p:h'), v:cmdbang)
+
+" vim 起動時のみカレントディレクトリを開いたファイルの親ディレクトリに指定
+autocmd MyAutoCmd VimEnter * call s:ChangeCurrentDir('', '')
+function! s:ChangeCurrentDir(directory, bang)
+    if a:directory == ''
+        lcd %:p:h
+    else
+        execute 'lcd' . a:directory
+    endif
+
+    if a:bang == ''
+        pwd
+    endif
+endfunction
+
+" ~/.vimrc.localが存在する場合のみ設定を読み込む
+let s:local_vimrc = expand('~/.vimrc.local')
+if filereadable(s:local_vimrc)
+    execute 'source ' . s:local_vimrc
+endif
+
+let s:mac_vimrc = expand('~/.vimrc.mac')
+if filereadable(s:mac_vimrc)
+    execute 'source ' . s:mac_vimrc
+endif
+
+let s:neobundle_initializer = expand('~/.vimrc.initializer')
+if filereadable(s:neobundle_initializer)
+    execute 'source ' . s:neobundle_initializer
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vimdiff設定
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! SetDiffMode()
+  if &diff
+    setlocal nospell
+    setl scrollbind
+    " setlocal wrap<
+  endif
+endfunction
+autocmd VimEnter,FilterWritePre * call SetDiffMode()
+" diffモードで開いて片方を残してそのまま編集したい時、 diffモードが続いてしまって見難いのでdiffoffをする必要がありますが、 これを自動で行う様に以下の様な設定をしておくと便利です。
+autocmd WinEnter * if(winnr('$') == 1) && (getbufvar(winbufnr(0), '&diff')) == 1 | diffoff | endif
+" 左側に編集中のファイル、右側に元のファイルを表示します。 (デフォルトではこのオプションはオフで、そのままだと右側に編集中のファイルがおかれる。)
+set splitright
+" 開いたファイルの初期状態からの違いをdiffモードで見ることが出来る
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+        \ | wincmd p | diffthis
+endif
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 最終処理
