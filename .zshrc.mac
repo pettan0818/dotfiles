@@ -17,10 +17,16 @@ export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export HOMEBREW_NO_ANALYTICS=1
 #===========================
+# For iterm2
+#===========================
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+#===========================
 # Go_BIN_PATH
 #===========================
 export GOPATH="$HOME/.go"
 export PATH=$PATH:/usr/local/opt/go/libexec/bin:$GOPATH/bin
+
 #===========================
 # Kaoriya macvim
 #===========================
@@ -48,6 +54,7 @@ fi
 #===========================
 ; export WORKON_HOME=$HOME/.virtualenvs
 ; source /usr/local/bin/virtualenvwrapper.sh
+
 #===========================
 # PyenvVirtualEnv
 #===========================
