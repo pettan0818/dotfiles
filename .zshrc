@@ -225,3 +225,7 @@ case ${OSTYPE} in
 esac
 [ -f ~/.zshrc.secret ] && source ~/.zshrc.secret
 
+# When you want to enable profiling for zsh. Also, .zshenv make uncomment out.
+# if (which zprof > /dev/null) ;then
+#   zprof | less
+# fi
