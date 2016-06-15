@@ -95,6 +95,7 @@ setopt share_history      # 他のシェルのヒストリをリアルタイム�
 setopt append_history     # 複数のZSHを起動しているときに、Historyファイルに順次追加する
 setopt hist_reduce_blanks # 余分なスペースを削除してヒストリに保存する
 setopt auto_param_keys    # 括弧の対応などを自動補完
+# setopt hist_save_no_dups  # ヒストリファイルに保存するときすでに重複したコマンドがあったら古い方を削除する。
 
 # マッチしたコマンドのヒストリを表示できるようにする
 autoload history-search-end
@@ -135,6 +136,7 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 ### Prompt ###
 # プロンプトに色を付ける
+autoload -Uz add-zsh-hook
 autoload -U colors; colors
 
 # 一般ユーザ時
@@ -209,6 +211,10 @@ esac
 # ------------------------------
 # Other Settings
 # ------------------------------
+## 実行したプロセスの消費時間が3秒以上かかったら
+## 自動的に消費時間の統計情報を表示する。
+REPORTTIME=3
+
 ### Aliases ###
 # alias r=rails
 alias v=vim
