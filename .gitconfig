@@ -13,7 +13,7 @@
     execludesfile = ~/.gitignore_global
 
 [push]
-    default = matching
+	default = simple
 
 [fetch]
     prune = true
