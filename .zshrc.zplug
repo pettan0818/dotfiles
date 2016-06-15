@@ -55,6 +55,7 @@ zplug "mollifier/cd-gitroot"
 # compinit 以降に読み込むようにロードの優先度を変更する(10~19にすれば良い)
 zplug "zsh-users/zsh-syntax-highlighting", nice:10
 zplug "zsh-users/zsh-completions"
+fpath=(~/.zplug/repos/zsh-users/zsh-completions/src $fpath)
 
 zplug "pettan0818/zsh-python-prompt"
 [ -f ~/.zplug/repos/pettan0818/zsh-python-prompt/zshrc.zsh ] && source ~/.zplug/repos/pettan0818/zsh-python-prompt/zshrc.zsh
