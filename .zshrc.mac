@@ -7,7 +7,7 @@ function chpwd() {gls -ahF --color=auto}
 export PATH="$HOME/Documents/Naver_Curation_system:$PATH"
 alias desktop="~/Desktop/"
 alias dropbox="~/Dropbox/"
-alias SEO="~/Dropbox/Document/SEO業務/"
+alias SEO="~/Dropbox/Document/SEO業務/Projects"
 alias Naver="~/Documents/Naver_Curation_system/"
 
 #===========================
