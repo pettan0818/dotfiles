@@ -1,6 +1,6 @@
 [user]
-	name = pettan0818
-	email = pettan0818+git@gmail.com
+    name = pettan0818
+    email = pettan0818+git@gmail.com
 
 [github]
     user = pettan0818
@@ -11,10 +11,10 @@
     pager = less -R
     whitespace = cr-at-eol
     execludesfile = ~/.gitignore_global
-	excludesfile = /Users/Noname/.gitignore_global
+    excludesfile = /Users/Noname/.gitignore_global
 
 [push]
-	default = simple
+    default = simple
 
 [fetch]
     prune = true
@@ -106,10 +106,10 @@
     ci = commit -a
     ad = add -A
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+    path = 
 [mergetool "sourcetree"]
-	cmd = /Users/Noname/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+    cmd = /Users/Noname/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+    trustExitCode = true
 [commit]
-	template = /Users/Noname/.stCommitMsg
+    template = /Users/Noname/.stCommitMsg
