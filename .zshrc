@@ -24,27 +24,58 @@ setopt notify            # バックグラウンドジョブの状態変化を�
 setopt equals            # =commandを`which command`と同じ処理にする
 setopt print_eight_bit   # 日本語名表示
 setopt list_packed       # リスト表示をつめて表示
+setopt always_last_prompt
 
 ### Complement ###
-autoload -U compinit; compinit # 補完機能を有効にする
+# autoload -Uz compinit; compinit -C # 補完機能を有効にする
 setopt complete_aliases        # aliasでも補完できるようにする
 setopt auto_list               # 補完候補を一覧で表示する(d)
 setopt auto_menu               # 補完キー連打で補完候補を順に表示する(d)
+setopt complete_in_word        # カーソル位置で補完する。
 bindkey "^[[Z" reverse-menu-complete  # Shift-Tabで補完候補を逆順する("\e[Z"でも動作する)
+
+### 補完候補がなければより曖昧に候補を探す。
+### m:{a-z}={A-Z}: 小文字を大文字に変えたものでも補完する。
+### r:|[._-]=*: 「.」「_」「-」の前にワイルドカード「*」があるものとして補完する。
 # zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' # 補完時に大文字小文字を区別しない
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
 
+# 補完時にキャッシュを使う。
+zstyle ':completion:*' use-cache yes
+zstyle ':completion:*' cache-path ~/.zsh/cache
+
 zstyle ':completion:*' auto-description 'specify: %d'
-zstyle ':completion:*' completer _expand _complete _correct _approximate
-zstyle ':completion:*' format 'Completing %d'
+### 補完候補
+### _oldlist 前回の補完結果を再利用する。
+### _complete: 補完する。
+### _match: globを展開しないで候補の一覧から補完する。
+### _history: ヒストリのコマンドも補完候補とする。
+### _ignored: 補完候補にださないと指定したものも補完候補とする。
+### _approximate: 似ている補完候補も補完候補とする。
+### _prefix: カーソル以降を無視してカーソル位置までで補完する。
+zstyle ':completion:*' completer _expand _complete _correct _approximate _history _oldlist _match _prefix
+# 補完方法ごとにグループ化する
 zstyle ':completion:*' group-name ''
+zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion;*' format '%B%F{blue}%d%f%b'
+# 補完候補を一覧から選択。補完方法が二つ以上なければ、すぐに補完する。
 zstyle ':completion:*' menu select=2
-zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
 zstyle ':completion:*' menu select=long
+### 補完候補に色を付ける。
+# zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+# 補完時の案内
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+
+# もっと表示するときの案内
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' use-compctl false
+# 詳細な情報を活用する。
 zstyle ':completion:*' verbose true
+zstyle ':completion:*' keep-prefix
+zstyle ':completion:*' recent-dirs-insert both
+## sudo の時にコマンドを探すパス
+zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin
 
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
@@ -64,6 +95,7 @@ setopt share_history      # 他のシェルのヒストリをリアルタイム�
 setopt append_history     # 複数のZSHを起動しているときに、Historyファイルに順次追加する
 setopt hist_reduce_blanks # 余分なスペースを削除してヒストリに保存する
 setopt auto_param_keys    # 括弧の対応などを自動補完
+# setopt hist_save_no_dups  # ヒストリファイルに保存するときすでに重複したコマンドがあったら古い方を削除する。
 
 # マッチしたコマンドのヒストリを表示できるようにする
 autoload history-search-end
@@ -104,6 +136,7 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 ### Prompt ###
 # プロンプトに色を付ける
+autoload -Uz add-zsh-hook
 autoload -U colors; colors
 
 # 一般ユーザ時
@@ -178,6 +211,10 @@ esac
 # ------------------------------
 # Other Settings
 # ------------------------------
+## 実行したプロセスの消費時間が3秒以上かかったら
+## 自動的に消費時間の統計情報を表示する。
+REPORTTIME=3
+
 ### Aliases ###
 # alias r=rails
 alias v=vim
@@ -225,3 +262,9 @@ case ${OSTYPE} in
 esac
 [ -f ~/.zshrc.secret ] && source ~/.zshrc.secret
 
+autoload -Uz compinit; compinit -C # 補完機能を有効にする
+
+# When you want to enable profiling for zsh. Also, .zshenv make uncomment out.
+# if (which zprof > /dev/null) ;then
+#   zprof | less
+# fi
