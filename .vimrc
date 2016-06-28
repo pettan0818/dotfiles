@@ -699,7 +699,7 @@ NeoBundleLazy "davidhalter/jedi-vim", {
     let g:syntastic_check_on_wq = 0
     " Python用のチェッカー指定
     " pylint is not available for pyenv
-    let g:syntastic_python_python_exec = 'python3'
+    let g:syntastic_python_python_exec = 'python'
     let g:syntastic_python_checkers = ["flake8","pyflakes","pep257","pep8","python"]
 
     " エラー無視の設定
