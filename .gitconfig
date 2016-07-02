@@ -10,8 +10,7 @@
     editor = vim
     pager = less -R
     whitespace = cr-at-eol
-    execludesfile = ~/.gitignore_global
-    excludesfile = /Users/Noname/.gitignore_global
+    excludesfile = ~/.gitignore_global
 
 [push]
     default = simple
@@ -76,8 +75,8 @@
         fi;\
         };f"
 
-    sgraph = "!git log --oneline --graph"
-    graph = "!git log1"
+    sgraph  = "!git log --oneline --graph"
+    graph   = "!git log1"
 
     ad      = add -A
     ap      = add -p
@@ -102,14 +101,6 @@
     smst    = submodule status
     smsync  = submodule sync
     st      = status
-    su = stash -u # stash also untracked
-    ci = commit -a
-    ad = add -A
-[difftool "sourcetree"]
-    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-    path = 
-[mergetool "sourcetree"]
-    cmd = /Users/Noname/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-    trustExitCode = true
-[commit]
-    template = /Users/Noname/.stCommitMsg
+    su      = stash -u # stash also untracked
+    ci      = commit -a
+    ad      = add -A
