@@ -260,6 +260,10 @@ case ${OSTYPE} in
     darwin*)
         [ -f ~/.zshrc.mac ] && source ~/.zshrc.mac;;
 esac
+case ${OSTYPE} in
+    linux*)
+        [ -f ~/.zshrc.linux ] && source ~/.zshrc.linux;;
+esac
 [ -f ~/.zshrc.secret ] && source ~/.zshrc.secret
 
 autoload -Uz compinit; compinit -C # 補完機能を有効にする
