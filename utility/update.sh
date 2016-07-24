@@ -8,8 +8,12 @@
 #
 
 # Usage
+# updating
+# * brew or apt-get as systemcommands
+# * zplug
+# * python liblaries
 #
-#
+echo "Starting system commands update..."
 case ${OSTYPE} in
     darwin*)
         [ -x "`which brew 2>/dev/null`" ] && brew update && brew upgrade;;
@@ -19,6 +23,8 @@ case ${OSTYPE} in
         [ -x "`which apt-get 2>/dev/null`" ] && sudo apt-get update && sudo apt-get upgrade;;
 esac
 
+echo "zplug updating..."
 [ -x "`which zplug 2>/dev/null`" ] && zplug update
 
+echo "Starting update python liblaries"
 [ -x "`which pip-review 2>/dev/null`" ] && pip-review --auto
