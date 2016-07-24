@@ -2,7 +2,8 @@
 if [ ! -f ~/.zplug/zplug ]; then
     printf "Zplug is not installed.\nInstall? [y/N]: "
     if read -q; then
-        echo; curl -fLo ~/.zplug/zplug --create-dirs git.io/zplug
+        # echo; curl -fLo ~/.zplug/zplug --create-dirs git.io/zplug
+        echo; curl -sL zplug.sh/installer | zsh
     fi
 fi
 
