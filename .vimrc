@@ -1,3 +1,7 @@
+" Must set in System Vimrc of Macvim
+" When you feel something wrong with vim, check system vimrc and add this
+" line.
+let g:no_vimrc_example = 1
 " No Vi互換モード
 if !&compatible
   set nocompatible
