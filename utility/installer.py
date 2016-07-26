@@ -39,6 +39,7 @@ BLACK_LIST_FILES = [".DS_Store", ".gitignore", "install.log", ".git", "utility",
 logging.basicConfig(level=logging.INFO, format='[%(lineno)d:%(levelname)s] %(asctime)s %(message)s')
 
 # Set Environment Values
+REPO_PATH = os.path.abspath("..") + "/"
 SELF_PATH = os.path.abspath(".")
 HOME = os.path.expanduser("~/")
 PLATFORM = platform.system() + "/"
@@ -46,6 +47,11 @@ DOT_FILE_PATH = os.path.expanduser("~/dotfiles/")
 PLATFORM_PATH = DOT_FILE_PATH + PLATFORM
 SSH_PATH = DOT_FILE_PATH + ".ssh/"
 VIM_RELATED_PATH = DOT_FILE_PATH + ".vim/vim_template/"
+
+# Check dotfiles repo is installed at ~/dotfiles/ or not.
+# This repo should be installed at ~/dotfiles/
+if not REPO_PATH == DOT_FILE_PATH:
+    raise OSError("This script is not properly installed. You must install this repo and scripts on ~/dotfiles.")
 
 # Output infos.
 logging.warning("This Script PATH: " + SELF_PATH)
