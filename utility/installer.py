@@ -89,7 +89,7 @@ os.chdir(HOME)
 for file in DOT_FILES_GENERAL:
     source = DOT_FILE_PATH + file
     target = HOME + file
-    logging.info("Installing...: %s -> %s" % source, target)
+    logging.info("Installing...: %s -> %s" % (source, target))
     if os.path.exists(target):
         os.rename(target, target + ".old")
     os.symlink(DOT_FILE_PATH + target, HOME + target)
