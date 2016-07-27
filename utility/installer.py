@@ -86,7 +86,10 @@ logging.warning("Following Files will be symlinked: " + DOT_FILE_PATH + ":\n" + 
 # yes_no_input()
 logging.info("Entering %s" % HOME)
 os.chdir(HOME)
-for target in DOT_FILES_GENERAL:
-    logging.info("Installing...: %s" % target)
+for file in DOT_FILES_GENERAL:
+    source = DOT_FILE_PATH + file
+    target = HOME + file
+    logging.info("Installing...: %s -> %s" % source, target)
+    if os.path.exists(target):
+        os.rename(target, target + ".old")
     os.symlink(DOT_FILE_PATH + target, HOME + target)
-
