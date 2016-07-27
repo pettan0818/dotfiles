@@ -99,7 +99,7 @@ os.chdir(HOME)
 logging.warning("Following OS Specificed Files will be symlinked: " + PLATFORM_PATH + ":\n" + "\n".join(map(str, DOT_FILES_OS)))
 # yes_no_input()
 for file in DOT_FILES_OS:
-    source = DOT_FILE_PATH + file
+    source = PLATFORM_PATH + file
     target = HOME + os.path.splitext(file)[0] + ".os"
     logging.info("Installing...: %s -> %s" % (source, target))
     if os.path.exists(target):
