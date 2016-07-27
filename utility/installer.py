@@ -23,6 +23,9 @@ import logging
 import os
 import platform
 
+# logging.basicConfig(level=logging.INFO, filename="install.log", filemode="w", format='%(asctime)s %(message)s')
+logging.basicConfig(level=logging.INFO, format='[%(lineno)d:%(levelname)s] %(asctime)s %(message)s')
+
 
 def yes_no_input():
     """Check User's mind."""
@@ -34,12 +37,8 @@ def yes_no_input():
             logging.critical("User Canceled.")
             raise("UserInterruption...Exit...")
 
-BLACK_LIST_FILES = [".DS_Store", ".gitignore", "install.log", ".git", "utility", "@Archived"]
-
-# logging.basicConfig(level=logging.INFO, filename="install.log", filemode="w", format='%(asctime)s %(message)s')
-logging.basicConfig(level=logging.INFO, format='[%(lineno)d:%(levelname)s] %(asctime)s %(message)s')
-
 # Set Environment Values
+BLACK_LIST_FILES = [".DS_Store", ".gitignore", "install.log", ".git", "utility", "@Archived"]
 REPO_PATH = os.path.abspath("..") + "/"
 SELF_PATH = os.path.abspath(".")
 HOME = os.path.expanduser("~/")
@@ -78,19 +77,33 @@ VIM_RELATED_FILES = list(set(os.listdir(VIM_RELATED_PATH)) - set(BLACK_LIST_FILE
 
 # Start Making Symlinks
 # Go to HOME Dir to make Symlinks correctly.
-logging.warning("Following OS Specificed Files will be symlinked: " + PLATFORM_PATH + ":\n" + "\n".join(map(str, DOT_FILES_OS)))
 logging.warning("Following SSH Related Files will be symlinked:" + SSH_PATH + ":\n" + "\n".join(map(str, SSH_FILE_LIST)))
 logging.warning("Following VIM Related FIles will be symlinked: " + VIM_RELATED_PATH + ":\n" + "\n".join(map(str, VIM_RELATED_FILES)))
 logging.critical("Start INSTALL GENERAL DOTFILES...")
+
 # General dotfiles Installation.
 logging.warning("Following Files will be symlinked: " + DOT_FILE_PATH + ":\n" + "\n".join(map(str, DOT_FILES_GENERAL)))
 # yes_no_input()
 logging.info("Entering %s" % HOME)
 os.chdir(HOME)
-for file in DOT_FILES_GENERAL:
+# for file in DOT_FILES_GENERAL:
+#     source = DOT_FILE_PATH + file
+#     target = HOME + file
+#     logging.info("Installing...: %s -> %s" % (source, target))
+#     if os.path.exists(target):
+#         os.rename(target, target + ".old")
+#     os.symlink(source, target)
+# logging.info("Done: General dotfiles are successfully installed.")
+
+# OS Specificed dotfiles Installation.
+logging.warning("Following OS Specificed Files will be symlinked: " + PLATFORM_PATH + ":\n" + "\n".join(map(str, DOT_FILES_OS)))
+# yes_no_input()
+logging.info("Entering %s" % HOME)
+for file in OS_SPECIFICED_FILE_LIST:
     source = DOT_FILE_PATH + file
-    target = HOME + file
-    logging.info("Installing...: %s -> %s" % (source, target))
+    target = HOME + file.split(".")[0] + ".os"
+    logging.info("Installing...: %s -> %s", (source, target))
     if os.path.exists(target):
         os.rename(target, target + ".old")
     os.symlink(source, target)
+logging.info("Done: OS Specified dotfiles are successfully installed.(Note: these files are renamed extention to .os)")
