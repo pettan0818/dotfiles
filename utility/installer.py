@@ -38,7 +38,7 @@ def yes_no_input():
             raise("UserInterruption...Exit...")
 
 # Set Environment Values
-BLACK_LIST_FILES = [".DS_Store", ".gitignore", "install.log", ".git", "utility", "@Archived"]
+BLACK_LIST_FILES = ["README.md", ".DS_Store", ".gitignore", "install.log", ".git", "utility", "@Archived"]
 REPO_PATH = os.path.abspath("..") + "/"
 SELF_PATH = os.path.abspath(".")
 HOME = os.path.expanduser("~/")
@@ -98,11 +98,10 @@ os.chdir(HOME)
 # OS Specificed dotfiles Installation.
 logging.warning("Following OS Specificed Files will be symlinked: " + PLATFORM_PATH + ":\n" + "\n".join(map(str, DOT_FILES_OS)))
 # yes_no_input()
-logging.info("Entering %s" % HOME)
-for file in OS_SPECIFICED_FILE_LIST:
+for file in DOT_FILES_OS:
     source = DOT_FILE_PATH + file
-    target = HOME + file.split(".")[0] + ".os"
-    logging.info("Installing...: %s -> %s", (source, target))
+    target = HOME + os.path.splitext(file)[0] + ".os"
+    logging.info("Installing...: %s -> %s" % (source, target))
     if os.path.exists(target):
         os.rename(target, target + ".old")
     os.symlink(source, target)
