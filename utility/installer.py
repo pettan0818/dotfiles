@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 # !/usr/bin/env python
 # vim: set fileencoding=utf-8 :
 
@@ -92,4 +93,4 @@ for file in DOT_FILES_GENERAL:
     logging.info("Installing...: %s -> %s" % (source, target))
     if os.path.exists(target):
         os.rename(target, target + ".old")
-    os.symlink(DOT_FILE_PATH + target, HOME + target)
+    os.symlink(source, target)
