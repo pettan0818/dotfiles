@@ -42,9 +42,9 @@ logging.basicConfig(level=logging.INFO, format='[%(lineno)d:%(levelname)s] %(asc
 REPO_PATH = os.path.abspath("..") + "/"
 SELF_PATH = os.path.abspath(".")
 HOME = os.path.expanduser("~/")
-PLATFORM = platform.system() + "/"
+PLATFORM = platform.system()
 DOT_FILE_PATH = os.path.expanduser("~/dotfiles/")
-PLATFORM_PATH = DOT_FILE_PATH + PLATFORM
+PLATFORM_PATH = DOT_FILE_PATH + PLATFORM + "/"
 SSH_PATH = DOT_FILE_PATH + ".ssh/"
 VIM_RELATED_PATH = DOT_FILE_PATH + ".vim/vim_template/"
 
@@ -77,11 +77,16 @@ VIM_RELATED_FILES = list(set(os.listdir(VIM_RELATED_PATH)) - set(BLACK_LIST_FILE
 
 # Start Making Symlinks
 # Go to HOME Dir to make Symlinks correctly.
-logging.warning("Following Files will be symlinked: " + DOT_FILE_PATH + ":\n" + "\n".join(map(str, DOT_FILES_GENERAL)))
 logging.warning("Following OS Specificed Files will be symlinked: " + PLATFORM_PATH + ":\n" + "\n".join(map(str, DOT_FILES_OS)))
 logging.warning("Following SSH Related Files will be symlinked:" + SSH_PATH + ":\n" + "\n".join(map(str, SSH_FILE_LIST)))
 logging.warning("Following VIM Related FIles will be symlinked: " + VIM_RELATED_PATH + ":\n" + "\n".join(map(str, VIM_RELATED_FILES)))
-# yes_no_input()
 logging.critical("Start INSTALL GENERAL DOTFILES...")
-os.chdir(HOME)
+# General dotfiles Installation.
+logging.warning("Following Files will be symlinked: " + DOT_FILE_PATH + ":\n" + "\n".join(map(str, DOT_FILES_GENERAL)))
+# yes_no_input()
 logging.info("Entering %s" % HOME)
+os.chdir(HOME)
+for target in DOT_FILES_GENERAL:
+    logging.info("Installing...: %s" % target)
+    os.symlink(DOT_FILE_PATH + target, HOME + target)
+
