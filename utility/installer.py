@@ -46,7 +46,7 @@ PLATFORM = platform.system()
 DOT_FILE_PATH = os.path.expanduser("~/dotfiles/")
 PLATFORM_PATH = DOT_FILE_PATH + PLATFORM + "/"
 SSH_PATH = DOT_FILE_PATH + ".ssh/"
-VIM_RELATED_PATH = DOT_FILE_PATH + ".vim/vim_template/"
+VIM_RELATED_PATH = DOT_FILE_PATH + ".vim/template/"
 
 # Check dotfiles repo is installed at ~/dotfiles/ or not.
 # This repo should be installed at ~/dotfiles/
