@@ -94,21 +94,21 @@ for file in DOT_FILES_OS:
 logging.info("Done: OS Specified dotfiles are successfully installed.(Note: these files are renamed extention to .os)")
 
 # SSH config File Installation.
-logging.warning("Following SSH Related Files will be symlinked:" + SSH_PATH + ":\n" + "\n".join(map(str, SSH_FILE_LIST)))
-logging.info("Entering... %s" % HOME)
-os.chdir(HOME)
-install_dir_ssh = HOME + ".ssh/"
-if not os.path.exists(install_dir_ssh):
-    os.mkdir(".ssh")
-logging.info("Entering... %s" % HOME)
-os.chdir(install_dir_ssh)
-for file in SSH_FILE_LIST:
-    source = SSH_PATH + file
-    target = HOME + ".ssh/" + file
-    logging.info("Installing...: %s -> %s" % (source, target))
-    if os.path.exists(target):
-        os.rename(target, target + ".old")
-    os.symlink(source, target)
+# logging.warning("Following SSH Related Files will be symlinked:" + SSH_PATH + ":\n" + "\n".join(map(str, SSH_FILE_LIST)))
+# logging.info("Entering... %s" % HOME)
+# os.chdir(HOME)
+# install_dir_ssh = HOME + ".ssh/"
+# if not os.path.exists(install_dir_ssh):
+#     os.mkdir(".ssh")
+# logging.info("Entering... %s" % HOME)
+# os.chdir(install_dir_ssh)
+# for file in SSH_FILE_LIST:
+#     source = SSH_PATH + file
+#     target = HOME + ".ssh/" + file
+#     logging.info("Installing...: %s -> %s" % (source, target))
+#     if os.path.exists(target):
+#         os.rename(target, target + ".old")
+#     os.symlink(source, target)
 
 # Vim Related Files Installation
 logging.warning("Following VIM Related FIles will be symlinked: " + VIM_RELATED_PATH + ":\n" + "\n".join(map(str, VIM_RELATED_FILES)))
