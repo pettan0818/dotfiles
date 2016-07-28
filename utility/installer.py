@@ -26,17 +26,6 @@ import platform
 # logging.basicConfig(level=logging.INFO, filename="install.log", filemode="w", format='%(asctime)s %(message)s')
 logging.basicConfig(level=logging.INFO, format='[%(lineno)d:%(levelname)s] %(asctime)s %(message)s')
 
-
-def yes_no_input():
-    """Check User's mind."""
-    while True:
-        choice = input("Can I proceed OK? [y/N]: ").lower()
-        if choice in ['y', 'ye', 'yes']:
-            pass
-        else:
-            logging.critical("User Canceled.")
-            raise("UserInterruption...Exit...")
-
 # Set Environment Values
 BLACK_LIST_FILES = ["README.md", ".DS_Store", ".gitignore", "install.log", ".git", "utility", "@Archived"]
 REPO_PATH = os.path.abspath("..") + "/"
@@ -80,7 +69,6 @@ logging.critical("Start INSTALL GENERAL DOTFILES...")
 
 # General dotfiles Installation.
 logging.warning("Following Files will be symlinked: " + DOT_FILE_PATH + ":\n" + "\n".join(map(str, DOT_FILES_GENERAL)))
-# yes_no_input()
 logging.info("Entering %s" % HOME)
 os.chdir(HOME)
 for file in DOT_FILES_GENERAL:
@@ -94,7 +82,6 @@ logging.info("Done: General dotfiles are successfully installed.")
 
 # OS Specificed dotfiles Installation.
 logging.warning("Following OS Specificed Files will be symlinked: " + PLATFORM_PATH + ":\n" + "\n".join(map(str, DOT_FILES_OS)))
-yes_no_input()
 logging.info("Entering %s" % HOME)
 os.chdir(HOME)
 for file in DOT_FILES_OS:
@@ -108,7 +95,6 @@ logging.info("Done: OS Specified dotfiles are successfully installed.(Note: thes
 
 # SSH config File Installation.
 logging.warning("Following SSH Related Files will be symlinked:" + SSH_PATH + ":\n" + "\n".join(map(str, SSH_FILE_LIST)))
-yes_no_input()
 logging.info("Entering... %s" % HOME)
 os.chdir(HOME)
 install_dir_ssh = HOME + ".ssh/"
@@ -126,11 +112,10 @@ for file in SSH_FILE_LIST:
 
 # Vim Related Files Installation
 logging.warning("Following VIM Related FIles will be symlinked: " + VIM_RELATED_PATH + ":\n" + "\n".join(map(str, VIM_RELATED_FILES)))
-yes_no_input()
 logging.info("Entering... %s" % HOME)
 os.chdir(HOME)
 vim_dir = HOME + ".vim/"
-template_vim_dir = HOME + ".vim/templates"
+template_vim_dir = HOME + ".vim/templates/"
 if not os.path.exists(vim_dir):
     os.mkdir(".vim")
 logging.info("Entering... %s" % vim_dir)
