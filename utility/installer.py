@@ -58,7 +58,7 @@ DIR_LIST_OS = [i for i in OS_SPECIFICED_FILE_LIST if os.path.isdir(PLATFORM_PATH
 DOT_FILES_OS = list(set(OS_SPECIFICED_FILE_LIST) - set(DIR_LIST_OS))
 
 # .ssh Files
-SSH_FILE_LIST = list(set(os.listdir(SSH_PATH)) - set(BLACK_LIST_FILES))
+# SSH_FILE_LIST = list(set(os.listdir(SSH_PATH)) - set(BLACK_LIST_FILES))
 
 # Vim Files(like vim templates...)
 VIM_RELATED_FILES = list(set(os.listdir(VIM_RELATED_PATH)) - set(BLACK_LIST_FILES))

@@ -256,15 +256,16 @@ alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 #ローカル設定の読み込み
 [ -f ~/.zshrc.zplug ] && source ~/.zshrc.zplug
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
-case ${OSTYPE} in
-    darwin*)
-        [ -f ~/.zshrc.mac ] && source ~/.zshrc.mac;;
-esac
-case ${OSTYPE} in
-    linux*)
-        [ -f ~/.zshrc.linux ] && source ~/.zshrc.linux;;
-esac
+[ -f ~/.zshrc.os ] && source ~/.zshrc.os
 [ -f ~/.zshrc.secret ] && source ~/.zshrc.secret
+# case ${OSTYPE} in
+#     darwin*)
+#         [ -f ~/.zshrc.mac ] && source ~/.zshrc.mac;;
+# esac
+# case ${OSTYPE} in
+#     linux*)
+#         [ -f ~/.zshrc.linux ] && source ~/.zshrc.linux;;
+# esac
 
 autoload -Uz compinit; compinit -Cu # 補完機能を有効にする
 
