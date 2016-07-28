@@ -266,7 +266,7 @@ case ${OSTYPE} in
 esac
 [ -f ~/.zshrc.secret ] && source ~/.zshrc.secret
 
-autoload -Uz compinit; compinit -C # 補完機能を有効にする
+autoload -Uz compinit; compinit -Cu # 補完機能を有効にする
 
 # When you want to enable profiling for zsh. Also, .zshenv make uncomment out.
 # if (which zprof > /dev/null) ;then
