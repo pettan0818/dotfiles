@@ -8,8 +8,8 @@ if [ ! -f ~/.zplug/zplug ]; then
 fi
 
 # Zplug処理開始
-[ -f ~/.zplug/zplug ] && source ~/.zplug/zplug
-
+# [ -f ~/.zplug/zplug ] && source ~/.zplug/zplug
+[ -f ~/.zplug/init.zsh ] && source ~/.zplug/init.zsh
 zplug "zplug/zplug"
 
 # from: では gh-r の他に oh-my-zsh と gist が使える
