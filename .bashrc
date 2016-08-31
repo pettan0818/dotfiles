@@ -61,3 +61,8 @@ export PATH LANG EDITOR
 
 # .inputrcの読み込み
 [ -f ~/.inputrc ] && bind -f ~/.inputrc
+
+# scp時、「bind: 警告: 行編集が有効になっていません」対策
+if [ -z "$PS1" ]; then
+        return;
+    fi
