@@ -121,7 +121,7 @@ if not os.path.exists(vim_dir):
 logging.info("Entering... %s" % vim_dir)
 os.chdir(vim_dir)
 if not os.path.exists(template_vim_dir):
-    os.mkdir("templates")
+    os.mkdir("template")
 logging.info("Entering... %s" % template_vim_dir)
 os.chdir(template_vim_dir)
 for file in VIM_RELATED_FILES:
