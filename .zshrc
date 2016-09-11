@@ -78,7 +78,7 @@ zstyle ':completion:*' recent-dirs-insert both
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin
 
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,stat,%cpu,%mem,cputime,command'
 
 ### Glob ###
 setopt extended_glob # グロブ機能を拡張する
@@ -224,12 +224,14 @@ alias gitg='git graph'
 alias gitst='git st'
 alias cd..='cd ..'
 alias cd...='cd ../..'
+alias pd='popd'
 alias mv='mv -i'
 alias cp='cp -i'
 alias rmdir='rm -rf'
 alias grep='grep --color=auto'
 alias egrep='grep -E'
 alias fgrep='grep -F'
+alias gd='dirs -v; echo -n "select number: "; read newdir; cd +"$newdir"'
 
 # Vim for clientserver
 # alias vim='vim --servername VIM'
