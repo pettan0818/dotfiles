@@ -8,6 +8,8 @@ if [ ! -f ~/.zplug/init.zsh ]; then
             export ZPLUG_HOME=~/.zplug
         fi
         git clone https://github.com/zplug/zplug.git $ZPLUG_HOME
+    else
+        return
     fi
 fi
 
@@ -55,7 +57,6 @@ bindkey '^xf' anyframe-widget-insert-filename
 bindkey '^x^f' anyframe-widget-insert-filename
 bindkey '^xt' anyframe-widget-tmux-attach
 bindkey '^x^t' anyframe-widget-tmux-attach
-
 
 # gitのルートに簡単移動
 zplug "mollifier/cd-gitroot"

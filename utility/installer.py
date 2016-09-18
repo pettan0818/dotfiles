@@ -115,13 +115,13 @@ logging.warning("Following VIM Related FIles will be symlinked: " + VIM_RELATED_
 logging.info("Entering... %s" % HOME)
 os.chdir(HOME)
 vim_dir = HOME + ".vim/"
-template_vim_dir = HOME + ".vim/templates/"
+template_vim_dir = HOME + ".vim/template/"
 if not os.path.exists(vim_dir):
     os.mkdir(".vim")
 logging.info("Entering... %s" % vim_dir)
 os.chdir(vim_dir)
 if not os.path.exists(template_vim_dir):
-    os.mkdir("templates")
+    os.mkdir("template")
 logging.info("Entering... %s" % template_vim_dir)
 os.chdir(template_vim_dir)
 for file in VIM_RELATED_FILES:

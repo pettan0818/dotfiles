@@ -78,7 +78,7 @@ zstyle ':completion:*' recent-dirs-insert both
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin
 
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,stat,%cpu,%mem,cputime,command'
 
 ### Glob ###
 setopt extended_glob # グロブ機能を拡張する
@@ -224,12 +224,14 @@ alias gitg='git graph'
 alias gitst='git st'
 alias cd..='cd ..'
 alias cd...='cd ../..'
+alias pd='popd'
 alias mv='mv -i'
 alias cp='cp -i'
 alias rmdir='rm -rf'
 alias grep='grep --color=auto'
 alias egrep='grep -E'
 alias fgrep='grep -F'
+alias gd='dirs -v; echo -n "select number: "; read newdir; cd +"$newdir"'
 
 # Vim for clientserver
 # alias vim='vim --servername VIM'
@@ -258,14 +260,6 @@ alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 [ -f ~/.zshrc.os ] && source ~/.zshrc.os
 [ -f ~/.zshrc.secret ] && source ~/.zshrc.secret
-# case ${OSTYPE} in
-#     darwin*)
-#         [ -f ~/.zshrc.mac ] && source ~/.zshrc.mac;;
-# esac
-# case ${OSTYPE} in
-#     linux*)
-#         [ -f ~/.zshrc.linux ] && source ~/.zshrc.linux;;
-# esac
 
 autoload -Uz compinit; compinit -Cu # 補完機能を有効にする
 
