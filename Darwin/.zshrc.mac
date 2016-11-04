@@ -40,6 +40,7 @@ fi
 
 #===========================
 # Pyenv
+# PyenvVirtualEnv
 #===========================
 export PYENV_ROOT="${HOME}/.pyenv"
 if [ -d "${PYENV_ROOT}" ]; then
@@ -58,5 +59,8 @@ fi
 # source /usr/local/bin/virtualenvwrapper.sh
 
 #===========================
-# PyenvVirtualEnv
+# Neovim
 #===========================
+export XDG_CONFIG_HOME=~/.config
+export XDG_CONFIG_HOME_PLUGIN=~/.config/nvim/plugin_settings
+export XDG_CONFIG_HOME_NVIM=~/.config/nvim/
