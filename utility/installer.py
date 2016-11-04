@@ -23,7 +23,6 @@ import logging
 import os
 import platform
 
-# logging.basicConfig(level=logging.INFO, filename="install.log", filemode="w", format='%(asctime)s %(message)s')
 logging.basicConfig(level=logging.INFO, format='[%(lineno)d:%(levelname)s] %(asctime)s %(message)s')
 
 # Set Environment Values
