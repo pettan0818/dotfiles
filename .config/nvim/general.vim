@@ -76,6 +76,8 @@ set softtabstop=4
 " Tabを空白に変換する
 set expandtab
 
+" スペルチェック
+set spelllang+=cjk
 " 検索関係
 " -----
 " 検索文字列をハイライトする
@@ -128,4 +130,3 @@ autocmd MyAutoCmd QuickfixCmdPost make,grep,grepadd,vimgrep copen
 
 " QuickFixおよびHelpでは q でバッファを閉じる
 autocmd MyAutoCmd FileType help,qf nnoremap <buffer> q <C-w>c
-

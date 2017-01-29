@@ -1,28 +1,48 @@
+# Deoplete
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
 hook_source = '''
     source $XDG_CONFIG_HOME/nvim/plugin_settings/deoplete.vim
+    set shortmess+=c
+    autocmd CompleteDone * pclose!
+'''
+on_i = 1
+[[plugins]]
+repo = 'Shougo/echodoc.vim'
+depends = ['deoplete.nvim']
+hook_add = '''
+    set cmdheight=2
+    let g:echodoc_enable_at_startup = 1
 '''
 on_i = 1
 
 [[plugins]]
+repo = 'zchee/deoplete-jedi'
+depends = ['deoplete.nvim']
+on_ft = ["python", "python3", "djangohtml"]
+on_i = 1
+hook_source = '''
+    let g:deoplete#sources#jedi#show_docstring=0
+'''
+[[plugins]]
 repo = 'Shougo/neosnippet'
 hook_source = '''
-  imap <C-k> <Plug>(neosnippet_expand_or_jump)
-  smap <C-k> <Plug>(neosnippet_expand_or_jump)
-  xmap <C-k> <Plug>(neosnippet_expand_target)
-  if has('conceal')
-    set conceallevel=2 concealcursor=niv
-  endif
+    imap <C-k> <Plug>(neosnippet_expand_or_jump)
+    smap <C-k> <Plug>(neosnippet_expand_or_jump)
+    xmap <C-k> <Plug>(neosnippet_expand_target)
+    if has('conceal')
+        set conceallevel=2 concealcursor=niv
+    endif
 '''
-on_i  = 1
-on_ft = ['snippet']
+on_i = 1
 depends = ['neosnippet-snippets']
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+on_i = 1
 [[plugins]]
 repo = 'ujihisa/neco-look'
 on_i = 1
 depends = ['deoplete.nvim']
-
 [[plugins]]
 repo = 'Shougo/neoinclude.vim'
 on_i = 1
@@ -34,29 +54,36 @@ hook_add = 'let g:necosyntax#min_keyword_length = 2'
 depends = ['deoplete.nvim']
 # Completion for specified Language.
 [[plugins]]
-repo = 'zchee/deoplete-jedi'
-depends = ['deoplete.nvim']
-on_i = 1
-[[plugins]]
 repo = 'Shougo/neco-vim'
 on_i = 1
 on_ft = 'vim'
 depends = ['deoplete.nvim']
 [[plugins]]
-repo = 'Rip-Rip/clang_complete'
+repo = 'zchee/deoplete-clang'
 on_ft = ['C', 'C++']
 on_i = 1
 depends = ['deoplete.nvim']
+hook_add = '''
+let g:deoplete#sources#clang#libclang_path = "/usr/local/Cellar/llvm/3.9.1/lib/libclang.dylib"
+let g:deoplete#sources#clang#clang_header = "/usr/local/Cellar/llvm/3.9.1"
+'''
 [[plugins]]
 repo = 'zchee/deoplete-go'
 depends = ['deoplete.nvim']
+on_ft = 'go'
 on_i = 1
+
+
+# # Wise parenthesis Autocomplete.
+# [[plugins]]
+# repo = 'cohama/lexima.vim'
+# on_i = 1
 
 # SuperTab
 [[plugins]]
 repo = "ervandew/supertab"
 
-# Gundo
+# Mundo
 [[plugins]]
 repo = 'simnalamburt/vim-mundo'
 on_cmd = ['MundoToggle']
@@ -106,14 +133,33 @@ repo = 'hdima/python-syntax'
 on_ft = ["python", "python3", "djangohtml"]
 
 [[plugins]]
-repo = 'vim-pandoc/vim-pandoc'
-on_ft = ["text", "pandoc", "markdown", "rst", "textile"]
-
-[[plugins]]
 repo = 'keith/tmux.vim'
 on_ft = ["tmux"]
 
 [[plugins]]
-repo = "c01o/previm"
-on_ft = ['markdown']
+repo = "plasticboy/vim-markdown"
+on_ft = ['markdown', 'md']
+hook_source = '''
+    let g:vim_markdown_folding_disabled = 1
+'''
+[[plugins]]
+repo = 'vim-pandoc/vim-pandoc'
+on_ft = ["text", "pandoc", "markdown", "rst", "textile"]
+hook_source = '''
+    let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
+    set nospell
+    let g:pandoc#modules#disabled = ["folding"]
+    let g:pandoc#spell#enabled = 0
 
+    let g:pandoc#filetypes#pandoc_markdown = 0
+'''
+[[plugins]]
+repo = 'vim-pandoc/vim-pandoc-syntax'
+on_ft = ["text", "pandoc", "markdown", "rst", "textile"]
+
+[[plugins]]
+repo = "c01o/previm"
+on_ft = ['markdown', "md"]
+hook_source = '''
+    let g:previm_open_cmd = 'open -a Google\ Chrome'
+'''

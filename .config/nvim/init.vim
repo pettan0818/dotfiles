@@ -11,7 +11,9 @@ augroup MyAutoCmd
     autocmd!
 augroup END
 
-let g:python3_host_prog = "/Users/noname/.pyenv/shims/python"
+let g:python_host_prog = "/Users/noname/.pyenv/shims/python2"
+let g:python3_host_prog = "/Users/noname/.pyenv/shims/python3"
+
 " Moduled Plugin setting.
 source $XDG_CONFIG_HOME/nvim/plugin.vim
 
@@ -37,7 +39,8 @@ endif
 " 最終処理
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ColorScheme must be setted up below processing Plugins.
-colorscheme mrkn256
+set termguicolors
+colorscheme hybrid
 
 " クリップボードをデフォルトのレジスタとして指定。後にYankRingを使うので
 " 'unnamedplus'が存在しているかどうかで設定を分ける必要がある

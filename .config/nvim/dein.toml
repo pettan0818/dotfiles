@@ -7,24 +7,23 @@ repo = 'haya14busa/dein-command.vim'
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
 hook_post_update = '''
-  if dein#util#_is_windows()
-    let cmd = 'tools\\update-dll-mingw'
-  elseif dein#util#_is_cygwin()
-    let cmd = 'make -f make_cygwin.mak'
-  elseif executable('gmake')
-    let cmd = 'gmake'
-  else
-    let cmd = 'make'
-  endif
-  let g:dein#plugin.build = cmd
+    if dein#util#_is_windows()
+        let cmd = 'tools\\update-dll-mingw'
+    elseif dein#util#_is_cygwin()
+        let cmd = 'make -f make_cygwin.mak'
+    elseif executable('gmake')
+        let cmd = 'gmake'
+    else
+        let cmd = 'make'
+    endif
+    let g:dein#plugin.build = cmd
 '''
 # VimShell
 [[plugins]]
-repo = 'Shougo/vimshell.vim'
-
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-
+repo = 'Shougo/deol.nvim'
+hook_add = '''
+    let g:deol#prompt_patter = '% \|%$'
+'''
 [[plugins]]
 repo = 'rhysd/migemo-search.vim'
 
@@ -33,7 +32,7 @@ repo = 'rhysd/migemo-search.vim'
 [[plugins]]
 repo = 'bronson/vim-trailing-whitespace'
 hook_add = '''
-    let g:extra_whitespace_ignored_filetypes = ['denite', 'mkd', 'md']
+    let g:extra_whitespace_ignored_filetypes = ['denite', 'mkd', 'md', 'Mundo', 'MundoDiff']
 '''
 # Expand status line.
 [[plugins]]
@@ -63,9 +62,11 @@ repo = "Konfekt/FastFold"
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 hook_post_update = '''
-  let g:quickrun_config = {'*': {'hook/time/enable': '1'},}
+  # let g:quickrun_config = {'*': {'hook/time/enable': '1'},}
+    let g:quickrun_config = {'_': {'hook/time/enable': '1', 'runner': "vimproc", 'runner/vimproc/updatetime': '40'},}
 '''
-hook_source = '''
+hook_add = '''
+    nnoremap <Space>r :QuickRun<CR>
     let g:quickrun_config = {
     \ "_": {
     \   "outputter/buffer/close_on_empty" : 1,
@@ -73,12 +74,11 @@ hook_source = '''
     \   "runner" : "vimproc",
     \   "runner/vimproc/updatetime" : 60,
     \ },
-    \ "python":{
-    \   "type" : "python",
-    \   "command" : "python",
-    \ },}
+    \ "C++":{
+    \   "type": "C++",
+    \   "command" : "clang++ -std=C++11",
+    \ }}
     nnoremap <expr><silent>> <C-c> quickrun#is_runnning() ? quickrun#sweep_sessions() : "\<C-c>"
-    nnoremap <Space>r :QuickRun<CR>
 '''
 
 # Japanese Doc for Vim.
@@ -89,18 +89,18 @@ repo = 'vim-jp/vimdoc-ja'
 [[plugins]]
 repo = 'vim-scripts/vim-auto-save'
 hook_add = '''
-" デフォルトで無効にする
-let g:auto_save = 0
-" do not save while in insert mode
-let g:auto_save_in_insert_mode = 0
-nmap [toggle]S :AutoSaveToggle<CR>
+    " デフォルトで無効にする
+    let g:auto_save = 0
+    " do not save while in insert mode
+    let g:auto_save_in_insert_mode = 0
+    nmap [toggle]S :AutoSaveToggle<CR>
 '''
 
 # Tagbar
 [[plugins]]
 repo = "majutsushi/tagbar"
 hook_add = '''
-nmap <Space>t :TagbarToggle<CR>
+    nmap <Space>t :TagbarToggle<CR>
 '''
 
 # Change FT relfecting Context.
@@ -109,9 +109,9 @@ repo = 'Shougo/context_filetype.vim'
 
 # Template for FT.
 [[plugins]]
-repo = 'thinca/vim-template'
-hook_post_source = '''
-    source $XDG_CONFIG_HOME/nvim/plugin_settings/vim_template.vim
+repo = 'mattn/sonictemplate-vim'
+hook_add = '''
+    source $XDG_CONFIG_HOME/nvim/plugin_settings/sonictemplate.vim
 '''
 
 # Outliner for vim.
@@ -146,8 +146,7 @@ depends = 'tpope/vim-fugitive'
 [[plugins]]
 repo = 'neomake/neomake'
 hook_add = '''
-    autocmd! BufWritePost,BufEnter * Neomake
-    let g:neomake_python_enabled_makers = ['python', 'pylint', 'pylama', 'flake8', 'mypy']
+    source $XDG_CONFIG_HOME/nvim/plugin_settings/neomake.vim
 '''
 
 # Editing Text Enhancer.
