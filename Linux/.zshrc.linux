@@ -1,5 +1,6 @@
 alias desktop="~/Desktop/"
 
+export GOPATH="$HOME/.go"
 #===========================
 # Neovim
 #===========================
