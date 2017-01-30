@@ -124,3 +124,14 @@ for file in VIM_RELATED_FILES:
     if os.path.exists(target):
         os.rename(target, target + ".old")
     os.symlink(source, target)
+
+# Neovim Settings(.config)
+logging.info("Entering... %s" % HOME)
+os.chdir(HOME)
+config_dir = HOME + ".config"
+
+source = REPO_PATH + ".config"
+target = config_dir
+if os.path.exists(target):
+    os.rename(target, target + ".old")
+os.symlink(source, target)
