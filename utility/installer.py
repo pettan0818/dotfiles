@@ -134,4 +134,6 @@ source = REPO_PATH + ".config"
 target = config_dir
 if os.path.exists(target):
     os.rename(target, target + ".old")
+
+logging.info("Installing...: %s -> %s" % (source, target))
 os.symlink(source, target)
