@@ -320,6 +320,13 @@ NeoBundle 'vim-scripts/VOoM'
         \ }}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enhanced Commentify
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    "コメントアウトしたい範囲を選択して、
+    "[Leader]xでコメントアウト
+    NeoBundle 'hrp/EnhancedCommentify'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " テキスト編集関連
 " Vim-Surround
 " Align
@@ -381,6 +388,7 @@ if has('lua') && v:version >= 703 && has('patch885')
             return pumvisible() ? neocomplete#close_popup() : "\<Cr>"
         endfunction
         inoremap <silent> <CR> <C-R>=<SID>my_crinsert()<CR>
+        inoremap <expr><C-Space> pumvisible() ? "\<down>" : neocomplete#start_manual_complete()
         " TABで補完を選択
         inoremap <expr><TAB> pumvisible() ? "<C-N>" : "<TAB>"
         if !exists('g:neocomplete#force_omni_input_patterns')
@@ -390,16 +398,16 @@ if has('lua') && v:version >= 703 && has('patch885')
         autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
         autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
         autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-        autocmd FileType python setlocal omnifunc=jedi#completions
+        " autocmd FileType python setlocal omnifunc=jedi#completions
         " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-        " autocmd FileType python3 setlocal omnifunc=python3complete#Complete
+        autocmd FileType python3 setlocal omnifunc=python3complete#Complete
         autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
         let g:neocomplete#force_omni_input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
         let g:neocomplete#force_omni_input_patterns.typescript = '[^. \t]\.\%(\h\w*\)\?' " Same as JavaScript
         let g:neocomplete#force_omni_input_patterns.go = '[^. \t]\.\%(\h\w*\)\?'         " Same as JavaScript
         " let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
-        let g:neocomplete#force_omni_input_patterns.python =
-        \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+        " let g:neocomplete#force_omni_input_patterns.python =
+        " \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
     endfunction
 else
     NeoBundleLazy "Shougo/neocomplcache.vim", {
@@ -461,61 +469,60 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O><C-P>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ~/.pyenv/shimsを$PATHに追加
 " jedi-vim や vim-pyenc のロードよりも先に行う必要がある、はず。
-let $PATH = "~/.pyenv/shims:".$PATH
 
-" docstringは表示しない
-autocmd FileType python setlocal completeopt-=preview
-
-NeoBundleLazy "davidhalter/jedi-vim", {
-      \ "autoload": {
-      \   "filetypes": ["python", "python3", "djangohtml"],
-      \ },
-      \ "build": {
-      \   "mac": "pip install jedi",
-      \   "unix": "pip install jedi",
-      \ }}
-
-    let s:hooks = neobundle#get_hooks("jedi-vim")
-
-    function! s:hooks.on_source(bundle)
-        let python_version = system("python -V")
-        let g:jedi#force_py_version = str2nr(matchstr(python_version, "[0-9]", 0))
-        if jedi#init_python()
-        function! s:jedi_auto_force_py_version() abort
-            let major_version = pyenv#python#get_internal_major_version()
-            call jedi#force_py_version(major_version)
-        endfunction
-        augroup vim-pyenv-custom-augroup
-            autocmd! *
-            autocmd User vim-pyenv-activate-post   call s:jedi_auto_force_py_version()
-            autocmd User vim-pyenv-deactivate-post call s:jedi_auto_force_py_version()
-        augroup END
-        endif
+" " docstringは表示しない
+" autocmd FileType python setlocal completeopt-=preview
+"
+" NeoBundleLazy "davidhalter/jedi-vim", {
+"       \ "autoload": {
+"       \   "filetypes": ["python", "python3", "djangohtml"],
+"       \ },
+"       \ "build": {
+"       \   "mac": "pip install jedi",
+"       \   "unix": "pip install jedi",
+"       \ }}
+"
+"     let s:hooks = neobundle#get_hooks("jedi-vim")
+"
+"     function! s:hooks.on_source(bundle)
+"         let python_version = system("python -V")
+"         let g:jedi#force_py_version = str2nr(matchstr(python_version, "[0-9]", 0))
+"         if jedi#init_python()
+"         function! s:jedi_auto_force_py_version() abort
+"             let major_version = pyenv#python#get_internal_major_version()
+"             call jedi#force_py_version(major_version)
+"         endfunction
+"         augroup vim-pyenv-custom-augroup
+"             autocmd! *
+"             autocmd User vim-pyenv-activate-post   call s:jedi_auto_force_py_version()
+"             autocmd User vim-pyenv-deactivate-post call s:jedi_auto_force_py_version()
+"         augroup END
+"         endif
         " let g:jedi#force_py_version = 2
         " let g:jedi#force_py_version = 3
 
         " jediにvimの設定を任せると'completeopt+=preview'するので
         " 自動設定機能をOFFにし手動で設定を行う
-        let g:jedi#auto_vim_configuration = 0
-        let g:jedi#show_call_signatures = "0"
-        " 補完の最初の項目が選択された状態だと使いにくいためオフにする
-        let g:jedi#popup_select_first = 0
-        " Don't Popup on dot.
-        let g:jedi#completions_enabled = 0
-        let g:jedi#popup_on_dot = 0
-        " quickrunと被るため大文字に変更
-        " gundoと被るため大文字に変更 (2013-06-24 10:00 追記)
-        let g:jedi#rename_command = '<Leader>R'
-        let g:jedi#goto_assignments_command = '<Leader>G'
-    endfunction
+    "     let g:jedi#auto_vim_configuration = 0
+    "     let g:jedi#show_call_signatures = "0"
+    "     " 補完の最初の項目が選択された状態だと使いにくいためオフにする
+    "     let g:jedi#popup_select_first = 0
+    "     " Don't Popup on dot.
+    "     let g:jedi#completions_enabled = 0
+    "     let g:jedi#popup_on_dot = 0
+    "     " quickrunと被るため大文字に変更
+    "     " gundoと被るため大文字に変更 (2013-06-24 10:00 追記)
+    "     let g:jedi#rename_command = '<Leader>R'
+    "     let g:jedi#goto_assignments_command = '<Leader>G'
+    " endfunction
 
     " Do not load vim-pyenv until *.py is opened and
     " make sure that it is loaded after jedi-vim is loaded.
-    NeoBundleLazy 'lambdalisue/vim-pyenv', {
-            \ 'depends': ['davidhalter/jedi-vim'],
-            \ 'autoload': {
-            \   'filetypes': ['python', 'python3'],
-            \ }}
+    " NeoBundleLazy 'lambdalisue/vim-pyenv', {
+    "         \ 'depends': ['davidhalter/jedi-vim'],
+    "         \ 'autoload': {
+    "         \   'filetypes': ['python', 'python3'],
+    "         \ }}
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " [BugFix] Djangoを正しくVimで読み込めるようにする
 " [BugFix] Vimで正しくvirtualenvを処理できるようにする
@@ -718,12 +725,6 @@ NeoBundleLazy "davidhalter/jedi-vim", {
     let g:syntastic_go_checkers = ['go', 'golint', 'govet', 'errcheck', 'gofmt']
     " let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Enhanced Commentify
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    "コメントアウトしたい範囲を選択して、
-    "[Leader]xでコメントアウト
-    NeoBundle 'hrp/EnhancedCommentify'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vim-R-Plugin

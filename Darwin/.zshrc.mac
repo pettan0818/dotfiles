@@ -15,6 +15,8 @@ alias Naver="~/Documents/Naver_Curation_system/"
 #===========================
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/bin:$PATH"
+
 export HOMEBREW_NO_ANALYTICS=1
 #===========================
 # For iterm2
@@ -52,8 +54,8 @@ fi
 #===========================
 # VirtualEnv
 #===========================
-; export WORKON_HOME=$HOME/.virtualenvs
-; source /usr/local/bin/virtualenvwrapper.sh
+# export WORKON_HOME=$HOME/.virtualenvs
+# source /usr/local/bin/virtualenvwrapper.sh
 
 #===========================
 # PyenvVirtualEnv
