@@ -79,6 +79,8 @@ if ! zplug check --verbose; then
 fi
 
 # プラグインを読み込み、コマンドにパスを通す
-export ZPLUG_CLONE_DEPTH=1
+zstyle :zplug:tag depth 1
+# export ZPLUG_CLONE_DEPTH=1
+
 # zplug load --verbose
 zplug load
