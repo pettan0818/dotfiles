@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # !/usr/bin/env python
 # vim: set fileencoding=utf-8 :
 
@@ -22,10 +21,13 @@ logging.basicConfig(level=logging.INFO, format='[%(lineno)d:%(levelname)s] %(asc
 
 # Set Environment Values
 BLACK_LIST_FILES = ["README.md", ".DS_Store", ".gitignore", "install.log", ".git", "utility", "@Archived"]
+
 REPO_PATH = os.path.abspath("..") + "/"
 SELF_PATH = os.path.abspath(".")
+
 HOME = os.path.expanduser("~/")
 PLATFORM = platform.system()
+
 DOT_FILE_PATH = os.path.expanduser("~/dotfiles/")
 PLATFORM_PATH = DOT_FILE_PATH + PLATFORM + "/"
 SSH_PATH = DOT_FILE_PATH + ".ssh/"
@@ -64,11 +66,13 @@ logging.critical("Start INSTALL GENERAL DOTFILES...")
 # General dotfiles Installation.
 logging.warning("Following Files will be symlinked: " + DOT_FILE_PATH + ":\n" + "\n".join(map(str, DOT_FILES_GENERAL)))
 logging.info("Entering %s" % HOME)
+
 os.chdir(HOME)
 for file in DOT_FILES_GENERAL:
     source = DOT_FILE_PATH + file
     target = HOME + file
     logging.info("Installing...: %s -> %s" % (source, target))
+
     if os.path.exists(target):
         os.rename(target, target + ".old")
     os.symlink(source, target)
@@ -77,11 +81,13 @@ logging.info("Done: General dotfiles are successfully installed.")
 # OS Specificed dotfiles Installation.
 logging.warning("Following OS Specificed Files will be symlinked: " + PLATFORM_PATH + ":\n" + "\n".join(map(str, DOT_FILES_OS)))
 logging.info("Entering %s" % HOME)
+
 os.chdir(HOME)
 for file in DOT_FILES_OS:
     source = PLATFORM_PATH + file
     target = HOME + os.path.splitext(file)[0] + ".os"
     logging.info("Installing...: %s -> %s" % (source, target))
+
     if os.path.exists(target):
         os.rename(target, target + ".old")
     os.symlink(source, target)
@@ -108,20 +114,37 @@ logging.info("Done: OS Specified dotfiles are successfully installed.(Note: thes
 logging.warning("Following VIM Related FIles will be symlinked: " + VIM_RELATED_PATH + ":\n" + "\n".join(map(str, VIM_RELATED_FILES)))
 logging.info("Entering... %s" % HOME)
 os.chdir(HOME)
+
 vim_dir = HOME + ".vim/"
 template_vim_dir = HOME + ".vim/template/"
 if not os.path.exists(vim_dir):
     os.mkdir(".vim")
+
 logging.info("Entering... %s" % vim_dir)
 os.chdir(vim_dir)
 if not os.path.exists(template_vim_dir):
     os.mkdir("template")
+
 logging.info("Entering... %s" % template_vim_dir)
 os.chdir(template_vim_dir)
 for file in VIM_RELATED_FILES:
     source = VIM_RELATED_PATH + file
     target = template_vim_dir + file
     logging.info("Installing...: %s -> %s" % (source, target))
+
     if os.path.exists(target):
         os.rename(target, target + ".old")
     os.symlink(source, target)
+
+# Neovim Settings(.config)
+logging.info("Entering... %s" % HOME)
+os.chdir(HOME)
+config_dir = HOME + ".config"
+
+source = REPO_PATH + ".config"
+target = config_dir
+if os.path.exists(target):
+    os.rename(target, target + ".old")
+
+logging.info("Installing...: %s -> %s" % (source, target))
+os.symlink(source, target)
