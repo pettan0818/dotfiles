@@ -11,8 +11,8 @@ augroup MyAutoCmd
     autocmd!
 augroup END
 
-let g:python_host_prog = "/Users/noname/.pyenv/shims/python2"
-let g:python3_host_prog = "/Users/noname/.pyenv/shims/python3"
+let g:python_host_prog = $PYENV_ROOT . "/shims/python2"
+let g:python3_host_prog = $PYENV_ROOT . "/shims/python3"
 
 " Moduled Plugin setting.
 source $XDG_CONFIG_HOME/nvim/plugin.vim
@@ -39,16 +39,19 @@ endif
 " 最終処理
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ColorScheme must be setted up below processing Plugins.
-set termguicolors
+" set termguicolors
 colorscheme hybrid
 
 " クリップボードをデフォルトのレジスタとして指定。後にYankRingを使うので
 " 'unnamedplus'が存在しているかどうかで設定を分ける必要がある
-if has('unnamedplus')
-    set clipboard+=unnamed,unnamedplus
-else
-    set clipboard+=unnamed
-endif
+if (executable('pbcopy') || executable('xclip') || executable('xsel')) && has('clipboard')
+    set clipboard=unnamed,unnamedplus
+    endif
+" if has('unnamedplus')
+"     set clipboard+=unnamed,unnamedplus
+" else
+"     set clipboard+=unnamed
+" endif
 
 " 注意: この内容は:filetype onよりも後に記述すること。
 "autocmd FileType *
