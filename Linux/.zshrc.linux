@@ -1,6 +1,15 @@
 alias desktop="~/Desktop/"
 
+#===========================
+# Go
+#===========================
 export GOPATH="$HOME/.go"
+
+#===========================
+# Neovim
+#===========================
+export XDG_CONFIG_HOME=~/.config
+
 #===========================
 # Pyenv
 #===========================
@@ -12,4 +21,3 @@ if [ -d "${PYENV_ROOT}" ]; then
     export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
     export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 fi
-
