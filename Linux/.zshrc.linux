@@ -1,4 +1,16 @@
 alias desktop="~/Desktop/"
+alias n=nvim
+alias jn="jupyter notebook --ip=0.0.0.0"
+#===========================
+# Go
+#===========================
+export GOPATH="$HOME/.go"
+
+#===========================
+# Neovim
+#===========================
+export XDG_CONFIG_HOME=$HOME/.config/
+
 #===========================
 # Pyenv
 #===========================
@@ -10,4 +22,3 @@ if [ -d "${PYENV_ROOT}" ]; then
     export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
     export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 fi
-

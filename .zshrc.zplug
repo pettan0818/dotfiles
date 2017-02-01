@@ -17,7 +17,6 @@ fi
 # [ -f ~/.zplug/zplug ] && source ~/.zplug/zplug
 export PATH="~/.zplug:$PATH"
 [ -f ~/.zplug/init.zsh ] && source ~/.zplug/init.zsh
-zplug "zplug/zplug"
 
 # from: では gh-r の他に oh-my-zsh と gist が使える
 # oh-my-zsh を指定すると oh-my-zsh のリポジトリにある plugin/ 以下を
@@ -27,11 +26,16 @@ zplug "zplug/zplug"
 # zplug "plugins/python", from:oh-my-zsh
 # zplug "plugins/pip", from:oh-my-zsh
 
+# Self Manangement of zplug
+zplug "zplug/zplug"
+
+zplug "chrissicool/zsh-256color", use:"zsh-256color.plugin.zsh"
+
 # Supports checking out a specific branch/tag/commit
 zplug "b4b4r07/enhancd"
 
 # ZSHの履歴検索を部分一致にアップグレード
-zplug "zsh-users/zsh-history-substring-search", nice:11
+zplug "zsh-users/zsh-history-substring-search", defer:2
 
 # fzf-bin にホスティングされているので注意
 # またファイル名が fzf-bin となっているので rename-to:fzf としてリネームする
@@ -62,7 +66,7 @@ bindkey '^x^t' anyframe-widget-tmux-attach
 zplug "mollifier/cd-gitroot"
 
 # compinit 以降に読み込むようにロードの優先度を変更する(10~19にすれば良い)
-zplug "zsh-users/zsh-syntax-highlighting", nice:10
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-completions"
 fpath=(~/.zplug/repos/zsh-users/zsh-completions/src $fpath)
 
@@ -79,6 +83,7 @@ if ! zplug check --verbose; then
 fi
 
 # プラグインを読み込み、コマンドにパスを通す
-export ZPLUG_CLONE_DEPTH=1
+zstyle :zplug:tag depth 1
+
 # zplug load --verbose
 zplug load
