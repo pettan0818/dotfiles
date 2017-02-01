@@ -79,5 +79,6 @@ fi
 
 # プラグインを読み込み、コマンドにパスを通す
 zstyle :zplug:tag depth 1
+
 # zplug load --verbose
 zplug load
