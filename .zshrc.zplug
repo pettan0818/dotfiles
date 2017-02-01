@@ -26,6 +26,8 @@ export PATH="~/.zplug:$PATH"
 # zplug "plugins/python", from:oh-my-zsh
 # zplug "plugins/pip", from:oh-my-zsh
 
+# Self Manangement of zplug
+zplug "zplug/zplug"
 # Supports checking out a specific branch/tag/commit
 zplug "b4b4r07/enhancd"
 
