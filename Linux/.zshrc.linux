@@ -1,5 +1,5 @@
 alias desktop="~/Desktop/"
-
+alias n=nvim
 #===========================
 # Go
 #===========================
@@ -8,7 +8,7 @@ export GOPATH="$HOME/.go"
 #===========================
 # Neovim
 #===========================
-export XDG_CONFIG_HOME=~/.config
+export XDG_CONFIG_HOME=$HOME/.config/
 
 #===========================
 # Pyenv
