@@ -14,16 +14,10 @@
 # Usage
 #
 """
-from __future__ import division
-from __future__ import unicode_literals
-from __future__ import print_function
-from __future__ import absolute_import
-
 import logging
 import os
 import platform
 
-# logging.basicConfig(level=logging.INFO, filename="install.log", filemode="w", format='%(asctime)s %(message)s')
 logging.basicConfig(level=logging.INFO, format='[%(lineno)d:%(levelname)s] %(asctime)s %(message)s')
 
 # Set Environment Values
