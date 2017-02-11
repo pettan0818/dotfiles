@@ -4,17 +4,17 @@ if [ ! -f ~/.zplug/init.zsh ]; then
     if read -q; then
         # echo; curl -fLo ~/.zplug/zplug --create-dirs git.io/zplug
         # echo; curl -sL zplug.sh/installer | zsh
-        if [[ -z $ZPLUG_HOME ]]; then
-            export ZPLUG_HOME=~/.zplug
-        fi
-        git clone https://github.com/zplug/zplug.git $ZPLUG_HOME
+        echo; curl -sL zplug.sh/installer | zsh
+        # if [[ -z $ZPLUG_HOME ]]; then
+        #    export ZPLUG_HOME=~/.zplug
+        # fi
+        # git clone https://github.com/zplug/zplug.git $ZPLUG_HOME
     else
         return
     fi
 fi
 
 # Zplug処理開始
-# [ -f ~/.zplug/zplug ] && source ~/.zplug/zplug
 export PATH="~/.zplug:$PATH"
 [ -f ~/.zplug/init.zsh ] && source ~/.zplug/init.zsh
 
@@ -27,8 +27,7 @@ export PATH="~/.zplug:$PATH"
 # zplug "plugins/pip", from:oh-my-zsh
 
 # Self Manangement of zplug
-zplug "zplug/zplug"
-
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "chrissicool/zsh-256color", use:"zsh-256color.plugin.zsh"
 
 # Supports checking out a specific branch/tag/commit
