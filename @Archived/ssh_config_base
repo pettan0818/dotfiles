@@ -1,0 +1,9 @@
+Host *
+    ControlMaster auto
+    ControlPath ~/.ssh/master-%r@%h:%p.socket
+    ControlPersist 10m
+    ServerAliveInterval 15
+    ServerAliveCountMax 10
+    TCPKeepAlive yes
+    Forwardagent yes
+
