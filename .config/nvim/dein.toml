@@ -82,8 +82,8 @@ hook_add = '''
 '''
 
 # Japanese Doc for Vim.
-[[plugins]]
-repo = 'vim-jp/vimdoc-ja'
+# [[plugins]]
+# repo = 'vim-jp/vimdoc-ja'
 
 # AutoSave
 [[plugins]]

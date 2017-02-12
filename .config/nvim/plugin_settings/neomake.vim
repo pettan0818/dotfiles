@@ -1,5 +1,5 @@
 " Automake Run on Enter strs and write files.
-autocmd! BufWritePost,BufEnter * Neomake
+autocmd! BufWritePost,BufEnter,InsertLeave * Neomake
 
 let g:neomake_error_sign = {"text": ">>", "texthl": "Error"}
 let g:neomake_warning_sign = {"text": ">", "texthl": "Todo"}
