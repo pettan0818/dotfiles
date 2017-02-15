@@ -209,6 +209,10 @@ case "${TERM}" in
 esac
 
 # ------------------------------
+# pip completion
+# ------------------------------
+eval "`pip completion --zsh`"
+# ------------------------------
 # Other Settings
 # ------------------------------
 ## 実行したプロセスの消費時間が3秒以上かかったら
@@ -268,3 +272,4 @@ autoload -Uz compinit; compinit -Cu # 補完機能を有効にする
 # if (which zprof > /dev/null) ;then
 #   zprof | less
 # fi
+
