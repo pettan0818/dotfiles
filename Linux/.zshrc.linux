@@ -22,3 +22,11 @@ if [ -d "${PYENV_ROOT}" ]; then
     export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
     export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 fi
+
+#============================
+# CUDA and cuDNN paths
+#============================
+if [ -d /usr/local/cuda-8.0/ ]; then
+    export PATH=/usr/local/cuda-8.0/bin:${PATH}
+    export LD_DIBRARY_PATH=/usr/local/cuda-8.0/lib64:${LD_LIBRARY_PATH}
+fi
