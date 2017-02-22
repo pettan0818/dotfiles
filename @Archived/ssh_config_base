@@ -7,3 +7,7 @@ Host *
     TCPKeepAlive yes
     Forwardagent yes
 
+Host github.com
+  Compression yes
+    Ciphers arcfour256
+

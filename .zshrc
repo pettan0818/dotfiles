@@ -209,6 +209,10 @@ case "${TERM}" in
 esac
 
 # ------------------------------
+# pip completion
+# ------------------------------
+eval "`pip completion --zsh`"
+# ------------------------------
 # Other Settings
 # ------------------------------
 ## 実行したプロセスの消費時間が3秒以上かかったら
@@ -219,6 +223,7 @@ REPORTTIME=3
 # alias r=rails
 alias v=vim
 alias n=nvim
+alias nd='nvim -d'
 alias gr='cd `git rev-parse --show-toplevel`'
 alias gitlog='git log-all | less -R'
 alias gitg='git graph'
@@ -268,3 +273,4 @@ autoload -Uz compinit; compinit -Cu # 補完機能を有効にする
 # if (which zprof > /dev/null) ;then
 #   zprof | less
 # fi
+

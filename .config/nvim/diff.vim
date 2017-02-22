@@ -18,3 +18,12 @@ if !exists(":DiffOrig")
     command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
         \ | wincmd p | diffthis
 endif
+
+" Change colourscheme when diffing
+fun! SetDiffColours()
+    highlight DiffAdd    cterm=bold ctermfg=white ctermbg=DarkGreen
+    highlight DiffDelete cterm=bold ctermfg=white ctermbg=DarkGrey
+    highlight DiffChange cterm=bold ctermfg=white ctermbg=DarkBlue
+    highlight DiffText   cterm=bold ctermfg=white ctermbg=DarkRed
+endfun
+autocmd FilterWritePre * call SetDiffColours()
