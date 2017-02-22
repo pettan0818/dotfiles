@@ -16,11 +16,15 @@ alias Naver="~/Documents/Naver_Curation_system/"
 #===========================
 # For HomeBrew
 #===========================
-export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
-export PATH="/usr/local/bin:$PATH"
+if type brew 2> /dev/null 1> /dev/null
+    then
+        export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+        export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+        export PATH="/usr/local/sbin:$PATH"
+        export PATH="/usr/local/bin:$PATH"
 
-export HOMEBREW_NO_ANALYTICS=1
+        export HOMEBREW_NO_ANALYTICS=1
+fi
 #===========================
 # For iterm2
 #===========================
