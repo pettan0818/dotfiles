@@ -8,7 +8,7 @@ let g:lightline = {
         \     ['fugitive', 'gitgutter', 'filename'],
         \   ],
         \   'right': [
-        \     ['lineinfo', 'syntastic'],
+        \     ['lineinfo', 'neomake'],
         \     ['percent'],
         \     ['charcode', 'fileformat', 'fileencoding', 'filetype'],
         \   ]
@@ -22,7 +22,7 @@ let g:lightline = {
         \   'filetype': 'MyFiletype',
         \   'fileencoding': 'MyFileencoding',
         \   'mode': 'MyMode',
-        \   'syntastic': 'SyntasticStatuslineFlag',
+        \   'neomake': 'NeoMakeCounter',
         \   'charcode': 'MyCharCode',
         \   'gitgutter': 'MyGitGutter',
         \   'pyenv':  "pyenv#statusline#component"
@@ -132,3 +132,25 @@ function! MyCharCode()
     return "'". char ."' ". nr
 endfunction
 
+function! NeoMakeCounter()
+    if !exists('*neomake#statusline#LoclistCounts')
+        return ''
+    endif
+
+    " Count All the erros, warings
+    let total = 0
+
+    for v in values(neomake#statusline#LoclistCounts())
+        let total += v
+    endfor
+
+    for v in items(neomake#statusline#QflistCounts())
+        let total += v
+    endfor
+
+    if total == 0
+        return ''
+    endif
+
+    return 'line '.getloclist(0)[0].lnum. ', 1 of '.total
+endfunction
