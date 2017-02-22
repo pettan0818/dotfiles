@@ -223,6 +223,7 @@ REPORTTIME=3
 # alias r=rails
 alias v=vim
 alias n=nvim
+alias nd='nvim -d'
 alias gr='cd `git rev-parse --show-toplevel`'
 alias gitlog='git log-all | less -R'
 alias gitg='git graph'
