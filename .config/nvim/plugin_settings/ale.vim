@@ -8,5 +8,6 @@ nmap <silent> <C-w>k <Plug>(ale_previous_wrap)
 
 let g:ale_echo_msg_format = '[%linter%] %s'
 
-let g:ale_flake8_args = '--ignore=E115,E266,E501'
-let g:ale_pylint_options = '--disable=line-too-long,no-member'
+let g:ale_python_flake8_args = '--ignore=E115,E266,E501'
+let g:ale_python_pylint_options = '--disable=line-too-long,no-member'
+let g:ale_python_mypy_options = '--fast-parser --ignore-missing-imports'
