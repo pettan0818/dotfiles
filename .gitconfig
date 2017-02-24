@@ -104,3 +104,5 @@
     su      = stash -u # stash also untracked
     ci      = commit -a
     ad      = add -A
+
+    cpush   = !git push origin `git rev-parse --abbrev-ref HEAD`
