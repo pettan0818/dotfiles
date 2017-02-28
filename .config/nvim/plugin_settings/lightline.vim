@@ -4,11 +4,11 @@ let g:lightline = {
         \ 'active': {
         \   'left': [
         \     ['mode', 'paste'],
-        \     ['pyenv'],
+        \     ['pyenv', 'ale'],
         \     ['fugitive', 'gitgutter', 'filename'],
         \   ],
         \   'right': [
-        \     ['lineinfo', 'neomake'],
+        \     ['lineinfo'],
         \     ['percent'],
         \     ['charcode', 'fileformat', 'fileencoding', 'filetype'],
         \   ]
@@ -22,7 +22,7 @@ let g:lightline = {
         \   'filetype': 'MyFiletype',
         \   'fileencoding': 'MyFileencoding',
         \   'mode': 'MyMode',
-        \   'neomake': 'NeoMakeCounter',
+        \   'ale': 'ALEStatus',
         \   'charcode': 'MyCharCode',
         \   'gitgutter': 'MyGitGutter',
         \   'pyenv':  "pyenv#statusline#component"
@@ -36,7 +36,7 @@ function! MyModified()
 endfunction
 
 function! MyReadonly()
-    return &ft !~? 'help\|vimfiler\|gundo' && &ro ? '>' : ''
+    return &ft !~? 'help\|vimfiler\|gundo' && &ro ? 'ReadOnly' : ''
 endfunction
 
 function! MyFilename()
@@ -46,17 +46,6 @@ function! MyFilename()
         \  &ft == 'vimshell' ? substitute(b:vimshell.current_dir,expand('~'),'~','') :
         \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
         \ ('' != MyModified() ? ' ' . MyModified() : '')
-endfunction
-
-function! MyFugitive()
-    try
-    if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
-    let _ = fugitive#head()
-    return strlen(_) ? '> '._ : ''
-    endif
-catch
-endtry
-return ''
 endfunction
 
 function! MyFileformat()
@@ -74,6 +63,22 @@ endfunction
 function! MyMode()
     return winwidth('.') > 60 ? lightline#mode() : ''
 endfunction
+
+function! MyFugitive()
+    try
+        if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+            let _ = fugitive#head()
+            return strlen(_) ? '> '._ : ''
+        endif
+    catch
+    endtry
+    return ''
+endfunction
+
+" vim-gitgutter
+let g:gitgutter_sign_added = '✚'
+let g:gitgutter_sign_modified = '➜'
+let g:gitgutter_sign_removed = '✘'
 
 function! MyGitGutter()
     if ! exists('*GitGutterGetHunkSummary')
@@ -132,25 +137,6 @@ function! MyCharCode()
     return "'". char ."' ". nr
 endfunction
 
-function! NeoMakeCounter()
-    if !exists('*neomake#statusline#LoclistCounts')
-        return ''
-    endif
-
-    " Count All the erros, warings
-    let total = 0
-
-    for v in values(neomake#statusline#LoclistCounts())
-        let total += v
-    endfor
-
-    for v in items(neomake#statusline#QflistCounts())
-        let total += v
-    endfor
-
-    if total == 0
-        return ''
-    endif
-
-    return 'line '.getloclist(0)[0].lnum. ', 1 of '.total
+function! ALEStatus()
+    return ALEGetStatusLine()
 endfunction

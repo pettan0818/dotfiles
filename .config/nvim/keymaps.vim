@@ -96,3 +96,7 @@ nnoremap <silent> [TABCMD]t :<c-u>tabnew<cr>
 nnoremap <silent> [TABCMD]v :<c-u>vsplit<cr>
 nnoremap <silent> [TABCMD]s :<c-u>split<cr>
 
+" Terminal mode
+if has('nvim')
+  tnoremap <silent> <ESC> <C-\><C-n>
+endif

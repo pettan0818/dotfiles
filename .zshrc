@@ -209,10 +209,6 @@ case "${TERM}" in
 esac
 
 # ------------------------------
-# pip completion
-# ------------------------------
-eval "`pip completion --zsh`"
-# ------------------------------
 # Other Settings
 # ------------------------------
 ## 実行したプロセスの消費時間が3秒以上かかったら
@@ -221,9 +217,10 @@ REPORTTIME=3
 
 ### Aliases ###
 # alias r=rails
-alias v=vim
-alias n=nvim
+alias v='vim'
+alias n='nvim'
 alias nd='nvim -d'
+alias g='git'
 alias gr='cd `git rev-parse --show-toplevel`'
 alias gitlog='git log-all | less -R'
 alias gitg='git graph'

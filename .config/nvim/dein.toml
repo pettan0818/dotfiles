@@ -62,24 +62,8 @@ repo = "Konfekt/FastFold"
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 hook_add = '''
-    nnoremap <Space>r :QuickRun<CR>
-    let g:quickrun_config = {
-    \ "_": {
-    \   "outputter" : "quickfix",
-    \   "outputter/quickfix/close_on_empty" : 1,
-    \   "runner" : "vimproc",
-    \   "runner/vimproc/updatetime" : 60,
-    \ },
-    \ "C++":{
-    \   "type": "C++",
-    \   "command" : "clang++ -std=C++11",
-    \ }}
-    nnoremap <expr><silent>> <C-c> quickrun#is_runnning() ? quickrun#sweep_sessions() : "\<C-c>"
+    source $XDG_CONFIG_HOME/nvim/plugin_settings/quickrun.vim
 '''
-
-# Japanese Doc for Vim.
-# [[plugins]]
-# repo = 'vim-jp/vimdoc-ja'
 
 # AutoSave
 [[plugins]]
@@ -127,6 +111,8 @@ repo = 'Shougo/neoyank.vim'
 
 # Git implemnent for vim.
 [[plugins]]
+repo = 'airblade/vim-gitgutter'
+[[plugins]]
 repo = 'mattn/gist-vim'
 depends = ['mattn/webapi-vim']
 [[plugins]]
@@ -140,9 +126,9 @@ repo = 'gregsexton/gitv'
 depends = 'tpope/vim-fugitive'
 
 [[plugins]]
-repo = 'neomake/neomake'
+repo = "w0rp/ale"
 hook_add = '''
-    source $XDG_CONFIG_HOME/nvim/plugin_settings/neomake.vim
+    source $XDG_CONFIG_HOME/nvim/plugin_settings/ale.vim
 '''
 
 # Editing Text Enhancer.

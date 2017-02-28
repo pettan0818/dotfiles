@@ -76,11 +76,6 @@ on_i = 1
 repo = "zplug/vim-zplug"
 on_ft = ['zplug']
 
-# # Wise parenthesis Autocomplete.
-# [[plugins]]
-# repo = 'cohama/lexima.vim'
-# on_i = 1
-
 # SuperTab
 [[plugins]]
 repo = "ervandew/supertab"

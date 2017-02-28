@@ -31,3 +31,15 @@ if [ -d /usr/local/cuda-8.0/ ]; then
     export PATH=/usr/local/cuda-8.0/bin:${PATH}
     export LD_DIBRARY_PATH=/usr/local/cuda-8.0/lib64:${LD_LIBRARY_PATH}
 fi
+
+# SSH AGENT SETUP
+if [ -f ~/.ssh-agent ]; then
+    . ~/.ssh-agent
+fi
+
+if [ -z "$SSH_AGENT_PID" ] || ! kill -0 $SSH_AGENT_PID; then
+    ssh-agent > ~/.ssh-agent
+    . ~/.ssh-agent
+fi
+ssh-add -l >& /dev/null || ssh-add
+
