@@ -59,6 +59,14 @@ if [ -d "${PYENV_ROOT}" ]; then
 fi
 
 #===========================
+# rbenv
+#===========================
+export RBENV_ROOT="${HOME}/.rbenv"
+if [ -d "${RBENV_ROOT}" ]; then
+    export PATH="$RBENV_ROOT:$PATH"
+    eval "$(rbenv init -)"
+fi
+#===========================
 # VirtualEnv
 #===========================
 # export WORKON_HOME=$HOME/.virtualenvs
