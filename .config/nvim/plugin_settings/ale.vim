@@ -3,7 +3,7 @@ let g:ale_lint_delay = 500
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
 
-let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+let g:ale_statusline_format = ['E %d', 'W %d', '⬥ ok']
 
 nmap <silent> <C-w>j <Plug>(ale_next_wrap)
 nmap <silent> <C-w>k <Plug>(ale_previous_wrap)
