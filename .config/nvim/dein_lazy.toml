@@ -178,3 +178,6 @@ hook_source = '''
 repo = "mattn/emmet-vim"
 on_ft = ["html"]
 
+[[plugins]]
+repo = "tpope/vim-endwise"
+on_ft = ["zsh", "ruby", "c", "cpp"]
