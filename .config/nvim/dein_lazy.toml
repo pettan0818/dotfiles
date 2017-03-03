@@ -26,6 +26,11 @@ hook_source = '''
 '''
 
 [[plugins]]
+repo = 'fishbullet/deoplete-ruby'
+depends = ['deoplete.nvim']
+on_ft = ['ruby', 'eruby']
+
+[[plugins]]
 repo = 'zchee/deoplete-go'
 depends = ['deoplete.nvim']
 build = 'make'
