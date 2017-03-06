@@ -173,3 +173,11 @@ on_ft = ['markdown', "md"]
 hook_source = '''
     let g:previm_open_cmd = 'open -a Google\ Chrome'
 '''
+
+[[plugins]]
+repo = "mattn/emmet-vim"
+on_ft = ["html"]
+
+[[plugins]]
+repo = "tpope/vim-endwise"
+on_ft = ["zsh", "ruby", "c", "cpp"]

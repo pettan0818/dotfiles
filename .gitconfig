@@ -106,3 +106,4 @@
     ad      = add -A
 
     cpush   = !git push origin `git rev-parse --abbrev-ref HEAD`
+    cpull   = !git pull origin `git rev-parse --abbrev-ref HEAD` 
