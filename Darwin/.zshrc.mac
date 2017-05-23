@@ -22,6 +22,7 @@ if type brew 2> /dev/null 1> /dev/null ; then
         export PATH="/usr/local/opt/sqlite/bin:$PATH"
         export PATH="/usr/local/sbin:$PATH"
         export PATH="/usr/local/bin:$PATH"
+        export PATH="/usr/local/opt/openssl/bin:$PATH"
 
         export HOMEBREW_NO_ANALYTICS=1
 fi
