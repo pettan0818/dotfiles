@@ -2,9 +2,8 @@
 if [ ! -f ~/.zplug/init.zsh ]; then
     printf "Zplug is not installed.\nInstall? [y/N]: "
     if read -q; then
+        source ~/dotfiles/utility/initilizer.sh
         # echo;curl -sL --proto-redir -all,https https://zplug.sh/installer | zsh
-        export ZPLUG_HOME = ~/.zplug
-        git clone https://github.com/zplug/zplug $ZPLUG_HOME
     else
         return
     fi
