@@ -30,9 +30,9 @@ source $XDG_CONFIG_HOME/nvim/keymaps.vim
 source $XDG_CONFIG_HOME/nvim/diff.vim
 
 " ~/.vimrc.localが存在する場合のみ設定を読み込む
-let s:local_vimrc = expand('~/.nvimrc.local')
-if filereadable(s:local_vimrc)
-    execute 'source ' . s:local_vimrc
+let s:local_nvimrc = expand('~/.nvimrc.local')
+if filereadable(s:local_nvimrc)
+    execute 'source ' . s:local_nvimrc
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
