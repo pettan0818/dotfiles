@@ -20,7 +20,7 @@
     default = simple
 
 [pull]
-    ff = true
+    ff = only
 
 [fetch]
     prune = true
