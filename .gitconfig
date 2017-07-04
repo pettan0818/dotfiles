@@ -14,10 +14,13 @@
     pager = less -R
     whitespace = cr-at-eol
     excludesfile = ~/.gitignore_global
-	quotepath = false
+    quotepath = false
 
 [push]
     default = simple
+
+[pull]
+    ff = only
 
 [fetch]
     prune = true
@@ -108,5 +111,3 @@
 
     cpush   = !git push origin `git rev-parse --abbrev-ref HEAD`
     cpull   = !git pull origin `git rev-parse --abbrev-ref HEAD` 
-[pull]
-	ff = only
