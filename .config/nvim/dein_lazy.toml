@@ -36,9 +36,11 @@ depends = ['deoplete.nvim']
 build = 'make'
 on_ft = 'go'
 hook_source = '''
+    let g:deoplete#sources#go#gocode_binary = expand("$GOPATH/bin/gocode")
     let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-    let g:deoplete#sources#go#use_cache = 1
-    let g:deoplete#sources#go#json_directory = expand('~/.cache/deoplete/go/')
+    let g:deoplete#sources#go#use_cache = 0
+    let g:deoplete#sources#go#json_directory = expand('~/.cache/deoplete/go/$GOOS_$GOARCH')
+    let g:deoplete#sources#go#pointer = 1
 '''
 
 [[plugins]]
@@ -126,13 +128,6 @@ hook_source = '''
     let g:go_template_autocreate = 0
 
     let g:go_fmt_command = 'goimports'
-    let s:goargs = go#package#ImportPath(expand('%:p:h'))
-    let g:neomake_go_errcheck_maker = {
-        \ 'args': ['-abspath', s:goargs],
-        \ 'append_file': 0,
-        \ 'errorformat': '%f:%l:%c:\ %m, %f:%l:%c\ %#%m',
-        \ }
-    let g:neomake_go_enabled_makers = ['golint', 'govet', 'errcheck']
 '''
 
 [[plugins]]
