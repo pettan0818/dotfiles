@@ -20,11 +20,16 @@ case ${OSTYPE} in
 esac
 case ${OSTYPE} in
     linux*)
-        [ -x "`which apt-get 2>/dev/null`" ] && sudo apt-get update && sudo apt-get upgrade;;
+        [ -x "`which apt-get 2>/dev/null`" ] && sudo apt-get update && sudo apt-get upgrade
+        [ -x "`which dnf 2>/dev/null`" ] && sudo dnf update;;
 esac
 
 echo "zplug updating..."
-[ -x "`which zplug 2>/dev/null`" ] && zplug update
+[ "`whence zplug 2>/dev/null`" = "zplug" ] && zplug update && echo "zplug update done."
 
 echo "Starting update python liblaries"
 [ -x "`which pip-review 2>/dev/null`" ] && pip-review --auto
+
+echo "Starting Neovim Dein plugin update"
+[ -x "`which nvim 2>/dev/null`" ] && nvim -c "call dein#update() | :q"
+
