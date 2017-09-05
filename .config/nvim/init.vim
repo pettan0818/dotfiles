@@ -69,6 +69,5 @@ set laststatus=2
 " シンタックス・ハイライトを有効にする
 syntax on
 filetype on
-filetype detect
 filetype indent on
 filetype plugin on
