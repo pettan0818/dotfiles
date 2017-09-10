@@ -62,6 +62,7 @@ on_i = 1
 repo = 'ujihisa/neco-look'
 on_i = 1
 depends = ['deoplete.nvim']
+on_ft = ["rst", "markdown", "txt", "gitrebase", "gitcommit", "vcs-commit", "hybrid", "text", "help", "tex"]
 [[plugins]]
 repo = 'Shougo/neoinclude.vim'
 on_i = 1
