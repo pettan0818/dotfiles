@@ -118,12 +118,15 @@ depends = ['mattn/webapi-vim']
 [[plugins]]
 repo = 'mattn/webapi-vim'
 
-[[plugins]]
-repo = 'tpope/vim-fugitive'
+# [[plugins]]
+# repo = 'tpope/vim-fugitive'
+#
+# [[plugins]]
+# repo = 'gregsexton/gitv'
+# depends = 'tpope/vim-fugitive'
 
 [[plugins]]
-repo = 'gregsexton/gitv'
-depends = 'tpope/vim-fugitive'
+repo = "lambdalisue/gina.vim"  # git wrapper.
 
 [[plugins]]
 repo = "w0rp/ale"
