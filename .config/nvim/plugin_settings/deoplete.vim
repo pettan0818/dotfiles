@@ -3,7 +3,9 @@ set completeopt+=noselect
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_camel_case = 1
-let g:deoplete#auto_complete_delay = 250
+let g:deoplete#auto_complete_delay = 750
+
+call deoplete#custom#source('look', 'filetypes', ['rst', 'markdown', 'txt', 'gitrebase', 'gitcommit', 'vcs-commit', 'hybrid', 'text', 'help', 'tex'])
 " Keymapping.
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
