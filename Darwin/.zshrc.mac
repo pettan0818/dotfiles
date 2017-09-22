@@ -2,14 +2,16 @@
 alias ls="gls -ahF --color=auto"
 alias dir="gls -ahFl --color=auto"
 function chpwd() {gls -ahF --color=auto}
+
 alias jn="jupyter notebook"
 # 画像をQuickLookに表示する。
 alias ql='qlmanage -p "$@" >& /dev/null'
 
 # Personal Settings
 export PATH="$HOME/Documents/Naver_Curation_system:$PATH"
-alias desktop="~/Desktop/"
-alias dropbox="~/Dropbox/"
+alias dt="~/Desktop/"
+alias dr="~/Dropbox/"
+alias pr='~/Dropbox/Document/programming'
 alias SEO="~/Dropbox/Document/SEO業務/"
 alias Naver="~/Documents/Naver_Curation_system/"
 
