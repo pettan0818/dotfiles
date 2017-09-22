@@ -81,7 +81,7 @@ nnoremap <silent> [toggle]w :setl wrap!<CR>:setl wrap?<CR>
 
 "タブ関連ショートカットキー
 nnoremap [TABCMD]  <nop>
-nmap     <leader>^ [TABCMD]
+nmap     t [TABCMD]
 
 nnoremap <silent> [TABCMD]f :<c-u>tabfirst<cr>
 nnoremap <silent> [TABCMD]l :<c-u>tablast<cr>
