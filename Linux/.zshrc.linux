@@ -1,5 +1,6 @@
-alias desktop="~/Desktop/"
-alias db="~/Dropbox"
+alias dt="~/Desktop/"
+alias dr="~/Dropbox"
+alias pr="~/Dropbox/Document/programming"
 alias n=nvim
 alias jn="jupyter notebook --ip=0.0.0.0"
 #===========================
