@@ -14,7 +14,7 @@ let g:ale_python_flake8_args = '--ignore=E115,E266,E501'
 let g:ale_python_pylint_options = '--disable=line-too-long,no-member'
 let g:ale_python_mypy_options = '--fast-parser --ignore-missing-imports'
 
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 let g:ale_fixers = {
 \   'python': [
 \       'autopep8',

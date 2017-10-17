@@ -84,8 +84,8 @@ on_ft = ['C', 'C++']
 on_i = 1
 depends = ['deoplete.nvim']
 hook_add = '''
-let g:deoplete#sources#clang#libclang_path = "/usr/local/Cellar/llvm/3.9.1/lib/libclang.dylib"
-let g:deoplete#sources#clang#clang_header = "/usr/local/Cellar/llvm/3.9.1"
+let g:deoplete#sources#clang#libclang_path = "/usr/local/Cellar/llvm/5.0.0/lib/libclang.dylib"
+let g:deoplete#sources#clang#clang_header = "/usr/local/Cellar/llvm/5.0.0"
 '''
 [[plugins]]
 repo = "zplug/vim-zplug"
