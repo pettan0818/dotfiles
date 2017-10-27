@@ -1,6 +1,7 @@
 alias dt="~/Desktop/"
 alias dr="~/Dropbox"
 alias pr="~/Dropbox/Document/programming"
+alias SEO="~/Dropbox/Document/SEO業務"
 alias n=nvim
 alias jn="jupyter notebook --ip=0.0.0.0"
 #===========================
@@ -28,9 +29,10 @@ fi
 #============================
 # CUDA and cuDNN paths
 #============================
-if [ -d /usr/local/cuda-8.0/ ]; then
-    export PATH=/usr/local/cuda-8.0/bin:${PATH}
-    export LD_DIBRARY_PATH=/usr/local/cuda-8.0/lib64:${LD_LIBRARY_PATH}
+if [ -d /usr/local/cuda/ ]; then
+    export PATH=/usr/local/cuda/include:${PATH}
+    export PATH=/usr/local/cuda/bin:${PATH}
+    export LD_DIBRARY_PATH=/usr/local/cuda/lib64:${LD_LIBRARY_PATH}
 fi
 
 # SSH AGENT SETUP
