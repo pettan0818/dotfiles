@@ -1,4 +1,4 @@
-" let g:ale_lint_delay = 200
+let g:ale_linters = {'python': ['pylint', 'mypy']}
 
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
