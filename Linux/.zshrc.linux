@@ -4,6 +4,7 @@ alias pr="~/Dropbox/Document/programming"
 alias SEO="~/Dropbox/Document/SEO業務"
 alias n=nvim
 alias jn="jupyter notebook --ip=0.0.0.0"
+alias pt="ptipython"
 #===========================
 # Go
 #===========================
