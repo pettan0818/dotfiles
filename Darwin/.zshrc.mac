@@ -4,6 +4,7 @@ alias dir="gls -ahFl --color=auto"
 function chpwd() {gls -ahF --color=auto}
 
 alias jn="jupyter notebook"
+alias pt="ptipython"
 # 画像をQuickLookに表示する。
 alias ql='qlmanage -p "$@" >& /dev/null'
 
