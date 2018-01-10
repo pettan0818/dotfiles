@@ -260,10 +260,10 @@ function extract() {
 alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 
 #ローカル設定の読み込み
-[ -f ~/.zshrc.zplug ] && source ~/.zshrc.zplug
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 [ -f ~/.zshrc.os ] && source ~/.zshrc.os
 [ -f ~/.zshrc.secret ] && source ~/.zshrc.secret
+[ -f ~/.zshrc.zplug ] && source ~/.zshrc.zplug
 
 autoload -Uz compinit; compinit -Cu # 補完機能を有効にする
 
