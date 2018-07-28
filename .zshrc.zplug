@@ -60,10 +60,6 @@ zplug "mollifier/cd-gitroot"
 zplug "modules/completion", from:prezto
 zplug "zsh-users/zsh-completions", defer:0
 fpath=(~/.zplug/repos/zsh-users/zsh-completions/src $fpath)
-# zplug "docker/docker", use:"contrib/completions/zsh/"
-# fpath=(~/.zplug/repos/docker/docker/contrib/completion/zsh/ $fpath)
-# zplug "docker/compose", use:"contrib/completion/zsh/"
-# fpath=(~/.zplug/repos/docker/compose/contrib/completion/zsh/ $fpath)
 
 zplug "zsh-users/zsh-autosuggestions", defer:2, on:"zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:3, on:"zsh-users/zsh-autosuggestions"

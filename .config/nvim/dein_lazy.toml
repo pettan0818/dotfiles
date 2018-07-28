@@ -26,6 +26,29 @@ hook_source = '''
 '''
 
 [[plugins]]
+repo = 'rust-lang/rust.vim'
+on_ft = 'rust'
+hook_source = '''
+    let g:rustfmt_autosave = 1
+'''
+
+[[plugins]]
+repo = 'sebastianmarkow/deoplete-rust'
+depends = ['deoplete.nvim']
+on_i = 1
+on_ft = ["rust"]
+hook_source = '''
+    let g:deoplete#sources#rust#racer_binary="/Users/noname/.cargo/bin/racer"
+    let g:deoplete#sources#rust#rust_source_path=expand("/Users/noname/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src")
+    let g:deoplete#sources#rust#documentation_max_height=20
+    let g:deoplete#sources#rust#show_duplicates=1
+    let g:deoplete#sources#rust#disable_keymap=1
+    nmap <buffer> gd <plug>DeopleteRustGoToDefinitionDefault
+    nmap <buffer> K  <plug>DeopleteRustShowDocumentation
+    '''
+
+
+[[plugins]]
 repo = 'fishbullet/deoplete-ruby'
 depends = ['deoplete.nvim']
 on_ft = ['ruby', 'eruby']

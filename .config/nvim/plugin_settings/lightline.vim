@@ -4,7 +4,7 @@ let g:lightline = {
         \ 'active': {
         \   'left': [
         \     ['mode', 'paste'],
-        \     ['pyenv', 'ale'],
+        \     ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
         \     ['fugitive', 'gitgutter', 'filename'],
         \   ],
         \   'right': [
@@ -22,7 +22,6 @@ let g:lightline = {
         \   'filetype': 'MyFiletype',
         \   'fileencoding': 'MyFileencoding',
         \   'mode': 'MyMode',
-        \   'ale': 'ALEStatus',
         \   'charcode': 'MyCharCode',
         \   'gitgutter': 'MyGitGutter',
         \   'pyenv':  "pyenv#statusline#component"
@@ -135,8 +134,4 @@ function! MyCharCode()
     let nr = printf(nrformat, nr)
 
     return "'". char ."' ". nr
-endfunction
-
-function! ALEStatus()
-    return ALEGetStatusLine()
 endfunction
