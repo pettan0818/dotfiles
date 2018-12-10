@@ -9,7 +9,7 @@ fi
 if [ ! -f ~/.zplug/init.zsh ]; then
     # export ZPLUG_HOME = ~/.zplug
     # git clone https://github.com/zplug/zplug $ZPLUG_HOME
-    echo;curl -sL --proto-redir -all,https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+    curl -sL --proto-redir -all,https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 fi
 
 echo Initialize Done.
