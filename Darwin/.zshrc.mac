@@ -27,7 +27,6 @@ if type brew 2> /dev/null 1> /dev/null ; then
         export PATH="/usr/local/bin:$PATH"
         export PATH="/usr/local/opt/openssl/bin:$PATH"
 
-        export HOMEBREW_UPGRADE_CLEANUP=1
         export HOMEBREW_NO_ANALYTICS=1
 fi
 #===========================
