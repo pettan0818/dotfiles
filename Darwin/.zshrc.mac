@@ -14,7 +14,7 @@ alias dt="~/Desktop/"
 alias dr="~/Dropbox/"
 alias pr='~/Dropbox/Document/programming'
 alias SEO="~/Dropbox/Document/SEO業務/"
-alias Naver="~/Documents/Naver_Curation_system/"
+alias Thub='~/Dropbox/Document/TrustHub/'
 
 #===========================
 # For HomeBrew
@@ -37,7 +37,7 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 #===========================
 # Go_BIN_PATH
 #===========================
-export GOPATH="$HOME/.go"
+export GOPATH="$HOME/go"
 export PATH=$PATH:/usr/local/opt/go/libexec/bin:$GOPATH/bin
 
 #===========================
@@ -52,13 +52,22 @@ fi
 #===========================
 # Pyenv
 # PyenvVirtualEnv
+# Pipenv
 #===========================
 export PYENV_ROOT="${HOME}/.pyenv"
 if [ -d "${PYENV_ROOT}" ]; then
     export PATH=${PYENV_ROOT}/bin:$PATH
     eval "$(pyenv init -)"
 fi
-
+#compdef pipenv
+_pipenv() {
+  eval $(env COMMANDLINE="${words[1,$CURRENT]}" _PIPENV_COMPLETE=complete-zsh  pipenv)
+}
+if [[ "$(basename -- ${(%):-%x})" != "_pipenv" ]]; then
+  autoload -U compinit && compinit
+  compdef _pipenv pipenv
+fi
+export PIPENV_VENV_IN_PROJECT=true
 #===========================
 # rbenv
 #===========================
@@ -67,6 +76,12 @@ if [ -d "${RBENV_ROOT}" ]; then
     export PATH="$RBENV_ROOT:$PATH"
     eval "$(rbenv init -)"
 fi
+
+#===========================
+# rustup
+#===========================
+export CARGO_HOME="$HOME/.cargo"
+export PATH="$CARGO_HOME/bin:$PATH"
 
 #===========================
 # Neovim

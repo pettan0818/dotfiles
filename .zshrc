@@ -24,6 +24,7 @@ setopt notify            # バックグラウンドジョブの状態変化を�
 setopt equals            # =commandを`which command`と同じ処理にする
 setopt print_eight_bit   # 日本語名表示
 setopt list_packed       # リスト表示をつめて表示
+setopt +o nomatch
 setopt always_last_prompt
 
 ### Complement ###
@@ -271,3 +272,7 @@ autoload -Uz compinit; compinit -Cu # 補完機能を有効にする
 # if (which zprof > /dev/null) ;then
 #   zprof | less
 # fi
+if command -v pyenv 1>/dev/null 2>&1; then
+eval "$(pyenv init --path)"
+fi
+
